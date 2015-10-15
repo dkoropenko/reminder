@@ -48,12 +48,12 @@ public class ToDoList extends Window {
     }
 
     public JScrollPane createList(){
-        columnName = new String[]{"Date", "ToDo", "Status"};
+        columnName = new String[]{"Дата", "Задание", "Статус"};
 
         data = new String[][]{
-                {"01.01.01", "To-Do somethink", "Complite"},
-                {"02.01.01", "To-Do somethink", "Complite"},
-                {"02.01.01", "To-Do somethink", "In Process"},
+                {"01.01.01", "Заехать на обед домой", "Завершено"},
+                {"02.01.01", "Подключить принтеры пользователям", "Завершено"},
+                {"02.01.01", "Переподключить всем пользователям папку обмена", "В процессе"},
         };
 
         table = new JTable(data, columnName);
