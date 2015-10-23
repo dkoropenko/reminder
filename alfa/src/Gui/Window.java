@@ -17,14 +17,20 @@ public class Window {
 
     private OpenDataBase data;
 
+    //Создаем кнопки для управления
     public JPanel createButtons(){
-         /*
-        * Создаем кнопки для управлением меню
-        */
-        add = new JButton("Add");
-        delete = new JButton("Del");
-        change = new JButton("Change");
 
+        //Добавляем иконки для кнопок
+        ImageIcon addIcon = new ImageIcon("resource\\images\\add.png");
+        ImageIcon delIcon = new ImageIcon("resource\\images\\del.png");
+        ImageIcon modIcon = new ImageIcon("resource\\images\\mod.png");
+
+        //Создаем сами кнопки
+        add = new JButton(addIcon);
+        delete = new JButton(delIcon);
+        change = new JButton(modIcon);
+
+        //Добавляем их к панели кнопок
         buttons = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttons.add(add);
         buttons.add(delete);
@@ -33,13 +39,16 @@ public class Window {
         return buttons;
     }
 
+    //Создаем gui списка меню
     public JScrollPane createList(){
-        /*
-        * Создаем gui списка меню левого экрана
-        */
+
+        //Подключаемся к базе для взятия оттуда данных
         data = new OpenDataBase();
-        menu = new JList(data.readFromFile()); //Создаем список меню
+
+        //Создаем меню с данными из базы
+        menu = new JList(data.readFromFile());
         container = new JScrollPane(menu);
+
         return container;
     }
 
