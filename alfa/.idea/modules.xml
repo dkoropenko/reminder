@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/reminder.iml" filepath="$PROJECT_DIR$/reminder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/alfa.iml" filepath="$PROJECT_DIR$/alfa.iml" />
     </modules>
   </component>
 </project>
