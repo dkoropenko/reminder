@@ -1,12 +1,12 @@
 package gui;
 
-import db_logic.LeftMenu;
+import db_logic.DBAction;
+import listeners.LeftMenuListeners;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  * Created by Koropenkods on 04.02.16.
@@ -26,7 +26,7 @@ public class MainWindow extends JFrame {
                     mainDataPanel;
 
     //Кнопки для управлением данными в левом меню.
-    private JButton btnLeftAdd, btnLeftDelete;
+    private JButton btnLeftAdd, btnLeftDelete, btnLeftMod;
     //Кнопки для управлением данными в главном окне.
     private JButton btnDataAdd, btnDataDelete;
 
@@ -37,27 +37,44 @@ public class MainWindow extends JFrame {
     JScrollPane jscrlp;
     private final Object[] HEADERS  = {"№", "Дата", "Описание"};
 
+    private DBAction dataBase;
+
     public MainWindow(){
-        setTitle("Reminder v 0.0.2");
-        setSize(500,500);
+        setTitle("Reminder v 0.0.4");
+        setSize(700,450);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        initBtn();
+        //Подключаемся к базе
+        dataBase = new DBAction();
+
         initData();
+        initBtn();
         initPanels();
 
         setVisible(true);
     }
 
     private void initBtn(){
+
+        LeftMenuListeners leftListener = new LeftMenuListeners(listModel, leftData);
         btnLeftAdd = new JButton();
         btnLeftAdd.setIcon(new ImageIcon("resource/images/add.png"));
         btnLeftAdd.setToolTipText("Добавить");
+        btnLeftAdd.setName("add");
+        btnLeftAdd.addActionListener(leftListener);
 
         btnLeftDelete = new JButton();
         btnLeftDelete.setIcon(new ImageIcon("resource/images/del.png"));
         btnLeftDelete.setToolTipText("Удалить");
+        btnLeftDelete.setName("delete");
+        btnLeftDelete.addActionListener(leftListener);
+
+        btnLeftMod = new JButton();
+        btnLeftMod.setIcon(new ImageIcon("resource/images/mod.png"));
+        btnLeftMod.setToolTipText("Переименовать");
+        btnLeftMod.setName("mod");
+        btnLeftMod.addActionListener(leftListener);
 
         btnDataAdd = new JButton();
         btnDataAdd.setIcon(new ImageIcon("resource/images/add.png"));
@@ -69,13 +86,15 @@ public class MainWindow extends JFrame {
     }
 
     private void initData(){
-        LeftMenu test = new LeftMenu();
-        test.setName("Вася");
-
         listModel = new DefaultListModel();
         leftData = new JList(listModel);
-        listModel.addElement(test.getName());
 
+        ArrayList<String> elements = dataBase.getValues();
+        if (elements != null){
+            for (String result: elements) {
+                listModel.addElement(result);
+            }
+        }
 
         Object[][] data = {{"aaaaa","bbbbb","ccccc"},
                 {"aaaaa","bbbbb","ccccc"},
@@ -136,6 +155,7 @@ public class MainWindow extends JFrame {
         //Заполняем левую панель
         btnLeftPanel.add(btnLeftAdd);
         btnLeftPanel.add(btnLeftDelete);
+        btnLeftPanel.add(btnLeftMod);
         mainLeftPanel.add(btnLeftPanel, BorderLayout.NORTH);
         mainLeftPanel.add(leftData, BorderLayout.CENTER);
 
