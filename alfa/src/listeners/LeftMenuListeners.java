@@ -29,7 +29,7 @@ public class LeftMenuListeners implements ActionListener {
         while (elemName.equals(""))
             elemName = JOptionPane.showInputDialog("Введи имя нового элемента");
 
-        if (!elemName.contains(">")){
+        if (!elemName.contains(VAR)){
             dataBase.addValue(elemName);
             refresh();
         }
@@ -56,7 +56,7 @@ public class LeftMenuListeners implements ActionListener {
                 if (elemName == null) return;
             }
 
-            if(elemName != null || !elemName.equals("") || !elemName.contains(">")){
+            if(elemName != null || !elemName.equals("") || !elemName.contains(VAR)){
                 int index = container.getSelectedIndex();
                 dataBase.renameElement(index,elemName);
                 refresh();

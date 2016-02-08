@@ -30,13 +30,15 @@ public class DBAction {
             //Пишем в конец файла
             fos = new FileOutputStream(leftDB,true);
 
+            FileWriter  newDataBaseFile = new FileWriter("DataBase/"+ name +"DataBase");
+            newDataBaseFile.write("");
+
             //Добавляем управляющий символ к элементу
             name += ">";
 
             //Пишем его в файл и закрываем поток.
             fos.write(name.getBytes());
             fos.close();
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e){

@@ -1,6 +1,7 @@
 package gui;
 
 import db_logic.DBAction;
+import listeners.DataMenuListeners;
 import listeners.LeftMenuListeners;
 
 import javax.swing.*;
@@ -28,7 +29,7 @@ public class MainWindow extends JFrame {
     //Кнопки для управлением данными в левом меню.
     private JButton btnLeftAdd, btnLeftDelete, btnLeftMod;
     //Кнопки для управлением данными в главном окне.
-    private JButton btnDataAdd, btnDataDelete;
+    private JButton btnDataAdd, btnDataDelete, btnDataMod;
 
     private DefaultListModel listModel;
     private JList leftData;
@@ -76,13 +77,24 @@ public class MainWindow extends JFrame {
         btnLeftMod.setName("mod");
         btnLeftMod.addActionListener(leftListener);
 
+        DataMenuListeners mainListener = new DataMenuListeners(mainData,listModel,leftData);
         btnDataAdd = new JButton();
         btnDataAdd.setIcon(new ImageIcon("resource/images/add.png"));
         btnDataAdd.setToolTipText("Добавить");
+        btnDataAdd.setName("add");
+        btnDataAdd.addActionListener(mainListener);
 
         btnDataDelete = new JButton();
         btnDataDelete.setIcon(new ImageIcon("resource/images/del.png"));
         btnDataDelete.setToolTipText("Удалить");
+        btnDataDelete.setName("del");
+        btnDataDelete.addActionListener(mainListener);
+
+        btnDataMod = new JButton();
+        btnDataMod.setIcon(new ImageIcon("resource/images/mod.png"));
+        btnDataMod.setToolTipText("Модифицировать");
+        btnDataMod.setName("mod");
+        btnDataMod.addActionListener(mainListener);
     }
 
     private void initData(){
@@ -94,6 +106,7 @@ public class MainWindow extends JFrame {
             for (String result: elements) {
                 listModel.addElement(result);
             }
+            leftData.setSelectedIndex(0);
         }
 
         Object[][] data = {{"aaaaa","bbbbb","ccccc"},
@@ -162,6 +175,7 @@ public class MainWindow extends JFrame {
         //Заполняем центральную панель
         btnDataPanel.add(btnDataAdd);
         btnDataPanel.add(btnDataDelete);
+        btnDataPanel.add(btnDataMod);
         mainDataPanel.add(btnDataPanel, BorderLayout.NORTH);
         mainDataPanel.add(jscrlp, BorderLayout.CENTER);
 
