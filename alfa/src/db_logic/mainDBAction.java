@@ -2,8 +2,6 @@ package db_logic;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by Koropenkods on 08.02.16.
@@ -15,30 +13,25 @@ public class mainDBAction {
 
     public mainDBAction(String name){
         //Открываем файл
-        DataBase = new File("DataBase/"+ name +"DataBase");
+        DataBase = new File("DataBase/"+ name +"DB");
+
 
         //Если файл не создан, то создаем его.
         try {
             fw = new FileWriter(DataBase,true);
             fw.write("");
+            fw.flush();
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void addValues(String content, Calendar time, int status){
-        //Переменные времени
-        int hour, minutes; //Переменные для указания даты
-
+    public void addValues(String content, long time, int status){
         //Результирующая строка для записи
         String result;
 
-        //Берем системное время
-        hour = time.get(11);
-        minutes = time.get(12);
-
         //Складываем строку
-        result = content +"*"+ hour +":"+ minutes +"*"+ status;
+        result = content +"*"+ time +"*"+ status;
 
         try{
             //И записываем ее в файл.
@@ -51,6 +44,43 @@ public class mainDBAction {
         }
 
 
+    }
+    public void delValues(int row){
+        ArrayList<String> data = getContent();
+        ArrayList<Long> time = getTime();
+        ArrayList<Integer> status = getStatus();
+
+        data.remove(row);
+        time.remove(row);
+        status.remove(row);
+
+        try {
+            fw = new FileWriter(DataBase);
+            fw.write("");
+            fw.flush();
+            fw.close();
+
+            for (int i = 0; i < data.size(); i++) {
+                addValues(data.get(i), time.get(i), status.get(i));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setStatus(int row){
+        ArrayList<String> data = getContent();
+        ArrayList<Long> time = getTime();
+        ArrayList<Integer> status = getStatus();
+
+        String valueData = data.get(row);
+        long valueTime = time.get(row);
+        int valueStatus = status.get(row);
+
+        if (valueStatus != 1){
+            delValues(row);
+            addValues(valueData,valueTime,1);
+        }
     }
 
     public ArrayList<String> getContent() {
@@ -66,31 +96,34 @@ public class mainDBAction {
                 lines += Character.toString((char) c);
             }
 
-            //Переменные для хранения индекса и знака разделения данных.
-            int returnIndex = 0;
-            int asteriskIndex;
-            //Переменная для возврата результата.
-            ArrayList<String> result = new ArrayList<>();
+            if (!lines.isEmpty()){
+                //Переменные для хранения индекса и знака разделения данных.
+                int returnIndex = 0;
+                int asteriskIndex;
+                //Переменная для возврата результата.
+                ArrayList<String> result = new ArrayList<>();
 
-            //Промежуточная переменная для проверки наличия символа переноса строки.
-            String value;
+                //Промежуточная переменная для проверки наличия символа переноса строки.
+                String value;
 
-            //Пока не прочитаем весь файл.
-            while (lines.length() != returnIndex + 1) {
-                //Берем индекс символа разделителя с начала файла
-                // или с последнего символа переноса строки.
-                asteriskIndex = lines.indexOf("*", returnIndex);
-                //Записываем значение в переменную
-                value = lines.substring(returnIndex, asteriskIndex);
-                //Если в строке есть символ переноса строки, то удаляем его.
-                if (value.indexOf('\n') != -1) value = value.substring(1, value.length());
+                //Пока не прочитаем весь файл.
+                while (lines.length() != returnIndex + 1) {
+                    //Берем индекс символа разделителя с начала файла
+                    // или с последнего символа переноса строки.
+                    asteriskIndex = lines.indexOf("*", returnIndex);
+                    //Записываем значение в переменную
+                    value = lines.substring(returnIndex, asteriskIndex);
+                    //Если в строке есть символ переноса строки, то удаляем его.
+                    if (value.indexOf('\n') != -1) value = value.substring(1, value.length());
 
-                //Записываем все в результат.
-                result.add(value);
-                returnIndex = lines.indexOf("\n", returnIndex + 1);
+                    //Записываем все в результат.
+                    result.add(value);
+                    returnIndex = lines.indexOf("\n", returnIndex + 1);
+                }
+
+                return result;
             }
-
-            return result;
+            else return null;
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -99,7 +132,7 @@ public class mainDBAction {
         }
         return null;
     }
-    public ArrayList<String> getTime() {
+    public ArrayList<Long> getTime() {
         try {
             //Открываем файл на чтение.
             fr = new FileReader(DataBase);
@@ -116,10 +149,10 @@ public class mainDBAction {
             int returnIndex = 0;
             int beginIndex, asteriskIndex;
             //Переменная для возврата результата.
-            ArrayList<String> result = new ArrayList<>();
+            ArrayList<Long> result = new ArrayList<>();
 
             //Промежуточная переменная для проверки наличия символа переноса строки.
-            String value;
+            long value;
 
             //Пока не прочитаем весь файл.
             while (lines.length() != returnIndex + 1) {
@@ -128,7 +161,7 @@ public class mainDBAction {
                 beginIndex = lines.indexOf("*", returnIndex);
                 asteriskIndex = lines.indexOf("*", beginIndex+1);
                 //Записываем значение в переменную
-                value = lines.substring(beginIndex+1, asteriskIndex);
+                value = Long.valueOf(lines.substring(beginIndex+1, asteriskIndex));
 
                 //Записываем все в результат.
                 result.add(value);
@@ -174,8 +207,6 @@ public class mainDBAction {
                 asteriskIndex = lines.indexOf("*", beginIndex+1);
                 nIndex = lines.indexOf("\n", asteriskIndex);
 
-                System.out.println("Return Index = "+ returnIndex);
-
                 //Записываем значение в переменную
                 value = lines.substring(asteriskIndex+1, nIndex);
 
@@ -192,26 +223,5 @@ public class mainDBAction {
             e.printStackTrace();
         }
         return null;
-    }
-
-
-    public static void main(String[] args) {
-        mainDBAction test = new mainDBAction("test");
-        Calendar timeTest = Calendar.getInstance();
-        timeTest.setTimeInMillis(System.currentTimeMillis());
-
-        //test.addValues("капучино", timeTest,0);
-
-        ArrayList<String> arr = test.getTime();
-
-        for (String aa : arr){
-            System.out.println("Test: "+ aa);
-        }
-
-        ArrayList<Integer> arr1 = test.getStatus();
-
-        for (int aa : arr1){
-            System.out.println("Test status: "+ aa);
-        }
     }
 }

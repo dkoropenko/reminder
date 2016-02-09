@@ -30,8 +30,11 @@ public class DBAction {
             //Пишем в конец файла
             fos = new FileOutputStream(leftDB,true);
 
-            FileWriter  newDataBaseFile = new FileWriter("DataBase/"+ name +"DataBase");
+            //Создаем новую базу данных для нового элемента.
+            FileWriter  newDataBaseFile = new FileWriter("DataBase/"+ name +"DB");
             newDataBaseFile.write("");
+            newDataBaseFile.flush();
+            newDataBaseFile.close();
 
             //Добавляем управляющий символ к элементу
             name += ">";
@@ -123,50 +126,4 @@ public class DBAction {
             addValue(name);
         }
     }
-
-//    public static void main(String[] args) {
-//        DBAction test = new DBAction();
-//
-//        if(test.connect()){
-//            System.out.println("Подключились к базе");
-//            test.addValue("                   П е т я ");
-//            test.addValue("Вася");
-//            test.addValue("Георгий");
-//            test.addValue("Петручио");
-//
-//            ArrayList<String> testValues= test.getValues();
-//
-//            System.out.println("Добавили значения:");
-//            for (String text: testValues) {
-//                System.out.println(text.trim());
-//            }
-//
-//            test.remove(2);
-//            System.out.println("Удалили значение №3:");
-//            testValues= test.getValues();
-//
-//            if (testValues != null) {
-//                for (String text : testValues) {
-//                    System.out.println(text.trim());
-//
-//                }
-//            }
-//            else System.out.println("Файл БД Пуст");
-//
-//            System.out.println("Очистили базу:");
-//            test.clear();
-//            testValues= test.getValues();
-//
-//            if (testValues != null) {
-//                for (String text : testValues) {
-//                    System.out.println(text.trim());
-//
-//                }
-//            }
-//            else System.out.println("Файл БД Пуст");
-//
-//        }
-//        else
-//            System.out.println("Вы кто такие? Идите нахер, я вас не звал!!!");
-//    }
 }

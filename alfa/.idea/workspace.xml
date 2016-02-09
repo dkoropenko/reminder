@@ -2,12 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3812541e-bf4a-43ea-be1b-e2ec58144a7b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/db_logic/mainDBAction.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/listeners/DataMenuListeners.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/alfa_jar.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/listeners/Listener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/listeners/RefreshMouseListeners.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/DataBase/testDataBase" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataBase/leftDataBase" afterPath="$PROJECT_DIR$/DataBase/leftDataBase" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/db_logic/DBAction.java" afterPath="$PROJECT_DIR$/src/db_logic/DBAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/db_logic/mainDBAction.java" afterPath="$PROJECT_DIR$/src/db_logic/mainDBAction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/MainWindow.java" afterPath="$PROJECT_DIR$/src/gui/MainWindow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/listeners/DataMenuListeners.java" afterPath="$PROJECT_DIR$/src/listeners/DataMenuListeners.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/listeners/LeftMenuListeners.java" afterPath="$PROJECT_DIR$/src/listeners/LeftMenuListeners.java" />
     </list>
     <ignored path="alfa.iws" />
@@ -30,51 +36,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainWindow.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainWindow.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="108" column="39" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
-              <folding />
+            <state vertical-scroll-proportion="0.5043328">
+              <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
+              <folding>
+                <element signature="method#initBtn#0;class#MainWindow#0" expanded="false" />
+                <element signature="method#initData#0;class#MainWindow#0" expanded="false" />
+                <element signature="method#initPanels#0;class#MainWindow#0" expanded="false" />
+                <element signature="e#6763#6790#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataMenuListeners.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LeftMenuListeners.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/listeners/LeftMenuListeners.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="62" column="39" selection-start-line="62" selection-start-column="39" selection-end-line="62" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1504#1533#0" expanded="false" />
+                <element signature="method#modData#0;class#LeftMenuListeners#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Listener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/listeners/Listener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="106" column="53" selection-start-line="106" selection-start-column="53" selection-end-line="106" selection-end-column="53" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#Listener#0;class#Listener#0" expanded="false" />
+                <element signature="method#delData#0;class#Listener#0" expanded="false" />
+                <element signature="method#modData#0;class#Listener#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataMenuListeners.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/listeners/DataMenuListeners.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6187175">
-              <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="43" column="27" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mainDBAction.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/db_logic/mainDBAction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="212" column="16" selection-start-line="212" selection-start-column="16" selection-end-line="212" selection-end-column="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#mainDBAction#0;class#mainDBAction#0" expanded="false" />
-                <element signature="method#addValues#0;class#mainDBAction#0" expanded="false" />
-                <element signature="method#getContent#0;class#mainDBAction#0" expanded="false" />
-                <element signature="method#getTime#0;class#mainDBAction#0" expanded="false" />
-                <element signature="method#getStatus#0;class#mainDBAction#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testDataBase" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DataBase/testDataBase">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -85,6 +98,25 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mainDBAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/db_logic/mainDBAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="70" column="34" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#mainDBAction#0;class#mainDBAction#0" expanded="false" />
+                <element signature="method#addValues#0;class#mainDBAction#0" expanded="false" />
+                <element signature="method#delValues#0;class#mainDBAction#0" expanded="false" />
+                <element signature="method#setStatus#0;class#mainDBAction#0" expanded="false" />
+                <element signature="method#getContent#0;class#mainDBAction#0" expanded="false" />
+                <element signature="method#getTime#0;class#mainDBAction#0" expanded="false" />
+                <element signature="method#getStatus#0;class#mainDBAction#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -111,13 +143,15 @@
       <list>
         <option value="$PROJECT_DIR$/src/runApp/Run.java" />
         <option value="$PROJECT_DIR$/src/db_logic/LeftMenu.java" />
-        <option value="$PROJECT_DIR$/DataBase/leftDataBase" />
-        <option value="$PROJECT_DIR$/src/db_logic/DBAction.java" />
-        <option value="$PROJECT_DIR$/src/db_logic/mainDBAction.java" />
         <option value="$PROJECT_DIR$/DataBase/testDataBase" />
+        <option value="$PROJECT_DIR$/src/listeners/RefreshMouseListeners.java" />
+        <option value="$PROJECT_DIR$/src/db_logic/DBAction.java" />
+        <option value="$PROJECT_DIR$/DataBase/leftDataBase" />
         <option value="$PROJECT_DIR$/src/listeners/LeftMenuListeners.java" />
-        <option value="$PROJECT_DIR$/src/gui/MainWindow.java" />
+        <option value="$PROJECT_DIR$/src/db_logic/mainDBAction.java" />
         <option value="$PROJECT_DIR$/src/listeners/DataMenuListeners.java" />
+        <option value="$PROJECT_DIR$/src/listeners/Listener.java" />
+        <option value="$PROJECT_DIR$/src/gui/MainWindow.java" />
       </list>
     </option>
   </component>
@@ -152,7 +186,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -168,6 +202,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="alfa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alfa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alfa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -275,20 +323,37 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="out" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alfa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alfa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="DataBase" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager" selected="Application.MainWindow">
     <configuration default="false" name="Run" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -677,7 +742,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925472" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -703,8 +768,20 @@
           <line>20</line>
           <properties />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/db_logic/DBAction.java</url>
+          <line>27</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/listeners/DataMenuListeners.java</url>
+          <line>22</line>
+          <properties class="listeners.DataMenuListeners" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="1" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -716,8 +793,134 @@
     <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="34" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="method#initBtn#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initData#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initPanels#0;class#MainWindow#0" expanded="false" />
+            <element signature="e#6763#6790#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/listeners/LeftMenuListeners.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="39" selection-start-line="62" selection-start-column="39" selection-end-line="62" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1504#1533#0" expanded="false" />
+            <element signature="method#modData#0;class#LeftMenuListeners#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/listeners/Listener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="106" column="53" selection-start-line="106" selection-start-column="53" selection-end-line="106" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Listener#0;class#Listener#0" expanded="false" />
+            <element signature="method#delData#0;class#Listener#0" expanded="false" />
+            <element signature="method#modData#0;class#Listener#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/listeners/DataMenuListeners.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="27" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataBase/leftDataBase">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="16" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db_logic/mainDBAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="70" column="34" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#mainDBAction#0;class#mainDBAction#0" expanded="false" />
+            <element signature="method#addValues#0;class#mainDBAction#0" expanded="false" />
+            <element signature="method#delValues#0;class#mainDBAction#0" expanded="false" />
+            <element signature="method#setStatus#0;class#mainDBAction#0" expanded="false" />
+            <element signature="method#getContent#0;class#mainDBAction#0" expanded="false" />
+            <element signature="method#getTime#0;class#mainDBAction#0" expanded="false" />
+            <element signature="method#getStatus#0;class#mainDBAction#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="108" column="39" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
+          <folding>
+            <element signature="method#initBtn#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initData#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initPanels#0;class#MainWindow#0" expanded="false" />
+            <element signature="e#6763#6790#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/listeners/DataMenuListeners.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db_logic/mainDBAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="212" column="16" selection-start-line="212" selection-start-column="16" selection-end-line="212" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#mainDBAction#0;class#mainDBAction#0" expanded="false" />
+            <element signature="method#addValues#0;class#mainDBAction#0" expanded="false" />
+            <element signature="method#delValues#0;class#mainDBAction#0" expanded="false" />
+            <element signature="method#setStatus#0;class#mainDBAction#0" expanded="false" />
+            <element signature="method#getContent#0;class#mainDBAction#0" expanded="false" />
+            <element signature="method#getTime#0;class#mainDBAction#0" expanded="false" />
+            <element signature="method#getStatus#0;class#mainDBAction#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataBase/leftDataBase">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="34" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
+          <folding>
+            <element signature="method#initBtn#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initData#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initPanels#0;class#MainWindow#0" expanded="false" />
+            <element signature="e#6763#6790#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -727,6 +930,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1504#1533#0" expanded="false" />
+            <element signature="method#modData#0;class#LeftMenuListeners#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -736,12 +941,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="118" column="16" selection-start-line="118" selection-start-column="16" selection-end-line="118" selection-end-column="16" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#addValue#0;class#DBAction#0" expanded="false" />
+            <element signature="method#getValues#0;class#DBAction#0" expanded="false" />
             <element signature="method#clear#0;class#DBAction#0" expanded="false" />
             <element signature="method#remove#0;class#DBAction#0" expanded="false" />
             <element signature="method#renameElement#0;class#DBAction#0" expanded="false" />
-            <element signature="e#3779#3825#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -758,7 +961,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="85" column="42" selection-start-line="85" selection-start-column="42" selection-end-line="85" selection-end-column="42" />
-          <folding />
+          <folding>
+            <element signature="method#initBtn#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initData#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initPanels#0;class#MainWindow#0" expanded="false" />
+            <element signature="e#6763#6790#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -767,12 +975,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#addValue#0;class#DBAction#0" expanded="false" />
+            <element signature="method#getValues#0;class#DBAction#0" expanded="false" />
             <element signature="method#clear#0;class#DBAction#0" expanded="false" />
             <element signature="method#remove#0;class#DBAction#0" expanded="false" />
             <element signature="method#renameElement#0;class#DBAction#0" expanded="false" />
-            <element signature="e#3779#3825#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -789,7 +995,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="85" column="42" selection-start-line="85" selection-start-column="42" selection-end-line="85" selection-end-column="42" />
-          <folding />
+          <folding>
+            <element signature="method#initBtn#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initData#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initPanels#0;class#MainWindow#0" expanded="false" />
+            <element signature="e#6763#6790#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -798,12 +1009,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#addValue#0;class#DBAction#0" expanded="false" />
+            <element signature="method#getValues#0;class#DBAction#0" expanded="false" />
             <element signature="method#clear#0;class#DBAction#0" expanded="false" />
             <element signature="method#remove#0;class#DBAction#0" expanded="false" />
             <element signature="method#renameElement#0;class#DBAction#0" expanded="false" />
-            <element signature="e#3779#3825#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -820,7 +1029,56 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33275563">
           <caret line="437" column="25" selection-start-line="437" selection-start-column="25" selection-end-line="437" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_71/src.zip!/javax/swing/table/TableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029462738">
+          <caret line="49" column="17" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_71/src.zip!/javax/swing/table/DefaultTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="61" column="13" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_71/src.zip!/javax/swing/DefaultListModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33275563">
+          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding>
+            <element signature="e#2587#2588#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/listeners/RefreshMouseListeners.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14558059">
+          <caret line="18" column="49" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#604#605#0" expanded="false" />
+            <element signature="e#629#630#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db_logic/DBAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41247833">
+          <caret line="33" column="79" selection-start-line="33" selection-start-column="79" selection-end-line="33" selection-end-column="79" />
+          <folding>
+            <element signature="method#getValues#0;class#DBAction#0" expanded="false" />
+            <element signature="method#clear#0;class#DBAction#0" expanded="false" />
+            <element signature="method#remove#0;class#DBAction#0" expanded="false" />
+            <element signature="method#renameElement#0;class#DBAction#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -832,35 +1090,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataBase/testDataBase">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_71/src.zip!/java/nio/file/Path.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db_logic/DBAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.20623916">
-          <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#addValue#0;class#DBAction#0" expanded="false" />
-            <element signature="method#clear#0;class#DBAction#0" expanded="false" />
-            <element signature="method#remove#0;class#DBAction#0" expanded="false" />
-            <element signature="method#renameElement#0;class#DBAction#0" expanded="false" />
-            <element signature="e#3779#3825#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="1.2079723">
+          <caret line="97" column="17" selection-start-line="97" selection-start-column="17" selection-end-line="97" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/listeners/LeftMenuListeners.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8942808">
-          <caret line="68" column="25" selection-start-line="68" selection-start-column="24" selection-end-line="68" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="39" selection-start-line="62" selection-start-column="39" selection-end-line="62" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1504#1533#0" expanded="false" />
+            <element signature="method#modData#0;class#LeftMenuListeners#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -868,11 +1112,13 @@
     <entry file="file://$PROJECT_DIR$/src/db_logic/mainDBAction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="212" column="16" selection-start-line="212" selection-start-column="16" selection-end-line="212" selection-end-column="16" />
+          <caret line="70" column="34" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#mainDBAction#0;class#mainDBAction#0" expanded="false" />
             <element signature="method#addValues#0;class#mainDBAction#0" expanded="false" />
+            <element signature="method#delValues#0;class#mainDBAction#0" expanded="false" />
+            <element signature="method#setStatus#0;class#mainDBAction#0" expanded="false" />
             <element signature="method#getContent#0;class#mainDBAction#0" expanded="false" />
             <element signature="method#getTime#0;class#mainDBAction#0" expanded="false" />
             <element signature="method#getStatus#0;class#mainDBAction#0" expanded="false" />
@@ -880,23 +1126,130 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="39" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/listeners/DataMenuListeners.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6187175">
-          <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="27" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/listeners/Listener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="106" column="53" selection-start-line="106" selection-start-column="53" selection-end-line="106" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Listener#0;class#Listener#0" expanded="false" />
+            <element signature="method#delData#0;class#Listener#0" expanded="false" />
+            <element signature="method#modData#0;class#Listener#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5043328">
+          <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
+          <folding>
+            <element signature="method#initBtn#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initData#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initPanels#0;class#MainWindow#0" expanded="false" />
+            <element signature="e#6763#6790#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>alfa:jar</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>alfa</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

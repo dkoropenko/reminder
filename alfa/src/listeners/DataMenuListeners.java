@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Koropenkods on 08.02.16.
  */
-public class DataMenuListeners implements ActionListener {
+public class DataMenuListeners extends Listener implements ActionListener {
 
     JTable table;
     DefaultTableModel tableModel;
@@ -18,36 +18,13 @@ public class DataMenuListeners implements ActionListener {
     DefaultListModel listModel;
     JButton button;
 
-    mainDBAction database;
-    String dataBaseName;
-
-    public DataMenuListeners(JTable table, /*DefaultTableModel model,*/ DefaultListModel listModel, JList list){
+    public DataMenuListeners(JTable table, DefaultTableModel model, DefaultListModel listModel, JList list){
+        super (list,listModel,table,model);
         this.table = table;
-        //this.tableModel = model;
+        this.tableModel = model;
         this.list = list;
         this.listModel = listModel;
     }
-
-    private void addData(){
-        dataBaseName = (String)listModel.getElementAt(list.getSelectedIndex());
-
-        /*
-        Сделать окно для ввода данных.
-        1. Что сделать.
-        2. Системное время когда была создана тема.
-        3. Записать в файл данных
-        4. Обновить таблицу.
-         */
-    }
-
-    private void delData(){
-
-    }
-
-    private void modData(){
-
-    }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -62,6 +39,9 @@ public class DataMenuListeners implements ActionListener {
                 break;
             case "mod":
                 modData();
+                break;
+            case "complete":
+                complete();
                 break;
         }
 
