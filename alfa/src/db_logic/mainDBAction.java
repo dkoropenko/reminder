@@ -1,6 +1,8 @@
 package db_logic;
 
 import java.io.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 /**
@@ -10,22 +12,54 @@ public class mainDBAction {
     private File DataBase;
     private FileWriter fw;
     private FileReader fr;
+    private String patch;
 
     public mainDBAction(String name){
+        //Создаем БД
+        patch = "DataBase/"+ name +"DB";
+        createDB(name);
+    }
+    private void createDB(String name){
         //Открываем файл
-        DataBase = new File("DataBase/"+ name +"DB");
-
+        patch = "DataBase/"+ name +"DB";
+        DataBase = new File(patch);
 
         //Если файл не создан, то создаем его.
         try {
-            fw = new FileWriter(DataBase,true);
-            fw.write("");
-            fw.flush();
-            fw.close();
+            if (!DataBase.exists())
+                Files.createFile(FileSystems.getDefault().getPath(patch));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    private String readFromDB(){
+        //Переменныя для считывания данных из файла
+        String result = "";
+
+        try {
+            //Открываем файл для чтения
+            fr = new FileReader(DataBase);
+            int c;
+            //Считываем символы и записываем их в строку.
+            while ((c = fr.read()) > 0) {
+                result += Character.toString((char) c);
+            }
+
+            fr.close();
+
+            return result;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+    public void changeDBName(String newName){
+        createDB(newName);
+    }
+
     public void addValues(String content, long time, int status){
         //Результирующая строка для записи
         String result;
@@ -84,117 +118,15 @@ public class mainDBAction {
     }
 
     public ArrayList<String> getContent() {
-        try {
-            //Открываем файл на чтение.
-            fr = new FileReader(DataBase);
+        //Считываем БД
+        String lines = readFromDB();
 
-            //Переменныя для считывания данных из файла
-            String lines = "";
-            int c;
-            //Считываем символы и записываем их в строку.
-            while ((c = fr.read()) > 0) {
-                lines += Character.toString((char) c);
-            }
-
-            if (!lines.isEmpty()){
-                //Переменные для хранения индекса и знака разделения данных.
-                int returnIndex = 0;
-                int asteriskIndex;
-                //Переменная для возврата результата.
-                ArrayList<String> result = new ArrayList<>();
-
-                //Промежуточная переменная для проверки наличия символа переноса строки.
-                String value;
-
-                //Пока не прочитаем весь файл.
-                while (lines.length() != returnIndex + 1) {
-                    //Берем индекс символа разделителя с начала файла
-                    // или с последнего символа переноса строки.
-                    asteriskIndex = lines.indexOf("*", returnIndex);
-                    //Записываем значение в переменную
-                    value = lines.substring(returnIndex, asteriskIndex);
-                    //Если в строке есть символ переноса строки, то удаляем его.
-                    if (value.indexOf('\n') != -1) value = value.substring(1, value.length());
-
-                    //Записываем все в результат.
-                    result.add(value);
-                    returnIndex = lines.indexOf("\n", returnIndex + 1);
-                }
-
-                return result;
-            }
-            else return null;
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    public ArrayList<Long> getTime() {
-        try {
-            //Открываем файл на чтение.
-            fr = new FileReader(DataBase);
-
-            //Переменныя для считывания данных из файла
-            String lines = "";
-            int c;
-            //Считываем символы и записываем их в строку.
-            while ((c = fr.read()) > 0) {
-                lines += Character.toString((char) c);
-            }
-
+        if (!lines.isEmpty()){
             //Переменные для хранения индекса и знака разделения данных.
             int returnIndex = 0;
-            int beginIndex, asteriskIndex;
+            int asteriskIndex;
             //Переменная для возврата результата.
-            ArrayList<Long> result = new ArrayList<>();
-
-            //Промежуточная переменная для проверки наличия символа переноса строки.
-            long value;
-
-            //Пока не прочитаем весь файл.
-            while (lines.length() != returnIndex + 1) {
-                //Берем индекс символа разделителя с начала файла
-                // или с последнего символа переноса строки.
-                beginIndex = lines.indexOf("*", returnIndex);
-                asteriskIndex = lines.indexOf("*", beginIndex+1);
-                //Записываем значение в переменную
-                value = Long.valueOf(lines.substring(beginIndex+1, asteriskIndex));
-
-                //Записываем все в результат.
-                result.add(value);
-                returnIndex = lines.indexOf("\n", returnIndex + 1);
-            }
-
-            return result;
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    public ArrayList<Integer> getStatus() {
-        try {
-            //Открываем файл на чтение.
-            fr = new FileReader(DataBase);
-
-            //Переменныя для считывания данных из файла
-            String lines = "";
-            int c;
-            //Считываем символы и записываем их в строку.
-            while ((c = fr.read()) > 0) {
-                lines += Character.toString((char) c);
-            }
-
-            //Переменные для хранения индекса и знака разделения данных.
-            int returnIndex = 0, nIndex;
-            int beginIndex, asteriskIndex;
-            //Переменная для возврата результата.
-            ArrayList<Integer> result = new ArrayList<>();
+            ArrayList<String> result = new ArrayList<>();
 
             //Промежуточная переменная для проверки наличия символа переноса строки.
             String value;
@@ -203,25 +135,84 @@ public class mainDBAction {
             while (lines.length() != returnIndex + 1) {
                 //Берем индекс символа разделителя с начала файла
                 // или с последнего символа переноса строки.
-                beginIndex = lines.indexOf("*", returnIndex);
-                asteriskIndex = lines.indexOf("*", beginIndex+1);
-                nIndex = lines.indexOf("\n", asteriskIndex);
-
+                asteriskIndex = lines.indexOf("*", returnIndex);
                 //Записываем значение в переменную
-                value = lines.substring(asteriskIndex+1, nIndex);
+                value = lines.substring(returnIndex, asteriskIndex);
+                //Если в строке есть символ переноса строки, то удаляем его.
+                if (value.indexOf('\n') != -1) value = value.substring(1, value.length());
 
                 //Записываем все в результат.
-                result.add(Integer.parseInt(value));
+                result.add(value);
                 returnIndex = lines.indexOf("\n", returnIndex + 1);
             }
 
             return result;
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return null;
+        else
+            return null;
     }
+    public ArrayList<Long> getTime() {
+        //Считываем БД
+        String lines = readFromDB();
+
+        //Переменные для хранения индекса и знака разделения данных.
+        int returnIndex = 0;
+        int beginIndex, asteriskIndex;
+        //Переменная для возврата результата.
+        ArrayList<Long> result = new ArrayList<>();
+
+        //Промежуточная переменная для проверки наличия символа переноса строки.
+        long value;
+
+        //Пока не прочитаем весь файл.
+        while (lines.length() != returnIndex + 1) {
+            //Берем индекс символа разделителя с начала файла
+            // или с последнего символа переноса строки.
+            beginIndex = lines.indexOf("*", returnIndex);
+            asteriskIndex = lines.indexOf("*", beginIndex+1);
+            //Записываем значение в переменную
+            value = Long.valueOf(lines.substring(beginIndex+1, asteriskIndex));
+
+            //Записываем все в результат.
+            result.add(value);
+            returnIndex = lines.indexOf("\n", returnIndex + 1);
+        }
+
+        return result;
+    }
+    public ArrayList<Integer> getStatus() {
+        //Считываем БД
+        String lines = readFromDB();
+
+        //Переменные для хранения индекса и знака разделения данных.
+        int returnIndex = 0, nIndex;
+        int beginIndex, asteriskIndex;
+        //Переменная для возврата результата.
+        ArrayList<Integer> result = new ArrayList<>();
+
+        //Промежуточная переменная для проверки наличия символа переноса строки.
+        String value;
+
+        //Пока не прочитаем весь файл.
+        while (lines.length() != returnIndex + 1) {
+            //Берем индекс символа разделителя с начала файла
+            // или с последнего символа переноса строки.
+            beginIndex = lines.indexOf("*", returnIndex);
+            asteriskIndex = lines.indexOf("*", beginIndex+1);
+            nIndex = lines.indexOf("\n", asteriskIndex);
+
+            //Записываем значение в переменную
+            value = lines.substring(asteriskIndex+1, nIndex);
+
+            //Записываем все в результат.
+            result.add(Integer.parseInt(value));
+            returnIndex = lines.indexOf("\n", returnIndex + 1);
+        }
+
+        return result;
+    }
+
+
+
+
 }

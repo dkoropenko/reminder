@@ -24,6 +24,7 @@ public class DBAction {
         if(leftDB.exists()) return true;
         else return false;
     }
+
     public void addValue(String name){
         try {
             //Открываем поток для записи в файл.
@@ -85,6 +86,7 @@ public class DBAction {
         }
         return null;
     }
+
     public void clear(){
         try{
             fos = new FileOutputStream(leftDB,false);
@@ -113,17 +115,6 @@ public class DBAction {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-    public void renameElement(int index, String newName){
-        ArrayList<String> result = getValues();
-
-        result.remove(index);
-        result.add(index,newName);
-
-        clear();
-        for (String name: result) {
-            addValue(name);
         }
     }
 }

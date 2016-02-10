@@ -9,6 +9,7 @@ import listeners.RefreshMouseListeners;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.ArrayList;
@@ -36,19 +37,22 @@ public class MainWindow extends JFrame {
     //Кнопки для управлением данными в главном окне.
     private JButton btnDataAdd, btnDataDelete, btnDataMod, complete;
 
+    //Переменные управления списком элементов в левом меню
     private DefaultListModel listModel;
     private JList leftData;
 
+    //Переменные для управления списком элементов в основном меню
     private DefaultTableModel tableModel;
     private JTable mainData;
     JScrollPane jscrlp;
     private final Object[] HEADERS  = {"№", "Дата", "Описание"};
 
+    //Подключение к базам данных
     private DBAction dataBase;
     private mainDBAction mainDatabase;
 
     public MainWindow(){
-        setTitle("Reminder v 0.9");
+        setTitle("Reminder v 0.9.5");
         setSize(700,450);
         setResizable(true);
         setLocationRelativeTo(null);
@@ -57,6 +61,7 @@ public class MainWindow extends JFrame {
         //Подключаемся к базе
         dataBase = new DBAction();
 
+        //Инициализируем UI
         initData();
         initBtn();
         initPanels();
@@ -116,6 +121,7 @@ public class MainWindow extends JFrame {
         //Создаем модель для работы со списком.
         listModel = new DefaultListModel();
         leftData = new JList(listModel);
+        leftData.setDragEnabled(false);
 
         //Заполняем данными левый блок.
         ArrayList<String> elements = dataBase.getValues();
@@ -130,9 +136,9 @@ public class MainWindow extends JFrame {
         //Создаем модель для работы с таблицей.
         tableModel = new DefaultTableModel();
         //Делаем шапку таблицы
-        tableModel.addColumn("№");
-        tableModel.addColumn("Дата создания");
+        tableModel.addColumn("Статус");
         tableModel.addColumn("Задание");
+        tableModel.addColumn("Дата");
 
         //Подключаемся к базе данных для того, что бы забрать данные для выделенного элемента.
         if(!leftData.isSelectionEmpty()){
@@ -152,7 +158,7 @@ public class MainWindow extends JFrame {
                 for (int i = 0; i < mainDatabase.getContent().size(); i++) {
                     if (mainDatabase.getStatus().get(i) == 0){
                         hms.setTimeInMillis(time.get(i));
-                        result = new Object[]{"В процессе", hms.get(11) +":"+ hms.get(12), data.get(i),};
+                        result = new Object[]{"В процессе", data.get(i), hms.get(5)+"."+ hms.get(4) +"."+ hms.get(1)};
                         tableModel.addRow(result);
                     }
                 }
@@ -160,7 +166,7 @@ public class MainWindow extends JFrame {
                 for (int i = 0; i < mainDatabase.getContent().size(); i++) {
                     if (mainDatabase.getStatus().get(i) == 1){
                         hms.setTimeInMillis(time.get(i));
-                        result = new Object[]{"Завершено", hms.get(11) +":"+ hms.get(12), data.get(i),};
+                        result = new Object[]{"Завершено", data.get(i), hms.get(5)+"."+ hms.get(4) +"."+ hms.get(1)};
                         tableModel.addRow(result);
                     }
                 }
@@ -168,12 +174,20 @@ public class MainWindow extends JFrame {
         }
         //Создаем таблицу и добавляем ей модель. Оборачиваем все в скроллпаин.
         mainData = new JTable();
+        mainData.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        mainData.setDragEnabled(false);
+
         mainData.setModel(tableModel);
-        jscrlp = new JScrollPane(mainData);
+        jscrlp = new JScrollPane(mainData,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         //Устаналиваем размеры прокручиваемой области
         mainData.setPreferredScrollableViewportSize(new Dimension(250, 100));
+        //А так же размеры столбцов
+        mainData.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+        mainData.getColumnModel().getColumn(0).setMaxWidth(100);
+        mainData.getColumnModel().getColumn(2).setMaxWidth(100);
 
+        //Листенер для обновления окна при выборе другого пункта в левом меню
         leftData.addMouseListener(new RefreshMouseListeners(leftData,listModel,mainData, tableModel));
     }
 

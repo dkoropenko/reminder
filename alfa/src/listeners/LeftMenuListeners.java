@@ -1,6 +1,7 @@
 package listeners;
 
 import db_logic.DBAction;
+import db_logic.mainDBAction;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +25,7 @@ public class LeftMenuListeners extends Listener implements ActionListener {
     private JButton button;
     private DBAction dataBase;
     private final String VAR = ">";
+    private int elementIndex;
 
     public LeftMenuListeners(JList list, DefaultListModel listModel, JTable table, DefaultTableModel tableModel){
         super(list, listModel, table,tableModel);
@@ -34,33 +36,51 @@ public class LeftMenuListeners extends Listener implements ActionListener {
 
     public void addData(){
         String elemName = "";
-        while (elemName.equals(""))
-            elemName = JOptionPane.showInputDialog("Введи имя нового элемента");
+        while (elemName.equals("")){
+            elemName = JOptionPane.showInputDialog("Введите имя нового элемента");
+            if (elemName == null){
+                String tempValue;
+                int count = 0, elemNumber;
+
+                for (int i = 0; i < listModel.size(); i++) {
+                    tempValue = (String) listModel.getElementAt(i);
+                    if (tempValue.indexOf("Untitled") != -1){
+                        count = Integer.parseInt(tempValue.substring(9));
+                        System.out.println(count);
+                    }
+                }
+                count++;
+                elemName = "Untitled "+ count;
+            }
+        }
 
         if (!elemName.contains(VAR)){
             dataBase.addValue(elemName);
+            elementIndex = listModel.getSize();
             refreshLeft();
         }
     }
     public void delData(){
+        //Если выбран какой-либо элемент
         if (list.getSelectedIndex() != -1){
+            //Выводим сообщение о подтвержении.
             int options = JOptionPane.showConfirmDialog(list,"Вы уверены?");
             if (options == JOptionPane.OK_OPTION){
-                int index = list.getSelectedIndex();
-
-                //Открываем файл для удаления
-                //Короче это не работает
-                //Да и хер с ним.
-                //Потом сделаю в другом треде.
-//                String file = "DataBase/"+ dataBase.getValues().get(index) +"DB";
-//                try {
-//                    Files.delete(FileSystems.getDefault().getPath(file));
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+                //Берем индекс выбранного элемента.
+                elementIndex = list.getSelectedIndex();
+                //И записываем имя этого элемента для удаления файла БД.
+                String elementName = dataBase.getValues().get(elementIndex);
 
                 //Удаляем значение из базы данных
-                dataBase.remove(index);
+                dataBase.remove(elementIndex);
+
+                //Открываем файл для удаления
+                String patch = "DataBase/"+ elementName +"DB";
+                try {
+                    Files.delete(FileSystems.getDefault().getPath(patch));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 //Обновляем окно
                 refreshLeft();
@@ -71,20 +91,32 @@ public class LeftMenuListeners extends Listener implements ActionListener {
     }
     public void modData(){
         if (!list.isSelectionEmpty()){
+            elementIndex = list.getSelectedIndex();
+            String oldName = (String) listModel.getElementAt(elementIndex);
 
-            String elemName = "";
-            while (elemName.equals("")){
-                elemName = JOptionPane.showInputDialog("Введи имя нового элемента");
+            mainDBAction mainDB = new mainDBAction(oldName);
+            ArrayList<String> data = null;
+            ArrayList<Long> time = null;
+            ArrayList<Integer> status = null;
 
-                if (elemName == null) return;
+            if (mainDB.getContent() != null){
+                data = mainDB.getContent();
+                time = mainDB.getTime();
+                status = mainDB.getStatus();
             }
 
-            if(elemName != null || !elemName.equals("") || !elemName.contains(VAR)){
-                int index = list.getSelectedIndex();
-                dataBase.renameElement(index,elemName);
-                refreshLeft();
-                list.setSelectedIndex(index);
+            delData();
+            addData();
+
+            elementIndex = list.getSelectedIndex();
+            String newName = (String) listModel.getElementAt(elementIndex);
+
+            mainDB.changeDBName(newName);
+            if(data != null)
+            for (int i = 0; i < data.size(); i++) {
+                mainDB.addValues(data.get(i),time.get(i),status.get(i));
             }
+            refresh();
         }
     }
 
@@ -95,7 +127,8 @@ public class LeftMenuListeners extends Listener implements ActionListener {
             listModel.clear();
             for (String result: elements) {
                 listModel.addElement(result);
-                list.setSelectedIndex(listModel.size()-1);
+                if (listModel.size() > 0)
+                    list.setSelectedIndex(elementIndex);
             }
         }
         else
