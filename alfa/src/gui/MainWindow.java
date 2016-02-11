@@ -117,7 +117,6 @@ public class MainWindow extends JFrame {
     }
 
     private void initData(){
-
         //Создаем модель для работы со списком.
         listModel = new DefaultListModel();
         leftData = new JList(listModel);
@@ -144,7 +143,7 @@ public class MainWindow extends JFrame {
         if(!leftData.isSelectionEmpty()){
             mainDatabase = new mainDBAction((String)listModel.getElementAt(leftData.getSelectedIndex()));
 
-            if(mainDatabase.getContent() != null){
+            if(mainDatabase.getDBSize() > 0){
                 ArrayList<String> data = mainDatabase.getContent();
                 ArrayList<Long> time = mainDatabase.getTime();
                 ArrayList<Integer> status = mainDatabase.getStatus();
@@ -172,13 +171,12 @@ public class MainWindow extends JFrame {
                 }
             }
         }
+
         //Создаем таблицу и добавляем ей модель. Оборачиваем все в скроллпаин.
         mainData = new JTable();
         mainData.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        mainData.setDragEnabled(false);
-
         mainData.setModel(tableModel);
-        jscrlp = new JScrollPane(mainData,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jscrlp = new JScrollPane(mainData);
 
         //Устаналиваем размеры прокручиваемой области
         mainData.setPreferredScrollableViewportSize(new Dimension(250, 100));
@@ -186,6 +184,10 @@ public class MainWindow extends JFrame {
         mainData.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         mainData.getColumnModel().getColumn(0).setMaxWidth(100);
         mainData.getColumnModel().getColumn(2).setMaxWidth(100);
+
+        //Выделяем первую строчку в таблице
+        if (tableModel.getRowCount() > 0)
+           mainData.setRowSelectionInterval(0,0);
 
         //Листенер для обновления окна при выборе другого пункта в левом меню
         leftData.addMouseListener(new RefreshMouseListeners(leftData,listModel,mainData, tableModel));

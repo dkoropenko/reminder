@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class DBAction {
     //Переменная файла
     private File leftDB;
+    private mainDBAction mainDataBase;
     //Переменная входящего потока
     private FileOutputStream fos;
 
@@ -32,10 +33,7 @@ public class DBAction {
             fos = new FileOutputStream(leftDB,true);
 
             //Создаем новую базу данных для нового элемента.
-            FileWriter  newDataBaseFile = new FileWriter("DataBase/"+ name +"DB");
-            newDataBaseFile.write("");
-            newDataBaseFile.flush();
-            newDataBaseFile.close();
+            mainDataBase = new mainDBAction(name);
 
             //Добавляем управляющий символ к элементу
             name += ">";

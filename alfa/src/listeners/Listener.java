@@ -20,6 +20,8 @@ public class Listener {
     private DefaultListModel listModel;
     private DefaultTableModel tableModel;
 
+    public static final String[] LETTERS = {"/", "\\", ":", "*", "?", "\"", "<", ">", "|"};
+
     private mainDBAction database;
 
     public Listener(JList list, DefaultListModel listModel, JTable table, DefaultTableModel tableModel) {
@@ -30,59 +32,91 @@ public class Listener {
     }
 
     public void addData(){
-        //Берем имя выделенного элемента в левом меню.
-        String dataBaseName = (String) listModel.getElementAt(list.getSelectedIndex());
-        //Открываем базу данных этого элемента
-        database = new mainDBAction(dataBaseName);
+        if (!list.isSelectionEmpty()){
+            //Берем имя выделенного элемента в левом меню.
+            String dataBaseName = (String) listModel.getElementAt(list.getSelectedIndex());
+            //Открываем базу данных этого элемента
+            database = new mainDBAction(dataBaseName);
 
-        //Открываем диалог для ввода данных
-        String data = JOptionPane.showInputDialog(table, "Введите данные задачи");
+            //Открываем диалог для ввода данных
+            String data = JOptionPane.showInputDialog(table, "Введите данные задачи");
 
-        //Забираем системное время для указания времени создания задачи.
-        Calendar time = Calendar.getInstance();
-        time.setTimeInMillis(System.currentTimeMillis());
+            //Забираем системное время для указания времени создания задачи.
+            Calendar time = Calendar.getInstance();
+            time.setTimeInMillis(System.currentTimeMillis());
 
-        //Добавляем данные в базу данных
-        database.addValues(data,System.currentTimeMillis(),0);
+            //Добавляем данные в базу данных
+            if (data != null)
+                database.addValues(data,System.currentTimeMillis(),0);
 
-        //Обновляем UI
-        refresh();
+            //Обновляем UI
+            refresh();
+            table.setRowSelectionInterval(database.getDBSize()-1,database.getDBSize()-1);
+        }
     }
 
     public void delData(){
-        //Берем имя выделенного элемента в левом меню.
-        String dataBaseName = (String)listModel.getElementAt(list.getSelectedIndex());
-        //Открываем базу данных этого элемента
-        database = new mainDBAction(dataBaseName);
+        if (table.getSelectedRow() != -1) {
+            //Берем имя выделенного элемента в левом меню.
+            String dataBaseName = (String) listModel.getElementAt(list.getSelectedIndex());
+            //Открываем базу данных этого элемента
+            database = new mainDBAction(dataBaseName);
 
-        int options = JOptionPane.showConfirmDialog(table,"Вы уверены?");
+            if (table.getSelectedRow() != -1) {
+                int options = JOptionPane.showConfirmDialog(table, "Вы уверены?");
 
-        if (options == JOptionPane.OK_OPTION){
-            int index = table.getSelectedRow();
+                if (options == JOptionPane.OK_OPTION) {
+                    int index = table.getSelectedRow();
 
-            database.delValues(index);
-            refresh();
+                    database.delValues(index);
+                    refresh();
+
+                    System.out.println(database.getDBSize());
+
+                    if (database.getDBSize() > 0 && index > 0) {
+                        table.setRowSelectionInterval(index - 1, index - 1);
+                    } else if (database.getDBSize() > 0)
+                        table.setRowSelectionInterval(index, index);
+                }
+            }
         }
-
     }
 
     public void modData(){
-        delData();
-        addData();
-        refresh();
+        if (table.getSelectedRow() != -1) {
+            delData();
+            addData();
+        }
     }
 
     public void complete(){
-        //Берем имя выделенного элемента в левом меню.
-        String dataBaseName = (String) listModel.getElementAt(list.getSelectedIndex());
-        //Открываем базу данных этого элемента
-        database = new mainDBAction(dataBaseName);
+        if (table.getSelectedRow() != -1) {
+            //Берем имя выделенного элемента в левом меню.
+            String dataBaseName = (String) listModel.getElementAt(list.getSelectedIndex());
+            //Открываем базу данных этого элемента
+            database = new mainDBAction(dataBaseName);
 
-        //Берем индех выделенного элемента и устанавливаем
-        //этой задаче статус "выполнено"
-        int index = table.getSelectedRow();
-        database.setStatus(index);
-        refresh();
+            if (table.getSelectedRow() != -1) {
+                //Берем индех выделенного элемента и устанавливаем
+                //этой задаче статус "выполнено"
+                int index = table.getSelectedRow()+1;
+
+                int notCompleteStatus = 0;
+                for (int i = 0; i < database.getDBSize(); i++) {
+                    if (database.getStatus().get(i) == 0) {
+                        notCompleteStatus++;
+                    }
+
+                    if (notCompleteStatus == index){
+                        database.setStatus(i);
+                        refresh();
+                        if (database.getDBSize() > 0)
+                            table.setRowSelectionInterval(database.getDBSize()-1, database.getDBSize()-1);
+                        return;
+                    }
+                }
+            }
+        }
     }
 
     public void refresh(){
@@ -90,8 +124,8 @@ public class Listener {
         DefaultTableModel newTableModel = new DefaultTableModel();
         //Делаем шапку таблицы
         newTableModel.addColumn("Статус");
-        newTableModel.addColumn("Дата создания");
         newTableModel.addColumn("Задание");
+        newTableModel.addColumn("Дата");
 
         //Подключаемся к базе данных для того, что бы забрать данные для выделенного элемента.
         if (list.getSelectedIndex() != -1){
@@ -140,5 +174,8 @@ public class Listener {
             //Очищаем таблицу
             table.setModel(newTableModel);
         }
+
+        if (database.getDBSize() > 0)
+            table.setRowSelectionInterval(0,0);
     }
 }

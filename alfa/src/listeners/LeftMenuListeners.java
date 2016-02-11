@@ -24,7 +24,6 @@ public class LeftMenuListeners extends Listener implements ActionListener {
     private JList list;
     private JButton button;
     private DBAction dataBase;
-    private final String VAR = ">";
     private int elementIndex;
 
     public LeftMenuListeners(JList list, DefaultListModel listModel, JTable table, DefaultTableModel tableModel){
@@ -36,25 +35,21 @@ public class LeftMenuListeners extends Listener implements ActionListener {
 
     public void addData(){
         String elemName = "";
-        while (elemName.equals("")){
-            elemName = JOptionPane.showInputDialog("Введите имя нового элемента");
-            if (elemName == null){
-                String tempValue;
-                int count = 0, elemNumber;
+        boolean check = true;
 
-                for (int i = 0; i < listModel.size(); i++) {
-                    tempValue = (String) listModel.getElementAt(i);
-                    if (tempValue.indexOf("Untitled") != -1){
-                        count = Integer.parseInt(tempValue.substring(9));
-                        System.out.println(count);
-                    }
+        while (check) {
+            check = false;
+            elemName = JOptionPane.showInputDialog("Введите имя нового элемента");
+
+            if (elemName != null && !elemName.isEmpty()) {
+                for (int i = 0; i < Listener.LETTERS.length; i++) {
+                    if (elemName.equals(Listener.LETTERS[i])) check = true;
                 }
-                count++;
-                elemName = "Untitled "+ count;
             }
         }
 
-        if (!elemName.contains(VAR)){
+        if (elemName != null){
+
             dataBase.addValue(elemName);
             elementIndex = listModel.getSize();
             refreshLeft();
@@ -90,14 +85,17 @@ public class LeftMenuListeners extends Listener implements ActionListener {
 
     }
     public void modData(){
+
+        String nameDB = null, oldName;
+        ArrayList<String> data = null;
+        ArrayList<Long> time = null;
+        ArrayList<Integer> status = null;
+
         if (!list.isSelectionEmpty()){
             elementIndex = list.getSelectedIndex();
-            String oldName = (String) listModel.getElementAt(elementIndex);
+            oldName = (String) listModel.getElementAt(elementIndex);
 
             mainDBAction mainDB = new mainDBAction(oldName);
-            ArrayList<String> data = null;
-            ArrayList<Long> time = null;
-            ArrayList<Integer> status = null;
 
             if (mainDB.getContent() != null){
                 data = mainDB.getContent();
@@ -106,17 +104,32 @@ public class LeftMenuListeners extends Listener implements ActionListener {
             }
 
             delData();
-            addData();
 
-            elementIndex = list.getSelectedIndex();
-            String newName = (String) listModel.getElementAt(elementIndex);
+            boolean check = true;
+            while (check) {
+                check = false;
+                nameDB = JOptionPane.showInputDialog("Введите имя нового элемента");
 
-            mainDB.changeDBName(newName);
-            if(data != null)
-            for (int i = 0; i < data.size(); i++) {
-                mainDB.addValues(data.get(i),time.get(i),status.get(i));
+                if (nameDB != null && !nameDB.isEmpty()) {
+                    for (int i = 0; i < Listener.LETTERS.length; i++) {
+                        System.out.println(nameDB + " " + Listener.LETTERS[i] + " = " + nameDB.equals(Listener.LETTERS[i]));
+                        if (nameDB.equals(Listener.LETTERS[i])) check = true;
+                    }
+                }
             }
-            refresh();
+
+            if (nameDB == null){
+                nameDB = oldName;
+            }
+
+            dataBase.addValue(nameDB);
+
+            mainDB.changeDBName(nameDB);
+            if(data != null)
+                for (int i = 0; i < data.size(); i++) {
+                    mainDB.addValues(data.get(i),time.get(i),status.get(i));
+                }
+            refreshLeft();
         }
     }
 

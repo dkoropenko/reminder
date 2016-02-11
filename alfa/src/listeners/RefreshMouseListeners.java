@@ -13,15 +13,35 @@ import java.util.Calendar;
  * Created by Koropenkods on 09.02.16.
  */
 public class RefreshMouseListeners extends Listener implements MouseListener {
+    private JTable table;
+    private DefaultTableModel tableModel;
+
+    private JList list;
+    private DefaultListModel listModel;
+    private mainDBAction mainDataBase;
 
 
     public RefreshMouseListeners(JList list, DefaultListModel listModel, JTable table, DefaultTableModel tableModel){
         super(list, listModel, table,tableModel);
+
+        this.table = table;
+        this.tableModel = tableModel;
+        this.list = list;
+        this.listModel = listModel;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        refresh();
+        if (!list.isSelectionEmpty()){
+            //Берем имя выделенного элемента в левом меню.
+            String dataBaseName = (String) listModel.getElementAt(list.getSelectedIndex());
+            //Открываем базу данных этого элемента
+            mainDataBase = new mainDBAction(dataBaseName);
+
+            refresh();
+            if (tableModel.getRowCount() > 0)
+                table.setRowSelectionInterval(0,0);
+        }
     }
 
     @Override

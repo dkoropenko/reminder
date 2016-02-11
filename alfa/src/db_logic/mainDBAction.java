@@ -16,12 +16,11 @@ public class mainDBAction {
 
     public mainDBAction(String name){
         //Создаем БД
-        patch = "DataBase/"+ name +"DB";
         createDB(name);
     }
     private void createDB(String name){
         //Открываем файл
-        patch = "DataBase/"+ name +"DB";
+        patch = "DataBase/"+ name +".db";
         DataBase = new File(patch);
 
         //Если файл не создан, то создаем его.
@@ -212,7 +211,10 @@ public class mainDBAction {
         return result;
     }
 
-
-
-
+    public int getDBSize(){
+        if (readFromDB().equals(""))
+            return 0;
+        else
+            return getContent().size();
+    }
 }
