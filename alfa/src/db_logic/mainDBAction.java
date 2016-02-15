@@ -31,6 +31,9 @@ public class mainDBAction {
             e.printStackTrace();
         }
     }
+    public void changeDBName(String newName){
+        createDB(newName);
+    }
     private String readFromDB(){
         //Переменныя для считывания данных из файла
         String result = "";
@@ -55,9 +58,7 @@ public class mainDBAction {
 
         return result;
     }
-    public void changeDBName(String newName){
-        createDB(newName);
-    }
+
 
     public void addValues(String content, long time, int status){
         //Результирующая строка для записи

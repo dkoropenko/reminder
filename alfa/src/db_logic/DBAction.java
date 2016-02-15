@@ -2,7 +2,10 @@ package db_logic;
 
 import javax.xml.crypto.Data;
 import java.io.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Koropenkods on 04.02.16.
@@ -11,19 +14,34 @@ public class DBAction {
     //Переменная файла
     private File leftDB;
     private mainDBAction mainDataBase;
+
+    private static DBAction instance;
+
     //Переменная входящего потока
     private FileOutputStream fos;
 
-    public DBAction(){
-        connect();
+    //Путь до файла
+    private String patch = "DataBase/DataBase.db";
+
+    private DBAction(){connect();}
+    //Реализация singleton
+    public static synchronized DBAction getInstance(){
+        if (instance == null)
+            instance = new DBAction();
+        return instance;
     }
 
-    private boolean connect(){
+    private void connect(){
         //Подключаемся к базе данных
-        leftDB = new File("DataBase/leftDataBase");
+        leftDB = new File(patch);
 
-        if(leftDB.exists()) return true;
-        else return false;
+        //Создаем БД, если файла не существует
+        try {
+            if(!leftDB.exists())
+                Files.createFile(FileSystems.getDefault().getPath(patch));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addValue(String name){
@@ -103,9 +121,12 @@ public class DBAction {
             names.remove(index);
             String result = "";
 
-            for(int i=0; i < names.size(); i++)
-                result += names.get(i) + ">";
+            //Пробегаемся по списку и добавляем управляющий символ в строку.
+            Iterator iter = names.iterator();
+            while (iter.hasNext())
+                result += iter.next() + ">";
 
+            //Пишем все это добро в файл и закрываем поток.
             fos = new FileOutputStream(leftDB, false);
             fos.write(result.getBytes());
             fos.close();

@@ -39,7 +39,7 @@ public class RefreshMouseListeners extends Listener implements MouseListener {
             mainDataBase = new mainDBAction(dataBaseName);
 
             refresh();
-            if (tableModel.getRowCount() > 0)
+            if (mainDataBase.getDBSize() > 0)
                 table.setRowSelectionInterval(0,0);
         }
     }

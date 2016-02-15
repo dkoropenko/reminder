@@ -52,71 +52,21 @@ public class MainWindow extends JFrame {
     private mainDBAction mainDatabase;
 
     public MainWindow(){
+        this.dataBase = DBAction.getInstance();
         setTitle("Reminder v 0.9.5");
         setSize(700,450);
         setResizable(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //Подключаемся к базе
-        dataBase = new DBAction();
-
         //Инициализируем UI
         initData();
         initBtn();
         initPanels();
-
-        setVisible(true);
-    }
-
-    private void initBtn(){
-
-        LeftMenuListeners leftListener = new LeftMenuListeners(leftData,listModel,mainData, tableModel);
-        btnLeftAdd = new JButton();
-        btnLeftAdd.setIcon(new ImageIcon("resource/images/add.png"));
-        btnLeftAdd.setToolTipText("Добавить");
-        btnLeftAdd.setName("add");
-        btnLeftAdd.addActionListener(leftListener);
-
-        btnLeftDelete = new JButton();
-        btnLeftDelete.setIcon(new ImageIcon("resource/images/del.png"));
-        btnLeftDelete.setToolTipText("Удалить");
-        btnLeftDelete.setName("delete");
-        btnLeftDelete.addActionListener(leftListener);
-
-        btnLeftMod = new JButton();
-        btnLeftMod.setIcon(new ImageIcon("resource/images/mod.png"));
-        btnLeftMod.setToolTipText("Переименовать");
-        btnLeftMod.setName("mod");
-        btnLeftMod.addActionListener(leftListener);
-
-        DataMenuListeners mainListener = new DataMenuListeners(mainData, tableModel, listModel, leftData);
-        btnDataAdd = new JButton();
-        btnDataAdd.setIcon(new ImageIcon("resource/images/add.png"));
-        btnDataAdd.setToolTipText("Добавить");
-        btnDataAdd.setName("add");
-        btnDataAdd.addActionListener(mainListener);
-
-        btnDataDelete = new JButton();
-        btnDataDelete.setIcon(new ImageIcon("resource/images/del.png"));
-        btnDataDelete.setToolTipText("Удалить");
-        btnDataDelete.setName("del");
-        btnDataDelete.addActionListener(mainListener);
-
-        btnDataMod = new JButton();
-        btnDataMod.setIcon(new ImageIcon("resource/images/mod.png"));
-        btnDataMod.setToolTipText("Модифицировать");
-        btnDataMod.setName("mod");
-        btnDataMod.addActionListener(mainListener);
-
-        complete = new JButton();
-        complete.setIcon(new ImageIcon("resource/images/complete.png"));
-        complete.setToolTipText("Завершить");
-        complete.setName("complete");
-        complete.addActionListener(mainListener);
     }
 
     private void initData(){
+        //******** ЛЕВОЕ МЕНЮ******************
         //Создаем модель для работы со списком.
         listModel = new DefaultListModel();
         leftData = new JList(listModel);
@@ -131,7 +81,9 @@ public class MainWindow extends JFrame {
             //Выделяем первый элемент.
             leftData.setSelectedIndex(0);
         }
+        //********КОНЕЦ ЛЕВОЕ МЕНЮ******************
 
+        //******** ПРАВОЕ МЕНЮ******************
         //Создаем модель для работы с таблицей.
         tableModel = new DefaultTableModel();
         //Делаем шапку таблицы
@@ -185,12 +137,61 @@ public class MainWindow extends JFrame {
         mainData.getColumnModel().getColumn(0).setMaxWidth(100);
         mainData.getColumnModel().getColumn(2).setMaxWidth(100);
 
+
         //Выделяем первую строчку в таблице
         if (tableModel.getRowCount() > 0)
            mainData.setRowSelectionInterval(0,0);
+        //********КОНЕЦ ПРАВОЕ МЕНЮ******************
 
         //Листенер для обновления окна при выборе другого пункта в левом меню
         leftData.addMouseListener(new RefreshMouseListeners(leftData,listModel,mainData, tableModel));
+    }
+
+    private void initBtn(){
+
+        LeftMenuListeners leftListener = new LeftMenuListeners(leftData,listModel,mainData, tableModel);
+        btnLeftAdd = new JButton();
+        btnLeftAdd.setIcon(new ImageIcon("resource/images/add.png"));
+        btnLeftAdd.setToolTipText("Добавить");
+        btnLeftAdd.setName("add");
+        btnLeftAdd.addActionListener(leftListener);
+
+        btnLeftDelete = new JButton();
+        btnLeftDelete.setIcon(new ImageIcon("resource/images/del.png"));
+        btnLeftDelete.setToolTipText("Удалить");
+        btnLeftDelete.setName("delete");
+        btnLeftDelete.addActionListener(leftListener);
+
+        btnLeftMod = new JButton();
+        btnLeftMod.setIcon(new ImageIcon("resource/images/mod.png"));
+        btnLeftMod.setToolTipText("Переименовать");
+        btnLeftMod.setName("mod");
+        btnLeftMod.addActionListener(leftListener);
+
+        DataMenuListeners mainListener = new DataMenuListeners(mainData, tableModel, listModel, leftData);
+        btnDataAdd = new JButton();
+        btnDataAdd.setIcon(new ImageIcon("resource/images/add.png"));
+        btnDataAdd.setToolTipText("Добавить");
+        btnDataAdd.setName("add");
+        btnDataAdd.addActionListener(mainListener);
+
+        btnDataDelete = new JButton();
+        btnDataDelete.setIcon(new ImageIcon("resource/images/del.png"));
+        btnDataDelete.setToolTipText("Удалить");
+        btnDataDelete.setName("del");
+        btnDataDelete.addActionListener(mainListener);
+
+        btnDataMod = new JButton();
+        btnDataMod.setIcon(new ImageIcon("resource/images/mod.png"));
+        btnDataMod.setToolTipText("Модифицировать");
+        btnDataMod.setName("mod");
+        btnDataMod.addActionListener(mainListener);
+
+        complete = new JButton();
+        complete.setIcon(new ImageIcon("resource/images/complete.png"));
+        complete.setToolTipText("Завершить");
+        complete.setName("complete");
+        complete.addActionListener(mainListener);
     }
 
     private void initPanels(){
@@ -247,7 +248,5 @@ public class MainWindow extends JFrame {
         getContentPane().add(mainPanel);
     }
 
-    public static void main(String[] args) {
-        MainWindow test = new MainWindow();
-    }
+    public void run(){setVisible(true);}
 }

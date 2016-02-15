@@ -7,12 +7,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 /**
@@ -25,12 +22,13 @@ public class LeftMenuListeners extends Listener implements ActionListener {
     private JButton button;
     private DBAction dataBase;
     private int elementIndex;
+    private DBAction database;
 
     public LeftMenuListeners(JList list, DefaultListModel listModel, JTable table, DefaultTableModel tableModel){
         super(list, listModel, table,tableModel);
         this.listModel = listModel;
         this.list = list;
-        dataBase = new DBAction();
+        this.dataBase = DBAction.getInstance();
     }
 
     public void addData(){
