@@ -40,16 +40,18 @@ public class mainDBAction {
 
         try {
             //Открываем файл для чтения
-            fr = new FileReader(DataBase);
-            int c;
-            //Считываем символы и записываем их в строку.
-            while ((c = fr.read()) > 0) {
-                result += Character.toString((char) c);
+            if (DataBase.exists()){
+                fr = new FileReader(DataBase);
+                int c;
+                //Считываем символы и записываем их в строку.
+                while ((c = fr.read()) > 0) {
+                    result += Character.toString((char) c);
+                }
+
+                fr.close();
+
+                return result;
             }
-
-            fr.close();
-
-            return result;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

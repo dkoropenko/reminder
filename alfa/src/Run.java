@@ -6,8 +6,6 @@ import gui.MainWindow;
  */
 public class Run {
     public static void main(String[] args) {
-        DBAction mainDataBase = DBAction.getInstance();
-
         MainWindow app = new MainWindow();
         app.run();
     }

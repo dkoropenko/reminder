@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Koropenkods on 05.02.16.
@@ -31,26 +32,21 @@ public class LeftMenuListeners extends Listener implements ActionListener {
         this.dataBase = DBAction.getInstance();
     }
 
+    //Добавление элемента в БД
     public void addData(){
         String elemName = "";
-        boolean check = true;
 
-        while (check) {
-            check = false;
-            elemName = JOptionPane.showInputDialog("Введите имя нового элемента");
-
-            if (elemName != null && !elemName.isEmpty()) {
-                for (int i = 0; i < Listener.LETTERS.length; i++) {
-                    if (elemName.equals(Listener.LETTERS[i])) check = true;
-                }
-            }
-        }
+        //Выводим запрос на ввод имени элемента
+        do elemName = JOptionPane.showInputDialog("Введите имя нового элемента");
+        while (checkLetters(elemName));
 
         if (elemName != null){
-
             dataBase.addValue(elemName);
             elementIndex = listModel.getSize();
+
             refreshLeft();
+            list.setSelectedIndex(listModel.size()-1);
+            refresh();
         }
     }
     public void delData(){
@@ -61,6 +57,7 @@ public class LeftMenuListeners extends Listener implements ActionListener {
             if (options == JOptionPane.OK_OPTION){
                 //Берем индекс выбранного элемента.
                 elementIndex = list.getSelectedIndex();
+                System.out.println(elementIndex);
                 //И записываем имя этого элемента для удаления файла БД.
                 String elementName = dataBase.getValues().get(elementIndex);
 
@@ -68,7 +65,7 @@ public class LeftMenuListeners extends Listener implements ActionListener {
                 dataBase.remove(elementIndex);
 
                 //Открываем файл для удаления
-                String patch = "DataBase/"+ elementName +"DB";
+                String patch = "DataBase/"+ elementName +".db";
                 try {
                     Files.delete(FileSystems.getDefault().getPath(patch));
                 } catch (IOException e) {
@@ -77,6 +74,9 @@ public class LeftMenuListeners extends Listener implements ActionListener {
 
                 //Обновляем окно
                 refreshLeft();
+                if (elementIndex > 1) list.setSelectedIndex(elementIndex-1);
+                else list.setSelectedIndex(0);
+                refresh();
             }
         }
 
@@ -103,18 +103,9 @@ public class LeftMenuListeners extends Listener implements ActionListener {
 
             delData();
 
-            boolean check = true;
-            while (check) {
-                check = false;
-                nameDB = JOptionPane.showInputDialog("Введите имя нового элемента");
-
-                if (nameDB != null && !nameDB.isEmpty()) {
-                    for (int i = 0; i < Listener.LETTERS.length; i++) {
-                        System.out.println(nameDB + " " + Listener.LETTERS[i] + " = " + nameDB.equals(Listener.LETTERS[i]));
-                        if (nameDB.equals(Listener.LETTERS[i])) check = true;
-                    }
-                }
-            }
+            //Выводим запрос на ввод имени элемента
+            do nameDB = JOptionPane.showInputDialog("Введите имя нового элемента");
+            while (checkLetters(nameDB));
 
             if (nameDB == null){
                 nameDB = oldName;
@@ -127,7 +118,10 @@ public class LeftMenuListeners extends Listener implements ActionListener {
                 for (int i = 0; i < data.size(); i++) {
                     mainDB.addValues(data.get(i),time.get(i),status.get(i));
                 }
+
             refreshLeft();
+            list.setSelectedIndex(listModel.size()-1);
+            refresh();
         }
     }
 
@@ -138,14 +132,37 @@ public class LeftMenuListeners extends Listener implements ActionListener {
             listModel.clear();
             for (String result: elements) {
                 listModel.addElement(result);
-                if (listModel.size() > 0)
-                    list.setSelectedIndex(elementIndex);
             }
         }
         else
             listModel.clear();
+    }
 
-        refresh();
+    private boolean checkLetters(String elemName){
+        boolean result = false;
+
+        ArrayList<String> elements = dataBase.getValues();
+
+        //Если пользователь не нажал Cancel или оставил поле пустым
+        if(elemName != null){
+            if (!elemName.isEmpty()) {
+
+                //Проверяем на воод запрещенных знаков.
+                for (int i = 0; i < Listener.LETTERS.length; i++) {
+                    if (elemName.toLowerCase().indexOf(LETTERS[i]) != -1) result = true;
+                    if (elemName.toLowerCase().equals("database")) result = true;
+                }
+                //Проверяем на повторение элементов в списке.
+                if (elements != null){
+                    for (int i = 0; i < elements.size(); i++) {
+                        if (elements.get(i).toLowerCase().equals(elemName)) result = true;
+                    }
+                }
+            }
+            else result = true;
+        }
+
+        return result;
     }
 
     @Override

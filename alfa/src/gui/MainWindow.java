@@ -17,6 +17,8 @@ import java.util.Calendar;
 
 /**
  * Created by Koropenkods on 04.02.16.
+ * Главный класс для построения графического интерфейса.
+ * Здесь же идет первоначальное заполнение данными таблиц в программе.
  */
 public class MainWindow extends JFrame {
 
@@ -53,11 +55,12 @@ public class MainWindow extends JFrame {
 
     public MainWindow(){
         this.dataBase = DBAction.getInstance();
-        setTitle("Reminder v 0.9.5");
+        setTitle("Reminder v 0.9.9");
         setSize(700,450);
         setResizable(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setIconImage(new ImageIcon("resource/images/icon.png").getImage());
 
         //Инициализируем UI
         initData();
@@ -83,7 +86,7 @@ public class MainWindow extends JFrame {
         }
         //********КОНЕЦ ЛЕВОЕ МЕНЮ******************
 
-        //******** ПРАВОЕ МЕНЮ******************
+        //******** ОСНОВНОЕ МЕНЮ******************
         //Создаем модель для работы с таблицей.
         tableModel = new DefaultTableModel();
         //Делаем шапку таблицы
@@ -91,6 +94,38 @@ public class MainWindow extends JFrame {
         tableModel.addColumn("Задание");
         tableModel.addColumn("Дата");
 
+        //Создаем таблицу и добавляем ей модель. Оборачиваем все в скроллпаин.
+        mainData = new JTable();
+        mainData.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        //Устаналиваем размеры прокручиваемой области
+        mainData.setPreferredScrollableViewportSize(new Dimension(250, 100));
+
+        //Заполняем таблицу данными.
+        initTableContents();
+
+        //Создаем пользовательский рендер для таблицы.
+        MainDBTableRender render = new MainDBTableRender();
+        mainData.setDefaultRenderer(Object.class,render);
+
+        //Задаем модель для таблицы.
+        mainData.setModel(tableModel);
+        jscrlp = new JScrollPane(mainData);
+        //Выделяем первую строчку в таблице
+        if (tableModel.getRowCount() > 0)
+           mainData.setRowSelectionInterval(0,0);
+
+        //А так же размеры столбцов
+        mainData.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+        mainData.getColumnModel().getColumn(0).setMaxWidth(100);
+        mainData.getColumnModel().getColumn(2).setMaxWidth(100);
+        //********КОНЕЦ ПРАВОЕ МЕНЮ******************
+
+        //Листенер для обновления окна при выборе другого пункта в левом меню
+        leftData.addMouseListener(new RefreshMouseListeners(leftData,listModel,mainData, tableModel));
+    }
+
+    private void initTableContents(){
         //Подключаемся к базе данных для того, что бы забрать данные для выделенного элемента.
         if(!leftData.isSelectionEmpty()){
             mainDatabase = new mainDBAction((String)listModel.getElementAt(leftData.getSelectedIndex()));
@@ -123,28 +158,6 @@ public class MainWindow extends JFrame {
                 }
             }
         }
-
-        //Создаем таблицу и добавляем ей модель. Оборачиваем все в скроллпаин.
-        mainData = new JTable();
-        mainData.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        mainData.setModel(tableModel);
-        jscrlp = new JScrollPane(mainData);
-
-        //Устаналиваем размеры прокручиваемой области
-        mainData.setPreferredScrollableViewportSize(new Dimension(250, 100));
-        //А так же размеры столбцов
-        mainData.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
-        mainData.getColumnModel().getColumn(0).setMaxWidth(100);
-        mainData.getColumnModel().getColumn(2).setMaxWidth(100);
-
-
-        //Выделяем первую строчку в таблице
-        if (tableModel.getRowCount() > 0)
-           mainData.setRowSelectionInterval(0,0);
-        //********КОНЕЦ ПРАВОЕ МЕНЮ******************
-
-        //Листенер для обновления окна при выборе другого пункта в левом меню
-        leftData.addMouseListener(new RefreshMouseListeners(leftData,listModel,mainData, tableModel));
     }
 
     private void initBtn(){

@@ -3,7 +3,9 @@ package listeners;
 import db_logic.mainDBAction;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.SimpleTimeZone;
@@ -178,4 +180,6 @@ public class Listener {
         if (database.getDBSize() > 0)
             table.setRowSelectionInterval(0,0);
     }
+
+
 }
