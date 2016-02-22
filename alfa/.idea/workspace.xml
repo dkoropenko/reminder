@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdeed17b-082a-45e1-bafc-2edefd28549d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/alfa_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/alfa_jar/DataBase/test.db" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/alfa_jar/Reminder.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/alfa_jar/DataBase/DataBase.db" afterPath="$PROJECT_DIR$/out/artifacts/alfa_jar/DataBase/DataBase.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/alfa/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/out/production/alfa/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="alfa.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -443,11 +430,18 @@
       <option name="number" value="Default" />
       <updated>1456134819313</updated>
     </task>
+    <task id="LOCAL-00001" summary="Разобрался с некорректным включением в ОС линукс.">
+      <created>1456137261868</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1456137261868</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -475,6 +469,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Разобрался с некорректным включением в ОС линукс." />
+    <option name="LAST_COMMIT_MESSAGE" value="Разобрался с некорректным включением в ОС линукс." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
