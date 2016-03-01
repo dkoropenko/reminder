@@ -47,7 +47,6 @@ public class MainWindow extends JFrame {
     private DefaultTableModel tableModel;
     private JTable mainData;
     JScrollPane jscrlp;
-    private final Object[] HEADERS  = {"№", "Дата", "Описание"};
 
     //Подключение к базам данных
     private DBAction dataBase;
@@ -90,9 +89,9 @@ public class MainWindow extends JFrame {
         //Создаем модель для работы с таблицей.
         tableModel = new DefaultTableModel();
         //Делаем шапку таблицы
-        tableModel.addColumn("Статус");
-        tableModel.addColumn("Задание");
-        tableModel.addColumn("Дата");
+        tableModel.addColumn(Constants.ID);
+        tableModel.addColumn(Constants.DATE);
+        tableModel.addColumn(Constants.VALUE);
 
         //Создаем таблицу и добавляем ей модель. Оборачиваем все в скроллпаин.
         mainData = new JTable();

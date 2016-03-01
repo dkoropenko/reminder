@@ -17,6 +17,7 @@ public class DBAction {
 
     private static DBAction instance;
 
+
     //Переменная входящего потока
     private FileOutputStream fos;
 

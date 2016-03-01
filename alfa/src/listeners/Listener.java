@@ -1,6 +1,8 @@
 package listeners;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import db_logic.mainDBAction;
+import gui.Constants;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -16,15 +18,15 @@ import java.util.TimeZone;
  * Главный листенер, где указаны все методы для работы
  * с базой данных. Далее некоторые методы будут переопределены.
  */
-public class Listener {
+public abstract class Listener {
     private JList list;
     private JTable table;
     private DefaultListModel listModel;
     private DefaultTableModel tableModel;
 
-    public static final String[] LETTERS = {"/", "\\", ":", "*", "?", "\"", "<", ">", "|"};
-
     private mainDBAction database;
+
+    private Listener() {}
 
     public Listener(JList list, DefaultListModel listModel, JTable table, DefaultTableModel tableModel) {
         this.list = list;
@@ -125,9 +127,9 @@ public class Listener {
         //Создаем новую модель для таблицы
         DefaultTableModel newTableModel = new DefaultTableModel();
         //Делаем шапку таблицы
-        newTableModel.addColumn("Статус");
-        newTableModel.addColumn("Задание");
-        newTableModel.addColumn("Дата");
+        newTableModel.addColumn(Constants.STATUS);
+        newTableModel.addColumn(Constants.TASK);
+        newTableModel.addColumn(Constants.DATE);
 
         //Подключаемся к базе данных для того, что бы забрать данные для выделенного элемента.
         if (list.getSelectedIndex() != -1){

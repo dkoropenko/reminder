@@ -2,6 +2,7 @@ package listeners;
 
 import db_logic.DBAction;
 import db_logic.mainDBAction;
+import gui.Constants;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -148,8 +149,8 @@ public class LeftMenuListeners extends Listener implements ActionListener {
             if (!elemName.isEmpty()) {
 
                 //Проверяем на воод запрещенных знаков.
-                for (int i = 0; i < Listener.LETTERS.length; i++) {
-                    if (elemName.toLowerCase().indexOf(LETTERS[i]) != -1) result = true;
+                for (int i = 0; i < Constants.LETTERS.length; i++) {
+                    if (elemName.toLowerCase().indexOf(Constants.LETTERS[i]) != -1) result = true;
                     if (elemName.toLowerCase().equals("database")) result = true;
                 }
                 //Проверяем на повторение элементов в списке.
