@@ -24,15 +24,26 @@ public class MainWindow extends JFrame {
 
     private JPanel mainPanel;
 
-    //Панели для левого окна вывода данных.
+    /**
+     *Панели для левого окна вывода данных.
+     */
     private JPanel btnLeftPanel,
                     listLeftPanel,
                     mainLeftPanel;
 
-    //Панели для главного окна вывода данных.
+    /**
+     *Панель для главного окна вывода данных.
+     */
     private JPanel btnDataPanel,
                     listDataPanel,
                     mainDataPanel;
+    /**
+     * Переменная для главного меню
+     */
+    private JMenuBar mainMenu;
+    private JMenu fileMenu, prefMenu, helpMenu;
+    private JMenuItem newDBMenu, openDBMenu, closeDBMenu, exitMenu;
+    private JMenuItem usersMenu, optionsMenu, refreshItemsMenu;
 
     //Кнопки для управлением данными в левом меню.
     private JButton btnLeftAdd, btnLeftDelete, btnLeftMod;
@@ -62,9 +73,38 @@ public class MainWindow extends JFrame {
         setIconImage(new ImageIcon("resource/images/icon.png").getImage());
 
         //Инициализируем UI
+        initMenu();
         initData();
         initBtn();
         initPanels();
+    }
+
+    private void initMenu(){
+        mainMenu = new JMenuBar();
+
+        fileMenu = new JMenu("Файл");
+        prefMenu = new JMenu("Настройки");
+        helpMenu = new JMenu("Помощь");
+
+        newDBMenu = new JMenuItem("Новая БД");
+        openDBMenu = new JMenuItem("Открыть БД");
+        closeDBMenu = new JMenuItem("Закрыть БД");
+        exitMenu = new JMenuItem("Выход");
+
+        usersMenu = new JMenuItem("Пользователи");
+        optionsMenu = new JMenuItem("Опции");
+
+        fileMenu.add(newDBMenu);
+        fileMenu.add(openDBMenu);
+        fileMenu.add(closeDBMenu);
+        fileMenu.addSeparator();
+        fileMenu.add(exitMenu);
+
+        prefMenu.add(usersMenu);
+        prefMenu.add(optionsMenu);
+
+        mainMenu.add(fileMenu);
+        mainMenu.add(prefMenu);
     }
 
     private void initData(){
@@ -257,8 +297,11 @@ public class MainWindow extends JFrame {
         //*************************//
 
         //Заполняем Frame
+        setJMenuBar(mainMenu);
         getContentPane().add(mainPanel);
     }
+
+
 
     public void run(){setVisible(true);}
 }
