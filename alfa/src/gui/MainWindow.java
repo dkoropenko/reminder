@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.sql.SQLException;
 
 /**
  * Created by Koropenkods on 04.02.16.
@@ -21,13 +22,11 @@ public class MainWindow extends JFrame {
      *Панели для левого окна вывода данных.
      */
     private JPanel btnLeftPanel,
-                    listLeftPanel,
                     mainLeftPanel;
     /**
      *Панель для главного окна вывода данных.
      */
     private JPanel btnDataPanel,
-                    listDataPanel,
                     mainDataPanel;
     /**
      * Переменная для главного меню
@@ -56,7 +55,13 @@ public class MainWindow extends JFrame {
 
     public MainWindow(){
 
-        setTitle(Constants.APPNAME);
+        try {
+            database = DataBaseClass.getInstance();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        setTitle(Constants.APPNAME +" User: "+ database.currentUser);
         setSize(700,450);
         setResizable(true);
         setLocationRelativeTo(null);
@@ -72,32 +77,32 @@ public class MainWindow extends JFrame {
 
     private void initMenu(){
         mainMenu = new JMenuBar();
-        MainMenuListener mainMenuListener = new MainMenuListener();
+
         fileMenu = new JMenu("Файл");
         prefMenu = new JMenu("Настройки");
         helpMenu = new JMenu("Помощь");
 
         newDBMenu = new JMenuItem("Новая БД");
         newDBMenu.setName("newDBMenu");
-        newDBMenu.addActionListener(mainMenuListener);
+
 
         openDBMenu = new JMenuItem("Открыть БД");
         openDBMenu.setName("openDBMenu");
-        openDBMenu.addActionListener(mainMenuListener);
+
 
         closeDBMenu = new JMenuItem("Закрыть БД");
         closeDBMenu.setName("closeDBMenu");
-        closeDBMenu.addActionListener(mainMenuListener);
+
 
         exitMenu = new JMenuItem("Выход");
 
         usersMenu = new JMenuItem("Пользователи");
         usersMenu.setName("usersMenu");
-        usersMenu.addActionListener(mainMenuListener);
+
 
         optionsMenu = new JMenuItem("Опции");
         optionsMenu.setName("optionsMenu");
-        optionsMenu.addActionListener(mainMenuListener);
+
 
         fileMenu.add(newDBMenu);
         fileMenu.add(openDBMenu);

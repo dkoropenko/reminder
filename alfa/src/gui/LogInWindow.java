@@ -12,6 +12,7 @@ import java.sql.SQLException;
 
 /**
  * Created by Koropenkods on 03.03.16.
+ * <p>GUI для аутентификации пользователя в программе</p>
  */
 public class LogInWindow extends JFrame {
 
@@ -34,7 +35,6 @@ public class LogInWindow extends JFrame {
         initPanels();
 
         getContentPane().add(mainPanel);
-        setVisible(true);
     }
     public void initTexts(){
         Dimension minSize = new Dimension(160,40);
@@ -56,7 +56,6 @@ public class LogInWindow extends JFrame {
 
     }
     public void initBtn(){
-
         LogInListener logInListener = new LogInListener(userText, passwdText, this);
 
         btnLogIn = new JButton("Войти");
@@ -97,10 +96,5 @@ public class LogInWindow extends JFrame {
         mainPanel = new JPanel(mainLayout);
         mainPanel.add(textPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
-    }
-
-    public static void main(String[] args) {
-        LogInWindow logInWindow = new LogInWindow();
-        logInWindow.setVisible(true);
     }
 }

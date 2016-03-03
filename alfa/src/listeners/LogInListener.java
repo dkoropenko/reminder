@@ -14,17 +14,19 @@ import java.util.Map;
 
 /**
  * Created by Koropenkods on 03.03.16.
+ * <p>ActionListener для GUI авторизации пользователя</p>
+ * <p>Сверяет введенные данные с данными из БД.</p>
  */
 public class LogInListener implements ActionListener {
 
     private JFrame startWindow;
-    private JTextField text;
+    private JTextField user;
     private JPasswordField password;
     private DataBaseClass database;
     private MainWindow mainWindow;
 
-    public LogInListener(JTextField text, JPasswordField passwd, JFrame startWindow){
-        this.text = text;
+    public LogInListener(JTextField user, JPasswordField passwd, JFrame startWindow){
+        this.user = user;
         this.password = passwd;
         this.startWindow = startWindow;
 
@@ -37,32 +39,43 @@ public class LogInListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!text.getText().equals("")){
+
+        if (!user.getText().equals("")){
             try {
                 database.connect();
 
                 ArrayList<String> users = database.getFromUsers("name");
                 ArrayList<String> passwd = database.getFromUsers("passwd");
                 int index;
+                String checkPasswd;
 
-                if (users.contains(text.getText())){
-                    index = users.indexOf(text.getText());
-                    System.out.println(index);
-                    if (passwd.get(index).equals(password.getPassword())){
-                        System.out.println("Entered in system");
+                if (users.contains(user.getText())){
+                    index = users.indexOf(user.getText());
+                    checkPasswd = String.copyValueOf(password.getPassword());
+
+                    if (passwd.get(index).equals(checkPasswd)){
+                        database.currentUser = user.getText();
+                        startWindow.setVisible(false);
+                        mainWindow = new MainWindow();
+                        mainWindow.setVisible(true);
                     }
+                    else{
+                        password.setBackground(Color.PINK);
+                        user.setBackground(Color.WHITE);
+                    }
+
                 }
-                else
-                    text.setBackground(Color.PINK);
-
-
+                else{
+                    user.setBackground(Color.PINK);
+                    password.setBackground(Color.WHITE);
+                }
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
         }
         else{
-            text.setBackground(Color.PINK);
+            user.setBackground(Color.PINK);
+            password.setBackground(Color.WHITE);
         }
-
     }
 }

@@ -17,6 +17,8 @@ public class DataBaseClass {
     private Connection connection = null;
     private Statement statement = null;
 
+    public static String currentUser;
+
     /**Приватный конструктор.
      * Инициализирует драйвер для работы с DB.
      * Пробует подключиться к этой базе.
@@ -51,28 +53,35 @@ public class DataBaseClass {
     private void createTables() throws SQLException {
         if(connection != null) {
             statement.execute("CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY, name char(20), " +
-                    "hash INTEGER NOT NULL, passwd CHAR(30));");
+                    "passwd CHAR(30));");
 
             statement.execute("CREATE TABLE IF NOT EXISTS Master (id INTEGER PRIMARY KEY, " +
                                                                 "name char(30), " +
                                                                 "count INTEGER, " +
-                                                                "author_hash INTEGER NOT NULL);");
+                                                                "author CHAR(30));");
 
             statement.execute("CREATE TABLE IF NOT EXISTS Tasks (id INTEGER PRIMARY KEY, " +
                     "name CHARACTER(100), createTime DATE, modifyTime DATE, finishTime DATE, " +
-                    "status INTEGER, author_hash INTEGER NOT NULL);");
+                    "status INTEGER, author CHAR(30) NOT NULL);");
+
+            if (this.getSize("Users") == 0){
+                statement.execute("INSERT INTO Users VALUES " +
+                        "(1, \""+ Constants.DEFAULT_USER +"\", \""+ Constants.DEFAULT_PASSWORD +"\");");
+            }
         }
     }
     public void close(){
         try {
-            if (statement != null){
+            if (!this.databaseIsClosed()){
                 statement.close();
-            }
-            if (connection != null)
                 connection.close();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public boolean databaseIsClosed() throws SQLException {
+        return (statement.isClosed() || connection.isClosed());
     }
 
     /**
@@ -145,10 +154,8 @@ public class DataBaseClass {
 
     /**
      * Метод возвращает значение одной строки из таблицы Users
-     *
-     * @return - HashMap<String, Object>
-     *     String - Ключ в таблице
-     *     Object - значение в ячейке.
+     * @param rowName - выбор столбца для возврата.
+     * @return - ArrayList<String> Все значения столбца в таблице.
      * @throws SQLException
      */
     public ArrayList<String> getFromUsers(String rowName) throws SQLException {
@@ -167,6 +174,13 @@ public class DataBaseClass {
         return result;
     }
 
+    /**
+     * Метод возвращает размер таблицы. Используется для выяснения
+     * пустая база или нет.
+     * @param tbName - имя таблиц, размер которой необходимо узнать
+     * @return int size - размер таблицы
+     * @throws SQLException
+     */
     public int getSize (String tbName) throws SQLException {
 
         StringBuilder query = new StringBuilder();
@@ -174,6 +188,7 @@ public class DataBaseClass {
         query.append("SELECT COUNT(*) FROM ");
         query.append(tbName);
 
+        connect();
         ResultSet rs = statement.executeQuery(query.toString());
 
         return rs.getInt(1);

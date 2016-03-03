@@ -12,13 +12,14 @@ public interface Constants {
     String TASK =   "Задание";
 
     //Данные для создания БД.
-    public static String[] LETTERS = {"/", "\\", ":", "*", "?", "\"", "<", ">", "|"};
-    public static String DRIVER = "org.sqlite.JDBC";
-    public static String URL = "jdbc:sqlite:Task.db";
-
+    String[] LETTERS = {"/", "\\", ":", "*", "?", "\"", "<", ">", "|"};
+    String DRIVER = "org.sqlite.JDBC";
+    String URL = "jdbc:sqlite:Task.db";
+    String DEFAULT_USER = "User";
+    String DEFAULT_PASSWORD = "";
 
     //Переменные UI
+    String APPNAME = "Reminder 0.9";
     String ICON = "resource/images/icon.png";
 
-    String APPNAME = "Reminder 0.9";
 }
