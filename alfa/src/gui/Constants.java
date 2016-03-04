@@ -1,5 +1,7 @@
 package gui;
 
+import javax.swing.*;
+
 /**
  * Created by Koropenkods on 29.02.16.
  */
@@ -21,5 +23,10 @@ public interface Constants {
     //Переменные UI
     String APPNAME = "Reminder 0.9";
     String ICON = "resource/images/icon.png";
+    ImageIcon ADD = new ImageIcon("resource/images/add.png");
+    ImageIcon DEL = new ImageIcon("resource/images/del.png");
+    ImageIcon OPTIONS = new ImageIcon("resource/images/mod.png");
+    ImageIcon COMPLETE = new ImageIcon("resource/images/complete.png");
+
 
 }

@@ -91,8 +91,6 @@ public class DataBaseClass {
      * @throws SQLException
      */
     public void add(String tableName, Object ... parametres) throws SQLException{
-        statement = connection.createStatement();
-
         StringBuffer prepareQuery = new StringBuffer();
         prepareQuery.append("INSERT INTO "+ tableName +" VALUES (");
         for (int i = 0; i < parametres.length; i++) {
@@ -113,19 +111,17 @@ public class DataBaseClass {
     /**
      * Метод удаляющий строку из БД по ее ключу.
      * @param tableName - имя таблицы в БД
-     * @param id - ключ строки.
+     * @param name - ключ строки.
      * @throws SQLException
      */
-    public void delete (String tableName, int id) throws SQLException{
-        statement = connection.createStatement();
-
+    public void delete (String tableName, String name) throws SQLException{
         StringBuilder buildQuery = new StringBuilder();
 
         buildQuery.append("DELETE FROM ");
         buildQuery.append(tableName);
-        buildQuery.append(" where id =");
-        buildQuery.append(id);
-        buildQuery.append(";");
+        buildQuery.append(" where name = \"");
+        buildQuery.append(name);
+        buildQuery.append("\";");
 
         statement.execute(buildQuery.toString());
     }
@@ -154,16 +150,24 @@ public class DataBaseClass {
 
     /**
      * Метод возвращает значение одной строки из таблицы Users
-     * @param rowName - выбор столбца для возврата.
+     * @param tbName - Таблица для поиска значений
+     * @param rowName - Выбор столбца для возврата
+     * @param author - Выбор владельца записей
      * @return - ArrayList<String> Все значения столбца в таблице.
      * @throws SQLException
      */
-    public ArrayList<String> getFromUsers(String rowName) throws SQLException {
+    public ArrayList<String> getFromTable(String tbName, String rowName, String author) throws SQLException {
         ArrayList<String> result = new ArrayList<>();
+        connect();
 
         StringBuilder prepareQuery = new StringBuilder();
 
-        prepareQuery.append("SELECT "+ rowName +" FROM Users;");
+        prepareQuery.append("SELECT "+ rowName +" FROM "+ tbName +" ");
+
+        if(author != null)
+            prepareQuery.append("WHERE author=\""+ author +"\"");
+
+        prepareQuery.append(";");
 
         ResultSet query = statement.executeQuery(prepareQuery.toString());
 
@@ -172,6 +176,13 @@ public class DataBaseClass {
         }
 
         return result;
+    }
+
+    public ArrayList<String> getFromUsers (String rowName) throws SQLException {
+        return this.getFromTable("Users", rowName, null);
+    }
+    public ArrayList<String> getFromMaster (String rowName, String author) throws SQLException {
+        return this.getFromTable("Master", rowName, author);
     }
 
     /**

@@ -2,12 +2,14 @@ package gui;
 
 import db_logic.DataBaseClass;
 import listeners.MainMenuListener;
+import listeners.MainWindowListener;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by Koropenkods on 04.02.16.
@@ -21,13 +23,13 @@ public class MainWindow extends JFrame {
     /**
      *Панели для левого окна вывода данных.
      */
-    private JPanel btnLeftPanel,
-                    mainLeftPanel;
+    private JPanel btnMasterPanel,
+                    mainMasterPanel;
     /**
      *Панель для главного окна вывода данных.
      */
-    private JPanel btnDataPanel,
-                    mainDataPanel;
+    private JPanel btnTaskPanel,
+                    mainTaskPanel;
     /**
      * Переменная для главного меню
      */
@@ -37,13 +39,12 @@ public class MainWindow extends JFrame {
     private JMenuItem usersMenu, optionsMenu, refreshItemsMenu;
 
     //Кнопки для управлением данными в левом окне.
-    private JButton btnLeftAdd, btnLeftDelete, btnLeftMod;
+    private JButton btnMasterAdd, btnMasterDelete, btnMasterOptions;
     //Кнопки для управлением данными в главном окне.
-    private JButton btnDataAdd, btnDataDelete, btnDataMod, complete;
+    private JButton btnTaskAdd, btnTaskDelete, btnTaskOptions, btnTaskComplete;
 
     //Переменные управления списком элементов в левом меню
-    private DefaultListModel listModel;
-    private JList leftData;
+    private JList masterList;
 
     //Переменные для управления списком элементов в основном меню
     private DefaultTableModel tableModel;
@@ -54,13 +55,6 @@ public class MainWindow extends JFrame {
     DataBaseClass database;
 
     public MainWindow(){
-
-        try {
-            database = DataBaseClass.getInstance();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         setTitle(Constants.APPNAME +" User: "+ database.currentUser);
         setSize(700,450);
         setResizable(true);
@@ -85,24 +79,19 @@ public class MainWindow extends JFrame {
         newDBMenu = new JMenuItem("Новая БД");
         newDBMenu.setName("newDBMenu");
 
-
         openDBMenu = new JMenuItem("Открыть БД");
         openDBMenu.setName("openDBMenu");
 
-
         closeDBMenu = new JMenuItem("Закрыть БД");
         closeDBMenu.setName("closeDBMenu");
-
 
         exitMenu = new JMenuItem("Выход");
 
         usersMenu = new JMenuItem("Пользователи");
         usersMenu.setName("usersMenu");
 
-
         optionsMenu = new JMenuItem("Опции");
         optionsMenu.setName("optionsMenu");
-
 
         fileMenu.add(newDBMenu);
         fileMenu.add(openDBMenu);
@@ -116,13 +105,30 @@ public class MainWindow extends JFrame {
         mainMenu.add(fileMenu);
         mainMenu.add(prefMenu);
     }
-
     private void initData(){
         //******** ЛЕВОЕ МЕНЮ******************
         //Создаем модель для работы со списком.
-        listModel = new DefaultListModel();
-        leftData = new JList(listModel);
-        leftData.setDragEnabled(false);
+        masterList = new JList();
+        masterList.setDragEnabled(false);
+
+        try {
+            database = DataBaseClass.getInstance();
+            database.connect();
+
+            ArrayList<String> tasks = database.getFromMaster("name", database.currentUser);
+
+            masterList.setListData(tasks.toArray());
+            masterList.setSelectedIndex(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (!database.databaseIsClosed())
+                    database.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
         //********КОНЕЦ ЛЕВОЕ МЕНЮ******************
 
@@ -166,48 +172,50 @@ public class MainWindow extends JFrame {
     }
 
     private void initBtn(){
-        btnLeftAdd = new JButton();
-        btnLeftAdd.setIcon(new ImageIcon("resource/images/add.png"));
-        btnLeftAdd.setToolTipText("Добавить");
-        btnLeftAdd.setName("add");
-        //btnLeftAdd.addActionListener(leftListener);
+        MainWindowListener btnListener = new MainWindowListener(masterList);
+        
+        btnMasterAdd = new JButton();
+        btnMasterAdd.setIcon(Constants.ADD);
+        btnMasterAdd.setToolTipText("Добавить");
+        btnMasterAdd.setName("MasterAdd");
+        btnMasterAdd.addActionListener(btnListener);
 
-        btnLeftDelete = new JButton();
-        btnLeftDelete.setIcon(new ImageIcon("resource/images/del.png"));
-        btnLeftDelete.setToolTipText("Удалить");
-        btnLeftDelete.setName("delete");
-        //btnLeftDelete.addActionListener(leftListener);
+        btnMasterDelete = new JButton();
+        btnMasterDelete.setIcon(Constants.DEL);
+        btnMasterDelete.setToolTipText("Удалить");
+        btnMasterDelete.setName("MasterDel");
+        btnMasterDelete.addActionListener(btnListener);
 
-        btnLeftMod = new JButton();
-        btnLeftMod.setIcon(new ImageIcon("resource/images/mod.png"));
-        btnLeftMod.setToolTipText("Переименовать");
-        btnLeftMod.setName("mod");
-        //btnLeftMod.addActionListener(leftListener);
+        btnMasterOptions = new JButton();
+        btnMasterOptions.setIcon(Constants.OPTIONS);
+        btnMasterOptions.setToolTipText("Переименовать");
+        btnMasterOptions.setName("MasterOptions");
+        btnMasterOptions.addActionListener(btnListener);
 
 
-        btnDataAdd = new JButton();
-        btnDataAdd.setIcon(new ImageIcon("resource/images/add.png"));
-        btnDataAdd.setToolTipText("Добавить");
-        btnDataAdd.setName("add");
-        //btnDataAdd.addActionListener();
+        btnTaskAdd = new JButton();
+        btnTaskAdd.setIcon(Constants.ADD);
+        btnTaskAdd.setToolTipText("Добавить");
+        btnTaskAdd.setName("TaskAdd");
+        btnTaskAdd.addActionListener(btnListener);
 
-        btnDataDelete = new JButton();
-        btnDataDelete.setIcon(new ImageIcon("resource/images/del.png"));
-        btnDataDelete.setToolTipText("Удалить");
-        btnDataDelete.setName("del");
-        //btnDataDelete.addActionListener();
+        btnTaskDelete = new JButton();
+        btnTaskDelete.setIcon(Constants.DEL);
+        btnTaskDelete.setToolTipText("Удалить");
+        btnTaskDelete.setName("TaskDel");
+        btnTaskDelete.addActionListener(btnListener);
 
-        btnDataMod = new JButton();
-        btnDataMod.setIcon(new ImageIcon("resource/images/mod.png"));
-        btnDataMod.setToolTipText("Модифицировать");
-        btnDataMod.setName("mod");
-        //btnDataMod.addActionListener();
+        btnTaskOptions = new JButton();
+        btnTaskOptions.setIcon(Constants.OPTIONS);
+        btnTaskOptions.setToolTipText("Модифицировать");
+        btnTaskOptions.setName("TaskOptions");
+        btnTaskOptions.addActionListener(btnListener);
 
-        complete = new JButton();
-        complete.setIcon(new ImageIcon("resource/images/complete.png"));
-        complete.setToolTipText("Завершить");
-        complete.setName("complete");
-        //complete.addActionListener();
+        btnTaskComplete = new JButton();
+        btnTaskComplete.setIcon(Constants.COMPLETE);
+        btnTaskComplete.setToolTipText("Завершить");
+        btnTaskComplete.setName("TaskComplete");
+        btnTaskComplete.addActionListener(btnListener);
     }
 
     private void initPanels(){
@@ -225,39 +233,39 @@ public class MainWindow extends JFrame {
         mainPanel = new JPanel(mainLayout);
 
         //Левая панель для кнопок.
-        btnLeftPanel = new JPanel(btnLayout);
-        btnLeftPanel.setBorder(new EtchedBorder());
+        btnMasterPanel = new JPanel(btnLayout);
+        btnMasterPanel.setBorder(new EtchedBorder());
         //Общая левая панель.
-        mainLeftPanel = new JPanel(leftMainLayout);
-        mainLeftPanel.setBorder(new EtchedBorder());
+        mainMasterPanel = new JPanel(leftMainLayout);
+        mainMasterPanel.setBorder(new EtchedBorder());
 
         //Центральная панель для кнопок.
-        btnDataPanel = new JPanel(btnLayout);
-        btnDataPanel.setBorder(new EtchedBorder());
+        btnTaskPanel = new JPanel(btnLayout);
+        btnTaskPanel.setBorder(new EtchedBorder());
         //Общая центральная панель.
-        mainDataPanel = new JPanel(dataMainLayout);
-        mainDataPanel.setBorder(new EtchedBorder());
+        mainTaskPanel = new JPanel(dataMainLayout);
+        mainTaskPanel.setBorder(new EtchedBorder());
         //**************************//
 
         //*****Заполняем панели*****//
         //Заполняем левую панель
-        btnLeftPanel.add(btnLeftAdd);
-        btnLeftPanel.add(btnLeftDelete);
-        btnLeftPanel.add(btnLeftMod);
-        mainLeftPanel.add(btnLeftPanel, BorderLayout.NORTH);
-        mainLeftPanel.add(leftData, BorderLayout.CENTER);
+        btnMasterPanel.add(btnMasterAdd);
+        btnMasterPanel.add(btnMasterDelete);
+        btnMasterPanel.add(btnMasterOptions);
+        mainMasterPanel.add(btnMasterPanel, BorderLayout.NORTH);
+        mainMasterPanel.add(masterList, BorderLayout.CENTER);
 
         //Заполняем центральную панель
-        btnDataPanel.add(btnDataAdd);
-        btnDataPanel.add(btnDataDelete);
-        btnDataPanel.add(btnDataMod);
-        btnDataPanel.add(complete);
-        mainDataPanel.add(btnDataPanel, BorderLayout.NORTH);
-        mainDataPanel.add(jscrlp, BorderLayout.CENTER);
+        btnTaskPanel.add(btnTaskAdd);
+        btnTaskPanel.add(btnTaskDelete);
+        btnTaskPanel.add(btnTaskOptions);
+        btnTaskPanel.add(btnTaskComplete);
+        mainTaskPanel.add(btnTaskPanel, BorderLayout.NORTH);
+        mainTaskPanel.add(jscrlp, BorderLayout.CENTER);
 
         //Заполняем главную панель данными
-        mainPanel.add(mainLeftPanel, BorderLayout.WEST);
-        mainPanel.add(mainDataPanel, BorderLayout.CENTER);
+        mainPanel.add(mainMasterPanel, BorderLayout.WEST);
+        mainPanel.add(mainTaskPanel, BorderLayout.CENTER);
         //*************************//
 
         //Заполняем Frame

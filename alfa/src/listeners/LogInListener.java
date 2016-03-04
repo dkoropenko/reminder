@@ -71,6 +71,13 @@ public class LogInListener implements ActionListener {
                 }
             } catch (SQLException e1) {
                 e1.printStackTrace();
+            }finally {
+                try {
+                    if (!database.databaseIsClosed())
+                        database.close();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             }
         }
         else{
