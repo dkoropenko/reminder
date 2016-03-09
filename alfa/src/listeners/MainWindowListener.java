@@ -5,6 +5,7 @@ import gui.AddTaskGUI;
 import gui.Constants;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -18,15 +19,21 @@ public class MainWindowListener implements ActionListener{
     private DataBaseClass database;
 
     private JList masterList;
+    private DefaultTableModel tableModel;
+    private JTable taskTable;
+
     private int selectedMasterElement;
+    private int selectedTaskRow;
 
     AddTaskGUI addTaskGUI;
 
     String taskTitle, taskBody;
 
-    public MainWindowListener(JList masterList){
+    public MainWindowListener(JList masterList, DefaultTableModel tableModel, JTable taskTable){
         addTaskGUI = new AddTaskGUI(this);
         this.masterList = masterList;
+        this.tableModel = tableModel;
+        this.taskTable = taskTable;
     }
 
     private void addMasterDataToDB(){
@@ -67,7 +74,7 @@ public class MainWindowListener implements ActionListener{
             if (name == JOptionPane.OK_OPTION){
                 database = DataBaseClass.getInstance();
                 database.connect();
-                database.delete("Master", (String)masterList.getSelectedValue());
+                database.delete("Master", (String) masterList.getSelectedValue());
 
                 if(selectedMasterElement != 0)
                     selectedMasterElement--;
@@ -113,13 +120,33 @@ public class MainWindowListener implements ActionListener{
     private void addTasksDataToDB(){
         taskTitle = addTaskGUI.getTitle();
         taskBody = addTaskGUI.getBody();
+        String selectedMaster = (String)masterList.getSelectedValue();
+        Long createTime;
 
         if (!taskTitle.equals("")){
-            //Дальше сделать:
-            //Добавление записи в таблицу Tasks
-            //Удаление записи из таблицы Tasks
-            //И другие классные штуки с таблицей Tasks
+            try {
+                database = DataBaseClass.getInstance();
+                database.connect();
+
+                //Дата создания задания
+                createTime = System.currentTimeMillis()/1000;
+
+                database.add("Tasks", taskTitle, taskBody, createTime,0,0,0, database.currentUser, selectedMaster);
+                selectedTaskRow = database.getSize("Tasks")-1;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally {
+                try {
+                    if (!database.databaseIsClosed()){
+                        database.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+        refreshElements();
     }
 
     private void refreshElements(){
@@ -127,10 +154,43 @@ public class MainWindowListener implements ActionListener{
             database = DataBaseClass.getInstance();
             database.connect();
 
-            ArrayList<String> tasks = database.getFromMaster("name", database.currentUser);
-
-            masterList.setListData(tasks.toArray());
+            ArrayList<String> masterElements = database.getFromMaster("name", database.currentUser);
+            masterList.setListData(masterElements.toArray());
             masterList.setSelectedIndex(selectedMasterElement);
+
+            ArrayList<String> title = database.getFromTasks("title", database.currentUser, (String)masterList.getSelectedValue());
+            ArrayList<String> status = database.getFromTasks("status", database.currentUser, (String)masterList.getSelectedValue());
+
+            Object[][] rowData = new Object[title.size()][];
+
+            for (int i = 0; i < title.size(); i++) {
+                Object[] rowLine = new Object[3];
+
+                rowLine[0] = i+1;
+                rowLine[1] = title.get(i);
+                rowLine[2] = status.get(i);
+
+                rowData[i] = rowLine;
+            }
+            Object[] head = {Constants.ID, Constants.TASK, Constants.STATUS};
+
+            //Заролняем таблицу
+            tableModel.setDataVector(rowData,head);
+
+            //Выделяем первую строчку в таблице
+            if (tableModel.getRowCount() > 0){
+                System.out.println("Больше 0");
+                taskTable.setRowSelectionInterval(0,selectedTaskRow);
+            }
+
+            //А так же размеры столбцов
+            taskTable.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+            taskTable.getColumnModel().getColumn(0).setMaxWidth(30);
+            taskTable.getColumnModel().getColumn(1).setMaxWidth(1000);
+            taskTable.getColumnModel().getColumn(2).setMaxWidth(70);
+
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -147,6 +207,7 @@ public class MainWindowListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton) e.getSource();
         selectedMasterElement = masterList.getSelectedIndex();
+        selectedTaskRow = taskTable.getSelectedRow();
 
         switch (button.getName()){
             case "MasterAdd":

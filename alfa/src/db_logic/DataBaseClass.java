@@ -62,7 +62,7 @@ public class DataBaseClass {
 
             statement.execute("CREATE TABLE IF NOT EXISTS Tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "title CHARACTER(50), body CHARACTER(500), " +
-                    "createTime DATE, modifyTime DATE, finishTime DATE, " +
+                    "createTime INTEGER, modifyTime INTEGER, finishTime INTEGER, " +
                     "status INTEGER, author CHAR(30) NOT NULL, master CHARACTER(30));");
 
             if (this.getSize("Users") == 0){
@@ -98,6 +98,9 @@ public class DataBaseClass {
         switch (tableName){
             case "Master":
                 prepareQuery.append(" (name, count, author) ");
+                break;
+            case "Tasks":
+                prepareQuery.append(" (title, body, createTime, modifyTime, finishTime, status, author, master) ");
         }
         prepareQuery.append("VALUES (");
 
@@ -169,7 +172,7 @@ public class DataBaseClass {
      * @return - ArrayList<String> Все значения столбца в таблице.
      * @throws SQLException
      */
-    private ArrayList<String> getFromTable(String tbName, String rowName, String author) throws SQLException {
+    private ArrayList<String> getFromTable(String tbName, String rowName, String author, String masterSelected) throws SQLException {
         ArrayList<String> result = new ArrayList<>();
 
         StringBuilder prepareQuery = new StringBuilder();
@@ -178,6 +181,8 @@ public class DataBaseClass {
 
         if(author != null)
             prepareQuery.append("WHERE author=\""+ author +"\"");
+        if (masterSelected != null)
+            prepareQuery.append(" AND master =\""+ masterSelected +"\"");
 
         prepareQuery.append(";");
 
@@ -191,10 +196,13 @@ public class DataBaseClass {
     }
 
     public ArrayList<String> getFromUsers (String rowName) throws SQLException {
-        return this.getFromTable("Users", rowName, null);
+        return this.getFromTable("Users", rowName, null, null);
     }
     public ArrayList<String> getFromMaster (String rowName, String author) throws SQLException {
-        return this.getFromTable("Master", rowName, author);
+        return this.getFromTable("Master", rowName, author, null);
+    }
+    public ArrayList<String> getFromTasks (String rowName, String author, String masterSelect) throws SQLException {
+        return this.getFromTable("Tasks", rowName, author, masterSelect);
     }
 
     /**
