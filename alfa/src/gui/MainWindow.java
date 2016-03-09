@@ -52,7 +52,7 @@ public class MainWindow extends JFrame {
     JScrollPane jscrlp;
 
     //База данных
-    DataBaseClass database;
+    DataBaseClass database = null;
 
     public MainWindow(){
         setTitle(Constants.APPNAME +" User: "+ database.currentUser);
@@ -60,7 +60,7 @@ public class MainWindow extends JFrame {
         setResizable(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setIconImage(new ImageIcon(Constants.ICON).getImage());
+        setIconImage(Constants.ICON.getImage());
 
         //Инициализируем UI
         initMenu();
@@ -137,12 +137,13 @@ public class MainWindow extends JFrame {
         tableModel = new DefaultTableModel();
         //Делаем шапку таблицы
         tableModel.addColumn(Constants.ID);
-        tableModel.addColumn(Constants.DATE);
-        tableModel.addColumn(Constants.VALUE);
+        tableModel.addColumn(Constants.TASK);
+        tableModel.addColumn(Constants.STATUS);
 
         //Создаем таблицу и добавляем ей модель. Оборачиваем все в скроллпаин.
         mainData = new JTable();
         mainData.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
 
         //Устаналиваем размеры прокручиваемой области
         mainData.setPreferredScrollableViewportSize(new Dimension(250, 100));
@@ -162,13 +163,21 @@ public class MainWindow extends JFrame {
            mainData.setRowSelectionInterval(0,0);
 
         //А так же размеры столбцов
-        mainData.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
-        mainData.getColumnModel().getColumn(0).setMaxWidth(100);
-        mainData.getColumnModel().getColumn(2).setMaxWidth(100);
+        mainData.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        mainData.getColumnModel().getColumn(0).setMaxWidth(30);
+        mainData.getColumnModel().getColumn(1).setMaxWidth(1000);
+        mainData.getColumnModel().getColumn(2).setMaxWidth(70);
         //********КОНЕЦ ПРАВОЕ МЕНЮ******************
     }
 
     private void initTableContents(){
+        try {
+            database.connect();
+
+            ArrayList<String> status;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initBtn(){

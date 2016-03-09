@@ -52,17 +52,18 @@ public class DataBaseClass {
     }
     private void createTables() throws SQLException {
         if(connection != null) {
-            statement.execute("CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY, name char(20), " +
+            statement.execute("CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, name char(20), " +
                     "passwd CHAR(30));");
 
-            statement.execute("CREATE TABLE IF NOT EXISTS Master (id INTEGER PRIMARY KEY, " +
+            statement.execute("CREATE TABLE IF NOT EXISTS Master (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                                                                 "name char(30), " +
                                                                 "count INTEGER, " +
                                                                 "author CHAR(30));");
 
-            statement.execute("CREATE TABLE IF NOT EXISTS Tasks (id INTEGER PRIMARY KEY, " +
-                    "name CHARACTER(100), createTime DATE, modifyTime DATE, finishTime DATE, " +
-                    "status INTEGER, author CHAR(30) NOT NULL);");
+            statement.execute("CREATE TABLE IF NOT EXISTS Tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "title CHARACTER(50), body CHARACTER(500), " +
+                    "createTime DATE, modifyTime DATE, finishTime DATE, " +
+                    "status INTEGER, author CHAR(30) NOT NULL, master CHARACTER(30));");
 
             if (this.getSize("Users") == 0){
                 statement.execute("INSERT INTO Users VALUES " +
@@ -92,7 +93,14 @@ public class DataBaseClass {
      */
     public void add(String tableName, Object ... parametres) throws SQLException{
         StringBuffer prepareQuery = new StringBuffer();
-        prepareQuery.append("INSERT INTO "+ tableName +" VALUES (");
+        prepareQuery.append("INSERT INTO "+ tableName);
+
+        switch (tableName){
+            case "Master":
+                prepareQuery.append(" (name, count, author) ");
+        }
+        prepareQuery.append("VALUES (");
+
         for (int i = 0; i < parametres.length; i++) {
 
             if (parametres[i] instanceof String)
@@ -143,6 +151,11 @@ public class DataBaseClass {
                 prepareQuery.append("name = \""+ parametres[0] +"\"");
                 prepareQuery.append(" where id = "+ id + ";");
                 break;
+            case "Master":
+                prepareQuery.append(tableName +" SET ");
+                prepareQuery.append("name = \""+ parametres[0] +"\"");
+                prepareQuery.append(" where name = \""+ parametres[1] + "\";");
+                break;
         }
 
         statement.execute(prepareQuery.toString());
@@ -156,9 +169,8 @@ public class DataBaseClass {
      * @return - ArrayList<String> Все значения столбца в таблице.
      * @throws SQLException
      */
-    public ArrayList<String> getFromTable(String tbName, String rowName, String author) throws SQLException {
+    private ArrayList<String> getFromTable(String tbName, String rowName, String author) throws SQLException {
         ArrayList<String> result = new ArrayList<>();
-        connect();
 
         StringBuilder prepareQuery = new StringBuilder();
 

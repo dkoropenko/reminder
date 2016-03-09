@@ -39,7 +39,7 @@ public class UsersWindow extends JFrame{
         setMaximumSize(new Dimension(400,900));
         setSize(200,300);
         setLocationRelativeTo(null);
-        setIconImage(new ImageIcon(Constants.ICON).getImage());
+        setIconImage(Constants.ICON.getImage());
 
         initData();
         initButtons();

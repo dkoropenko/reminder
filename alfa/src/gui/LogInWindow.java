@@ -25,6 +25,7 @@ public class LogInWindow extends JFrame {
 
     public LogInWindow(){
         setTitle(Constants.APPNAME);
+        setIconImage(Constants.ICON.getImage());
         setSize(200,170);
         setResizable(false);
         setLocationRelativeTo(null);

@@ -21,11 +21,14 @@ public class Run {
 
         try {
             database = DataBaseClass.getInstance();
+            database.connect();
 
-            //database.getFromUsers("name").get(0).equals(Constants.DEFAULT_USER) - выясняем есть ли в бд стандартный
+            //database.getFromUsers("name").get(0).equals(Constants.DEFAULT_USER)
+            // выясняем есть ли в бд стандартный
             //пользователь и является ли он единственным.
             if (database.getSize("Users") == 1 && database.getFromUsers("name").get(0).equals(Constants.DEFAULT_USER)){
                 database.currentUser = Constants.DEFAULT_USER;
+
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.setVisible(true);
             } else{
