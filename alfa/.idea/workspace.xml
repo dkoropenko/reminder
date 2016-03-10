@@ -2,16 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdeed17b-082a-45e1-bafc-2edefd28549d" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gui/UpdateTaskGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Task.db" afterPath="$PROJECT_DIR$/Task.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/alfa_jar/alfa.jar" afterPath="$PROJECT_DIR$/out/artifacts/alfa_jar/alfa.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resource/images/Thumbs.db" afterPath="$PROJECT_DIR$/resource/images/Thumbs.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Run.java" afterPath="$PROJECT_DIR$/src/Run.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/db_logic/DataBaseClass.java" afterPath="$PROJECT_DIR$/src/db_logic/DataBaseClass.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/AddTaskGUI.java" afterPath="$PROJECT_DIR$/src/gui/AddTaskGUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Constants.java" afterPath="$PROJECT_DIR$/src/gui/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/LogInWindow.java" afterPath="$PROJECT_DIR$/src/gui/LogInWindow.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/MainWindow.java" afterPath="$PROJECT_DIR$/src/gui/MainWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/UsersWindow.java" afterPath="$PROJECT_DIR$/src/gui/UsersWindow.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/listeners/MainWindowListener.java" afterPath="$PROJECT_DIR$/src/listeners/MainWindowListener.java" />
     </list>
     <ignored path="alfa.iws" />
@@ -37,8 +37,8 @@
       <file leaf-file-name="Run.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Run.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="31" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
+            <state vertical-scroll-proportion="-6.5925927">
+              <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -48,7 +48,7 @@
         <entry file="file://$PROJECT_DIR$/src/gui/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="62" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="62" />
+              <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -58,19 +58,18 @@
         <entry file="file://$PROJECT_DIR$/src/db_logic/DataBaseClass.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="65" column="84" selection-start-line="65" selection-start-column="84" selection-end-line="65" selection-end-column="84" />
+              <caret line="167" column="37" selection-start-line="167" selection-start-column="37" selection-end-line="167" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#getInstance#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#initDriver#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#connect#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#close#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#databaseIsClosed#0;class#DataBaseClass#0" expanded="false" />
                 <element signature="method#delete#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#change#0;class#DataBaseClass#0" expanded="false" />
+                <element signature="method#deleteFromUsers#0;class#DataBaseClass#0" expanded="false" />
+                <element signature="method#deleteFromMaster#0;class#DataBaseClass#0" expanded="false" />
+                <element signature="method#deleteFromTasks#0;class#DataBaseClass#0" expanded="false" />
+                <element signature="method#clearTask#0;class#DataBaseClass#0" expanded="false" />
                 <element signature="method#getFromTable#0;class#DataBaseClass#0" expanded="false" />
                 <element signature="method#getFromUsers#0;class#DataBaseClass#0" expanded="false" />
                 <element signature="method#getFromMaster#0;class#DataBaseClass#0" expanded="false" />
+                <element signature="method#getFromTasks#0;class#DataBaseClass#0" expanded="false" />
                 <element signature="method#getSize#0;class#DataBaseClass#0" expanded="false" />
               </folding>
             </state>
@@ -81,10 +80,8 @@
         <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="51" column="23" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
-              <folding>
-                <element signature="method#initMenu#0;class#MainWindow#0" expanded="false" />
-              </folding>
+              <caret line="298" column="37" selection-start-line="298" selection-start-column="37" selection-end-line="298" selection-end-column="37" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -92,26 +89,29 @@
       <file leaf-file-name="MainWindowListener.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/listeners/MainWindowListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5588235">
-              <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.41666666">
+              <caret line="204" column="27" selection-start-line="204" selection-start-column="27" selection-end-line="204" selection-end-column="27" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="method#addMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
                 <element signature="method#delMasterDataFromTable#0;class#MainWindowListener#0" expanded="false" />
                 <element signature="method#changeMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
+                <element signature="method#addTasksDataToDB#0;class#MainWindowListener#0" expanded="false" />
+                <element signature="method#deleteTaskDataFromDB#0;class#MainWindowListener#0" expanded="false" />
                 <element signature="method#refreshElements#0;class#MainWindowListener#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddTaskGUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gui/AddTaskGUI.java">
+      <file leaf-file-name="UpdateTaskGUI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/UpdateTaskGUI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="113" column="21" selection-start-line="113" selection-start-column="21" selection-end-line="113" selection-end-column="21" />
+              <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2515#2516#0" expanded="true" />
+                <element signature="e#2583#2584#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -148,13 +148,14 @@
         <option value="$PROJECT_DIR$/src/listeners/MainMenuListener.java" />
         <option value="$PROJECT_DIR$/src/gui/AddUserWindow.java" />
         <option value="$PROJECT_DIR$/src/listeners/LogInListener.java" />
-        <option value="$PROJECT_DIR$/src/Run.java" />
-        <option value="$PROJECT_DIR$/src/gui/Constants.java" />
         <option value="$PROJECT_DIR$/src/gui/LogInWindow.java" />
         <option value="$PROJECT_DIR$/src/gui/UsersWindow.java" />
-        <option value="$PROJECT_DIR$/src/db_logic/DataBaseClass.java" />
-        <option value="$PROJECT_DIR$/src/gui/MainWindow.java" />
         <option value="$PROJECT_DIR$/src/gui/AddTaskGUI.java" />
+        <option value="$PROJECT_DIR$/src/gui/Constants.java" />
+        <option value="$PROJECT_DIR$/src/gui/MainWindow.java" />
+        <option value="$PROJECT_DIR$/src/Run.java" />
+        <option value="$PROJECT_DIR$/src/db_logic/DataBaseClass.java" />
+        <option value="$PROJECT_DIR$/src/gui/UpdateTaskGUI.java" />
         <option value="$PROJECT_DIR$/src/listeners/MainWindowListener.java" />
       </list>
     </option>
@@ -190,8 +191,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -295,6 +294,8 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -715,20 +716,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1288" height="1002" extended-state="0" />
-    <editor active="false" />
+    <frame x="-4" y="-4" width="1288" height="1002" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32814237" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32752994" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32814237" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32703003" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19453125" sideWeight="0.4935065" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19375" sideWeight="0.4935065" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.4935065" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -785,7 +786,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -794,6 +795,116 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/gui/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db_logic/DataBaseClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="204" column="27" selection-start-line="204" selection-start-column="27" selection-end-line="204" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#delete#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromUsers#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromTasks#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#clearTask#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromTable#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromUsers#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromTasks#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getSize#0;class#DataBaseClass#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="166" column="61" selection-start-line="166" selection-start-column="61" selection-end-line="166" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/listeners/MainWindowListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="134" column="32" selection-start-line="134" selection-start-column="32" selection-end-line="134" selection-end-column="32" />
+          <folding>
+            <element signature="method#addMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#delMasterDataFromTable#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#changeMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#addTasksDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#deleteTaskDataFromDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#refreshElements#0;class#MainWindowListener#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Run.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db_logic/DataBaseClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#delete#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromUsers#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromTasks#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#clearTask#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromTable#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromUsers#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromTasks#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getSize#0;class#DataBaseClass#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/listeners/MainWindowListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="method#addMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#delMasterDataFromTable#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#changeMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#addTasksDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#deleteTaskDataFromDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#refreshElements#0;class#MainWindowListener#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Run.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -816,16 +927,15 @@
           <caret line="123" column="29" selection-start-line="123" selection-start-column="29" selection-end-line="123" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getInstance#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#initDriver#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#connect#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#close#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#databaseIsClosed#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#delete#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#change#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromUsers#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromTasks#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#clearTask#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromTable#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromUsers#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromTasks#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getSize#0;class#DataBaseClass#0" expanded="false" />
           </folding>
         </state>
@@ -835,9 +945,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="130" column="9" selection-start-line="113" selection-start-column="8" selection-end-line="130" selection-end-column="9" />
-          <folding>
-            <element signature="method#initMenu#0;class#MainWindow#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -846,10 +954,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="method#addMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
             <element signature="method#delMasterDataFromTable#0;class#MainWindowListener#0" expanded="false" />
             <element signature="method#changeMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#addTasksDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#deleteTaskDataFromDB#0;class#MainWindowListener#0" expanded="false" />
             <element signature="method#refreshElements#0;class#MainWindowListener#0" expanded="false" />
           </folding>
         </state>
@@ -877,16 +986,15 @@
           <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getInstance#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#initDriver#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#connect#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#close#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#databaseIsClosed#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#delete#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#change#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromUsers#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromTasks#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#clearTask#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromTable#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromUsers#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromTasks#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getSize#0;class#DataBaseClass#0" expanded="false" />
           </folding>
         </state>
@@ -896,10 +1004,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="48" column="96" selection-start-line="48" selection-start-column="96" selection-end-line="48" selection-end-column="96" />
-          <folding>
-            <marker date="1457520427593" expanded="true" signature="263:308" placeholder="/**...*/" />
-            <marker date="1457520427593" expanded="true" signature="3078:3086" placeholder="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -907,9 +1012,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="63" selection-start-line="63" selection-start-column="63" selection-end-line="63" selection-end-column="63" />
-          <folding>
-            <element signature="method#initMenu#0;class#MainWindow#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -919,7 +1022,6 @@
           <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="false" />
-            <marker date="1457078440375" expanded="true" signature="296:341" placeholder="/**...*/" />
           </folding>
         </state>
       </provider>
@@ -937,7 +1039,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="86" column="42" selection-start-line="52" selection-start-column="7" selection-end-line="86" selection-end-column="42" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
             <element signature="method#initPanels#0;class#UsersWindow#0" expanded="false" />
           </folding>
         </state>
@@ -957,16 +1059,15 @@
           <caret line="48" column="49" selection-start-line="48" selection-start-column="49" selection-end-line="48" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getInstance#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#initDriver#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#connect#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#close#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#databaseIsClosed#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#delete#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#change#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromUsers#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromTasks#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#clearTask#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromTable#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromUsers#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromTasks#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getSize#0;class#DataBaseClass#0" expanded="false" />
           </folding>
         </state>
@@ -976,10 +1077,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1457520427593" expanded="true" signature="263:308" placeholder="/**...*/" />
-            <marker date="1457520427593" expanded="true" signature="3078:3086" placeholder="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -989,7 +1087,6 @@
           <caret line="50" column="60" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="60" />
           <folding>
             <element signature="imports" expanded="false" />
-            <marker date="1457078440375" expanded="true" signature="296:341" placeholder="/**...*/" />
           </folding>
         </state>
       </provider>
@@ -1006,9 +1103,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="72" column="75" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="75" />
-          <folding>
-            <element signature="method#initMenu#0;class#MainWindow#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1017,7 +1112,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
             <element signature="method#initPanels#0;class#UsersWindow#0" expanded="false" />
           </folding>
         </state>
@@ -1037,16 +1132,15 @@
           <caret line="203" column="53" selection-start-line="203" selection-start-column="53" selection-end-line="203" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getInstance#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#initDriver#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#connect#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#close#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#databaseIsClosed#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#delete#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#change#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromUsers#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromTasks#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#clearTask#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromTable#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromUsers#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromTasks#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getSize#0;class#DataBaseClass#0" expanded="false" />
           </folding>
         </state>
@@ -1064,9 +1158,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="93" column="44" selection-start-line="93" selection-start-column="44" selection-end-line="93" selection-end-column="44" />
-          <folding>
-            <element signature="method#initMenu#0;class#MainWindow#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1084,16 +1176,15 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getInstance#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#initDriver#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#connect#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#close#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#databaseIsClosed#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#delete#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#change#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromUsers#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromTasks#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#clearTask#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromTable#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromUsers#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromTasks#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getSize#0;class#DataBaseClass#0" expanded="false" />
           </folding>
         </state>
@@ -1111,16 +1202,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#initMenu#0;class#MainWindow#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/MainDBTableRender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1144,16 +1226,7 @@
           <caret line="76" column="41" selection-start-line="76" selection-start-column="41" selection-end-line="76" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="false" />
-            <marker date="1457078440375" expanded="true" signature="296:341" placeholder="/**...*/" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_71/src.zip!/javax/swing/JOptionPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="563" column="25" selection-start-line="563" selection-start-column="25" selection-end-line="563" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1161,7 +1234,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14705883">
           <caret line="54" column="14" selection-start-line="0" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1169,10 +1241,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47058824">
           <caret line="27" column="46" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
-          <folding>
-            <marker date="1457520427593" expanded="true" signature="263:308" placeholder="/**...*/" />
-            <marker date="1457520427593" expanded="true" signature="3078:3086" placeholder="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1181,16 +1250,31 @@
         <state vertical-scroll-proportion="0.33217993">
           <caret line="41" column="39" selection-start-line="41" selection-start-column="39" selection-end-line="41" selection-end-column="39" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
             <element signature="method#initPanels#0;class#UsersWindow#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/MainDBTableRender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5118243">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="62" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="62" />
+          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="298" column="37" selection-start-line="298" selection-start-column="37" selection-end-line="298" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -1198,61 +1282,61 @@
     <entry file="file://$PROJECT_DIR$/src/db_logic/DataBaseClass.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="84" selection-start-line="65" selection-start-column="84" selection-end-line="65" selection-end-column="84" />
+          <caret line="167" column="37" selection-start-line="167" selection-start-column="37" selection-end-line="167" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getInstance#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#initDriver#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#connect#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#close#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#databaseIsClosed#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#delete#0;class#DataBaseClass#0" expanded="false" />
-            <element signature="method#change#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromUsers#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromTasks#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#clearTask#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromTable#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromUsers#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromTasks#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getSize#0;class#DataBaseClass#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/gui/UpdateTaskGUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="23" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
+          <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
           <folding>
-            <element signature="method#initMenu#0;class#MainWindow#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#2515#2516#0" expanded="true" />
+            <element signature="e#2583#2584#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Run.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="31" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/AddTaskGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="113" column="21" selection-start-line="113" selection-start-column="21" selection-end-line="113" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.23488773">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="119" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Run.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.5925927">
+          <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/listeners/MainWindowListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5588235">
-          <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.41666666">
+          <caret line="204" column="27" selection-start-line="204" selection-start-column="27" selection-end-line="204" selection-end-column="27" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="method#addMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
             <element signature="method#delMasterDataFromTable#0;class#MainWindowListener#0" expanded="false" />
             <element signature="method#changeMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#addTasksDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#deleteTaskDataFromDB#0;class#MainWindowListener#0" expanded="false" />
             <element signature="method#refreshElements#0;class#MainWindowListener#0" expanded="false" />
           </folding>
         </state>

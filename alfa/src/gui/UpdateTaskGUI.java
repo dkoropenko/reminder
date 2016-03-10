@@ -1,20 +1,17 @@
 package gui;
 
-import db_logic.DataBaseClass;
-import javafx.scene.layout.Border;
 import listeners.MainWindowListener;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Koropenkods on 09.03.16.
+ * Created by Koropenkods on 10.03.16.
  */
-public class AddTaskGUI extends JFrame {
+public class UpdateTaskGUI extends JFrame {
     JPanel mainPanel, textPanel, buttonPanel;
 
     private JTextField taskTitle;
@@ -24,8 +21,8 @@ public class AddTaskGUI extends JFrame {
     private JButton btnCreate, btnCancel;
     private MainWindowListener listener;
 
-    public AddTaskGUI(MainWindowListener listener){
-        setTitle("Создать");
+    public UpdateTaskGUI(MainWindowListener listener){
+        setTitle("Обновить");
         setIconImage(Constants.ICON.getImage());
         setSize(300,270);
         setResizable(false);
@@ -60,8 +57,8 @@ public class AddTaskGUI extends JFrame {
 
     }
     public void initBtn(){
-        btnCreate = new JButton("Создать");
-        btnCreate.setName("newTask");
+        btnCreate = new JButton("Обновить");
+        btnCreate.setName("updateTask");
 
         btnCancel = new JButton("Отмена");
 
@@ -81,7 +78,7 @@ public class AddTaskGUI extends JFrame {
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddTaskGUI.this.setVisible(false);
+                UpdateTaskGUI.this.setVisible(false);
             }
         });
     }

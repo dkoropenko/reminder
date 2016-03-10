@@ -36,12 +36,16 @@ public class MainWindow extends JFrame {
     private JMenuBar mainMenu;
     private JMenu fileMenu, prefMenu, helpMenu;
     private JMenuItem newDBMenu, openDBMenu, closeDBMenu, exitMenu;
-    private JMenuItem usersMenu, optionsMenu, refreshItemsMenu;
+    private JMenuItem usersMenu, optionsMenu;
+
+    private MainWindowListener btnListener;
 
     //Кнопки для управлением данными в левом окне.
     private JButton btnMasterAdd, btnMasterDelete, btnMasterOptions;
     //Кнопки для управлением данными в главном окне.
-    private JButton btnTaskAdd, btnTaskDelete, btnTaskOptions, btnTaskComplete;
+    private JButton btnTaskAdd, btnTaskDelete, btnTaskOptions;
+    //Кнопки для управлением состоянием задач
+    private JButton btnTaskPause, btnTaskStart, btnTaskComplete;
 
     //Переменные управления списком элементов в левом меню
     private JList masterList;
@@ -55,8 +59,8 @@ public class MainWindow extends JFrame {
     DataBaseClass database = null;
 
     public MainWindow(){
-        setTitle(Constants.APPNAME +" User: "+ database.currentUser);
-        setSize(700,450);
+        setTitle(Constants.APPNAME + " User: " + database.currentUser);
+        setSize(700, 450);
         setResizable(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -130,15 +134,12 @@ public class MainWindow extends JFrame {
             }
         }
 
+
         //********КОНЕЦ ЛЕВОЕ МЕНЮ******************
 
         //******** ОСНОВНОЕ МЕНЮ******************
         //Создаем модель для работы с таблицей.
         tableModel = new DefaultTableModel();
-        //Делаем шапку таблицы
-        tableModel.addColumn(Constants.ID);
-        tableModel.addColumn(Constants.TASK);
-        tableModel.addColumn(Constants.STATUS);
 
         //Создаем таблицу и добавляем ей модель. Оборачиваем все в скроллпаин.
         mainData = new JTable();
@@ -152,8 +153,8 @@ public class MainWindow extends JFrame {
         initTableContents();
 
         //Создаем пользовательский рендер для таблицы.
-        MainDBTableRender render = new MainDBTableRender();
-        mainData.setDefaultRenderer(Object.class,render);
+        //MainDBTableRender render = new MainDBTableRender();
+        //mainData.setDefaultRenderer(Object.class,render);
 
         //Задаем модель для таблицы.
         mainData.setModel(tableModel);
@@ -163,25 +164,39 @@ public class MainWindow extends JFrame {
            mainData.setRowSelectionInterval(0,0);
 
         //А так же размеры столбцов
-        mainData.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        mainData.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         mainData.getColumnModel().getColumn(0).setMaxWidth(30);
-        mainData.getColumnModel().getColumn(1).setMaxWidth(1000);
+        mainData.getColumnModel().getColumn(1).setMaxWidth(10000);
         mainData.getColumnModel().getColumn(2).setMaxWidth(70);
         //********КОНЕЦ ПРАВОЕ МЕНЮ******************
     }
 
     private void initTableContents(){
         try {
+            database = DataBaseClass.getInstance();
             database.connect();
 
-            ArrayList<String> status;
+            ArrayList<Integer> id = new ArrayList<>();
+            ArrayList<String> resultStatus = new ArrayList<>();
+            ArrayList<String> title = database.getFromTasks("title", database.currentUser, (String)masterList.getSelectedValue());
+            ArrayList<String> status = database.getFromTasks("status", database.currentUser, (String)masterList.getSelectedValue());
+
+            //Заролняем таблицу
+            for (int i = 1; i <= title.size(); i++) {
+                id.add(i);
+                resultStatus.add(Constants.TASK_STATUS[Integer.parseInt(status.get(i-1))]);
+            }
+            tableModel.addColumn(Constants.ID, id.toArray());
+            tableModel.addColumn(Constants.TASK, title.toArray());
+            tableModel.addColumn(Constants.STATUS, resultStatus.toArray());
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     private void initBtn(){
-        MainWindowListener btnListener = new MainWindowListener(masterList);
+        btnListener = new MainWindowListener(masterList, tableModel, mainData);
         
         btnMasterAdd = new JButton();
         btnMasterAdd.setIcon(Constants.ADD);
@@ -225,6 +240,18 @@ public class MainWindow extends JFrame {
         btnTaskComplete.setToolTipText("Завершить");
         btnTaskComplete.setName("TaskComplete");
         btnTaskComplete.addActionListener(btnListener);
+
+        btnTaskStart = new JButton();
+        btnTaskStart.setIcon(Constants.START);
+        btnTaskStart.setToolTipText("Старт задачи");
+        btnTaskStart.setName("TaskStart");
+        btnTaskStart.addActionListener(btnListener);
+
+        btnTaskPause = new JButton();
+        btnTaskPause.setIcon(Constants.PAUSE);
+        btnTaskPause.setToolTipText("Приостановить");
+        btnTaskPause.setName("TaskPause");
+        btnTaskPause.addActionListener(btnListener);
     }
 
     private void initPanels(){
@@ -268,6 +295,8 @@ public class MainWindow extends JFrame {
         btnTaskPanel.add(btnTaskAdd);
         btnTaskPanel.add(btnTaskDelete);
         btnTaskPanel.add(btnTaskOptions);
+        btnTaskPanel.add(btnTaskPause);
+        btnTaskPanel.add(btnTaskStart);
         btnTaskPanel.add(btnTaskComplete);
         mainTaskPanel.add(btnTaskPanel, BorderLayout.NORTH);
         mainTaskPanel.add(jscrlp, BorderLayout.CENTER);

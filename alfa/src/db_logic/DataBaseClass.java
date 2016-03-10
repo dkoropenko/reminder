@@ -62,10 +62,10 @@ public class DataBaseClass {
 
             statement.execute("CREATE TABLE IF NOT EXISTS Tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "title CHARACTER(50), body CHARACTER(500), " +
-                    "createTime DATE, modifyTime DATE, finishTime DATE, " +
+                    "createTime INTEGER, modifyTime INTEGER, finishTime INTEGER, " +
                     "status INTEGER, author CHAR(30) NOT NULL, master CHARACTER(30));");
 
-            if (this.getSize("Users") == 0){
+            if (this.getSize("Users", null, null) == 0){
                 statement.execute("INSERT INTO Users VALUES " +
                         "(1, \""+ Constants.DEFAULT_USER +"\", \""+ Constants.DEFAULT_PASSWORD +"\");");
             }
@@ -98,6 +98,9 @@ public class DataBaseClass {
         switch (tableName){
             case "Master":
                 prepareQuery.append(" (name, count, author) ");
+                break;
+            case "Tasks":
+                prepareQuery.append(" (title, body, createTime, modifyTime, finishTime, status, author, master) ");
         }
         prepareQuery.append("VALUES (");
 
@@ -119,17 +122,43 @@ public class DataBaseClass {
     /**
      * Метод удаляющий строку из БД по ее ключу.
      * @param tableName - имя таблицы в БД
-     * @param name - ключ строки.
+     * @param rowName - ключ строки.
      * @throws SQLException
      */
-    public void delete (String tableName, String name) throws SQLException{
+    private void delete (String tableName, String name, String rowName, String author, String master) throws SQLException{
         StringBuilder buildQuery = new StringBuilder();
 
         buildQuery.append("DELETE FROM ");
         buildQuery.append(tableName);
-        buildQuery.append(" where name = \"");
-        buildQuery.append(name);
-        buildQuery.append("\";");
+        buildQuery.append(" where "+ name +" = \""+ rowName +"\"");
+
+        if (author != null)
+            buildQuery.append(" AND author = \""+ author +"\"");
+        if (master != null)
+            buildQuery.append(" AND master = \""+ master +"\"");
+
+        buildQuery.append(";");
+
+        statement.execute(buildQuery.toString());
+    }
+
+    public void deleteFromUsers(String rowName) throws SQLException {
+        delete("Users", "name", rowName, null, null);
+    }
+    public void deleteFromMaster(String rowName, String author) throws SQLException {
+        delete("Master", "name", rowName, author, null);
+    }
+    public void deleteFromTasks(String rowName, String author, String master) throws SQLException {
+        delete("Tasks", "title", rowName, author, master);
+    }
+    public void clearTask(String author, String master) throws SQLException {
+        StringBuilder buildQuery = new StringBuilder();
+
+        buildQuery.append("DELETE FROM Tasks");
+        buildQuery.append(" WHERE author = \""+ author +"\"");
+        buildQuery.append(" AND master = \""+ master +"\"");
+
+        buildQuery.append(";");
 
         statement.execute(buildQuery.toString());
     }
@@ -137,11 +166,10 @@ public class DataBaseClass {
     /**
      * Метод изменяет состояние строки в таблице.
      * @param tableName - имя таблицы
-     * @param id - ключ строки
      * @param parametres - новые параметры
      * @throws SQLException
      */
-    public void change (String tableName, int id, Object ... parametres) throws SQLException{
+    public void change (String tableName, Object ... parametres) throws SQLException{
         StringBuilder prepareQuery = new StringBuilder();
 
         prepareQuery.append("UPDATE ");
@@ -149,13 +177,19 @@ public class DataBaseClass {
             case "Users":
                 prepareQuery.append(tableName +" SET ");
                 prepareQuery.append("name = \""+ parametres[0] +"\"");
-                prepareQuery.append(" where id = "+ id + ";");
+                prepareQuery.append(" where id = "+ parametres[1] + ";");
                 break;
             case "Master":
                 prepareQuery.append(tableName +" SET ");
                 prepareQuery.append("name = \""+ parametres[0] +"\"");
                 prepareQuery.append(" where name = \""+ parametres[1] + "\";");
                 break;
+            case "Tasks":
+                prepareQuery.append(tableName +" SET ");
+                prepareQuery.append("master = \""+ parametres[0] +"\"");
+                prepareQuery.append(" where master = \""+ parametres[1] + "\";");
+                break;
+
         }
 
         statement.execute(prepareQuery.toString());
@@ -169,7 +203,7 @@ public class DataBaseClass {
      * @return - ArrayList<String> Все значения столбца в таблице.
      * @throws SQLException
      */
-    private ArrayList<String> getFromTable(String tbName, String rowName, String author) throws SQLException {
+    private ArrayList<String> getFromTable(String tbName, String rowName, String author, String masterSelected) throws SQLException {
         ArrayList<String> result = new ArrayList<>();
 
         StringBuilder prepareQuery = new StringBuilder();
@@ -178,6 +212,8 @@ public class DataBaseClass {
 
         if(author != null)
             prepareQuery.append("WHERE author=\""+ author +"\"");
+        if (masterSelected != null)
+            prepareQuery.append(" AND master =\""+ masterSelected +"\"");
 
         prepareQuery.append(";");
 
@@ -191,10 +227,13 @@ public class DataBaseClass {
     }
 
     public ArrayList<String> getFromUsers (String rowName) throws SQLException {
-        return this.getFromTable("Users", rowName, null);
+        return this.getFromTable("Users", rowName, null, null);
     }
     public ArrayList<String> getFromMaster (String rowName, String author) throws SQLException {
-        return this.getFromTable("Master", rowName, author);
+        return this.getFromTable("Master", rowName, author, null);
+    }
+    public ArrayList<String> getFromTasks (String rowName, String author, String masterSelect) throws SQLException {
+        return this.getFromTable("Tasks", rowName, author, masterSelect);
     }
 
     /**
@@ -204,12 +243,19 @@ public class DataBaseClass {
      * @return int size - размер таблицы
      * @throws SQLException
      */
-    public int getSize (String tbName) throws SQLException {
+    public int getSize (String tbName, String user, String master) throws SQLException {
 
         StringBuilder query = new StringBuilder();
 
         query.append("SELECT COUNT(*) FROM ");
         query.append(tbName);
+
+        if(user != null)
+            query.append(" WHERE author =\""+ user +"\"");
+        if(master != null)
+            query.append(" AND master=\""+ master +"\"");
+
+        query.append(";");
 
         connect();
         ResultSet rs = statement.executeQuery(query.toString());
