@@ -78,8 +78,12 @@ public class MainWindowListener implements ActionListener{
             if (name == JOptionPane.OK_OPTION){
                 database = DataBaseClass.getInstance();
                 database.connect();
+<<<<<<< HEAD
                 database.deleteFromMaster((String)masterList.getSelectedValue(), database.currentUser);
                 database.clearTask(database.currentUser, (String)masterList.getSelectedValue());
+=======
+                database.delete("Master", (String) masterList.getSelectedValue());
+>>>>>>> 79d10337a3fa20ee52f4d4c2ec37ac9d773b4fad
 
                 if(selectedMasterElement != 0)
                     selectedMasterElement--;
@@ -134,6 +138,7 @@ public class MainWindowListener implements ActionListener{
                 database = DataBaseClass.getInstance();
                 database.connect();
 
+<<<<<<< HEAD
                 ArrayList<String> checkName = database.getFromTasks("title", database.currentUser, selectedMaster);
 
                 if (!checkName.contains(taskTitle)){
@@ -148,6 +153,13 @@ public class MainWindowListener implements ActionListener{
                     JOptionPane.showMessageDialog(null,"Данное задача уже присутствует в списке.\n" +
                             "Измените тему и повторите заново", "Неудачно", 0, Constants.FAIL);
                 }
+=======
+                //Дата создания задания
+                createTime = System.currentTimeMillis()/1000;
+
+                database.add("Tasks", taskTitle, taskBody, createTime,0,0,0, database.currentUser, selectedMaster);
+                selectedTaskRow = database.getSize("Tasks")-1;
+>>>>>>> 79d10337a3fa20ee52f4d4c2ec37ac9d773b4fad
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -162,6 +174,7 @@ public class MainWindowListener implements ActionListener{
             }
         }
         refreshElements();
+<<<<<<< HEAD
     }
     private void deleteTaskDataFromDB(){
         String title = String.valueOf(tableModel.getValueAt(selectedTaskRow,1));
@@ -221,6 +234,8 @@ public class MainWindowListener implements ActionListener{
 //            e.printStackTrace();
 //        }
 
+=======
+>>>>>>> 79d10337a3fa20ee52f4d4c2ec37ac9d773b4fad
     }
 
     private void refreshElements(){
@@ -242,7 +257,11 @@ public class MainWindowListener implements ActionListener{
 
                 rowLine[0] = i+1;
                 rowLine[1] = title.get(i);
+<<<<<<< HEAD
                 rowLine[2] = Constants.TASK_STATUS[Integer.parseInt(status.get(i))];
+=======
+                rowLine[2] = status.get(i);
+>>>>>>> 79d10337a3fa20ee52f4d4c2ec37ac9d773b4fad
 
                 rowData[i] = rowLine;
             }
@@ -251,9 +270,17 @@ public class MainWindowListener implements ActionListener{
             //Заролняем таблицу
             tableModel.setDataVector(rowData,head);
 
+<<<<<<< HEAD
             //Выделяем cтрочку в таблице
             if (tableModel.getRowCount() > 0)
                 taskTable.setRowSelectionInterval(0,selectedTaskRow);
+=======
+            //Выделяем первую строчку в таблице
+            if (tableModel.getRowCount() > 0){
+                System.out.println("Больше 0");
+                taskTable.setRowSelectionInterval(0,selectedTaskRow);
+            }
+>>>>>>> 79d10337a3fa20ee52f4d4c2ec37ac9d773b4fad
 
             //А так же размеры столбцов
             taskTable.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
@@ -279,6 +306,7 @@ public class MainWindowListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton) e.getSource();
         selectedMasterElement = masterList.getSelectedIndex();
+        selectedTaskRow = taskTable.getSelectedRow();
 
         if (taskTable.getSelectedRow() != -1)
             selectedTaskRow = taskTable.getSelectedRow();

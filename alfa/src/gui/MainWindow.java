@@ -177,18 +177,28 @@ public class MainWindow extends JFrame {
             database.connect();
 
             ArrayList<Integer> id = new ArrayList<>();
+<<<<<<< HEAD
             ArrayList<String> resultStatus = new ArrayList<>();
+=======
+>>>>>>> 79d10337a3fa20ee52f4d4c2ec37ac9d773b4fad
             ArrayList<String> title = database.getFromTasks("title", database.currentUser, (String)masterList.getSelectedValue());
             ArrayList<String> status = database.getFromTasks("status", database.currentUser, (String)masterList.getSelectedValue());
 
             //Заролняем таблицу
             for (int i = 1; i <= title.size(); i++) {
                 id.add(i);
+<<<<<<< HEAD
                 resultStatus.add(Constants.TASK_STATUS[Integer.parseInt(status.get(i-1))]);
             }
             tableModel.addColumn(Constants.ID, id.toArray());
             tableModel.addColumn(Constants.TASK, title.toArray());
             tableModel.addColumn(Constants.STATUS, resultStatus.toArray());
+=======
+            }
+            tableModel.addColumn(Constants.ID, id.toArray());
+            tableModel.addColumn(Constants.TASK, title.toArray());
+            tableModel.addColumn(Constants.STATUS, status.toArray());
+>>>>>>> 79d10337a3fa20ee52f4d4c2ec37ac9d773b4fad
 
         } catch (SQLException e) {
             e.printStackTrace();
