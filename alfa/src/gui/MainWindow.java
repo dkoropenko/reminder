@@ -3,6 +3,7 @@ package gui;
 import db_logic.DataBaseClass;
 import listeners.MainMenuListener;
 import listeners.MainWindowListener;
+import listeners.MainWindowMouseListener;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -39,6 +40,8 @@ public class MainWindow extends JFrame {
     private JMenuItem usersMenu, optionsMenu;
 
     private MainWindowListener btnListener;
+    private MainWindowMouseListener mouseListener;
+    private MainMenuListener menuListener;
 
     //Кнопки для управлением данными в левом окне.
     private JButton btnMasterAdd, btnMasterDelete, btnMasterOptions;
@@ -70,10 +73,12 @@ public class MainWindow extends JFrame {
         initMenu();
         initData();
         initBtn();
+        initListeners();
         initPanels();
     }
 
     private void initMenu(){
+
         mainMenu = new JMenuBar();
 
         fileMenu = new JMenu("Файл");
@@ -82,20 +87,27 @@ public class MainWindow extends JFrame {
 
         newDBMenu = new JMenuItem("Новая БД");
         newDBMenu.setName("newDBMenu");
+        newDBMenu.setIcon(Constants.NEW);
 
         openDBMenu = new JMenuItem("Открыть БД");
         openDBMenu.setName("openDBMenu");
+        openDBMenu.setIcon(Constants.OPEN);
 
         closeDBMenu = new JMenuItem("Закрыть БД");
         closeDBMenu.setName("closeDBMenu");
+        closeDBMenu.setIcon(Constants.CLOSE);
 
         exitMenu = new JMenuItem("Выход");
+        exitMenu.setName("exit");
+        exitMenu.setIcon(Constants.EXIT);
 
         usersMenu = new JMenuItem("Пользователи");
         usersMenu.setName("usersMenu");
+        usersMenu.setIcon(Constants.USERS);
 
         optionsMenu = new JMenuItem("Опции");
         optionsMenu.setName("optionsMenu");
+        optionsMenu.setIcon(Constants.PREFERENCE);
 
         fileMenu.add(newDBMenu);
         fileMenu.add(openDBMenu);
@@ -133,6 +145,8 @@ public class MainWindow extends JFrame {
                 e.printStackTrace();
             }
         }
+
+
 
 
         //********КОНЕЦ ЛЕВОЕ МЕНЮ******************
@@ -177,90 +191,96 @@ public class MainWindow extends JFrame {
             database.connect();
 
             ArrayList<Integer> id = new ArrayList<>();
-<<<<<<< HEAD
             ArrayList<String> resultStatus = new ArrayList<>();
-=======
->>>>>>> 79d10337a3fa20ee52f4d4c2ec37ac9d773b4fad
-            ArrayList<String> title = database.getFromTasks("title", database.currentUser, (String)masterList.getSelectedValue());
-            ArrayList<String> status = database.getFromTasks("status", database.currentUser, (String)masterList.getSelectedValue());
+
+            ArrayList<String> title = database.getFromTasks("title", database.currentUser, (String) masterList.getSelectedValue(), null);
+            ArrayList<String> status = database.getFromTasks("status", database.currentUser, (String) masterList.getSelectedValue(), null);
 
             //Заролняем таблицу
             for (int i = 1; i <= title.size(); i++) {
                 id.add(i);
-<<<<<<< HEAD
-                resultStatus.add(Constants.TASK_STATUS[Integer.parseInt(status.get(i-1))]);
+                resultStatus.add(Constants.TASK_STATUS[Integer.parseInt(status.get(i - 1))]);
             }
             tableModel.addColumn(Constants.ID, id.toArray());
             tableModel.addColumn(Constants.TASK, title.toArray());
             tableModel.addColumn(Constants.STATUS, resultStatus.toArray());
-=======
-            }
-            tableModel.addColumn(Constants.ID, id.toArray());
-            tableModel.addColumn(Constants.TASK, title.toArray());
-            tableModel.addColumn(Constants.STATUS, status.toArray());
->>>>>>> 79d10337a3fa20ee52f4d4c2ec37ac9d773b4fad
-
-        } catch (SQLException e) {
+        }
+         catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     private void initBtn(){
-        btnListener = new MainWindowListener(masterList, tableModel, mainData);
-        
         btnMasterAdd = new JButton();
         btnMasterAdd.setIcon(Constants.ADD);
         btnMasterAdd.setToolTipText("Добавить");
         btnMasterAdd.setName("MasterAdd");
-        btnMasterAdd.addActionListener(btnListener);
 
         btnMasterDelete = new JButton();
         btnMasterDelete.setIcon(Constants.DEL);
         btnMasterDelete.setToolTipText("Удалить");
         btnMasterDelete.setName("MasterDel");
-        btnMasterDelete.addActionListener(btnListener);
 
         btnMasterOptions = new JButton();
         btnMasterOptions.setIcon(Constants.OPTIONS);
         btnMasterOptions.setToolTipText("Переименовать");
         btnMasterOptions.setName("MasterOptions");
-        btnMasterOptions.addActionListener(btnListener);
-
 
         btnTaskAdd = new JButton();
         btnTaskAdd.setIcon(Constants.ADD);
         btnTaskAdd.setToolTipText("Добавить");
         btnTaskAdd.setName("TaskAdd");
-        btnTaskAdd.addActionListener(btnListener);
 
         btnTaskDelete = new JButton();
         btnTaskDelete.setIcon(Constants.DEL);
         btnTaskDelete.setToolTipText("Удалить");
         btnTaskDelete.setName("TaskDel");
-        btnTaskDelete.addActionListener(btnListener);
 
         btnTaskOptions = new JButton();
         btnTaskOptions.setIcon(Constants.OPTIONS);
         btnTaskOptions.setToolTipText("Модифицировать");
         btnTaskOptions.setName("TaskOptions");
-        btnTaskOptions.addActionListener(btnListener);
 
         btnTaskComplete = new JButton();
         btnTaskComplete.setIcon(Constants.COMPLETE);
         btnTaskComplete.setToolTipText("Завершить");
         btnTaskComplete.setName("TaskComplete");
-        btnTaskComplete.addActionListener(btnListener);
 
         btnTaskStart = new JButton();
         btnTaskStart.setIcon(Constants.START);
         btnTaskStart.setToolTipText("Старт задачи");
         btnTaskStart.setName("TaskStart");
-        btnTaskStart.addActionListener(btnListener);
 
         btnTaskPause = new JButton();
         btnTaskPause.setIcon(Constants.PAUSE);
         btnTaskPause.setToolTipText("Приостановить");
         btnTaskPause.setName("TaskPause");
+    }
+
+    private void initListeners(){
+
+        menuListener = new MainMenuListener();
+        newDBMenu.addActionListener(menuListener);
+        openDBMenu.addActionListener(menuListener);
+        closeDBMenu.addActionListener(menuListener);
+        exitMenu.addActionListener(menuListener);
+        usersMenu.addActionListener(menuListener);
+        optionsMenu.addActionListener(menuListener);
+
+        mouseListener = new MainWindowMouseListener(masterList, tableModel, mainData);
+        masterList.addMouseListener(mouseListener);
+
+        btnListener = new MainWindowListener(masterList, tableModel, mainData);
+
+        btnMasterAdd.addActionListener(btnListener);
+        btnMasterDelete.addActionListener(btnListener);
+        btnMasterOptions.addActionListener(btnListener);
+
+        btnTaskAdd.addActionListener(btnListener);
+        btnTaskDelete.addActionListener(btnListener);
+        btnTaskOptions.addActionListener(btnListener);
+        btnTaskComplete.addActionListener(btnListener);
+        btnTaskStart.addActionListener(btnListener);
         btnTaskPause.addActionListener(btnListener);
     }
 

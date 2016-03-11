@@ -14,7 +14,7 @@ public class MainMenuListener implements ActionListener {
     private UsersWindow usersWindow;
 
     public MainMenuListener(){
-        usersWindow = new UsersWindow();
+
     }
 
     @Override
@@ -23,18 +23,23 @@ public class MainMenuListener implements ActionListener {
 
         switch (menuItem.getName()){
             case "newDBMenu":
+                System.out.println("new DB");
                 break;
             case "openDBMenu":
+                System.out.println("OpenDB");
                 break;
             case "closeDBMenu":
+                System.out.println("Close DB");
+                break;
+            case "exit":
+                System.exit(0);
                 break;
             case "usersMenu":
-                if (usersWindow.isVisible())
-                    usersWindow.setVisible(false);
-                else
-                    usersWindow.setVisible(true);
+                usersWindow = new UsersWindow();
+                usersWindow.setVisible(true);
                 break;
-            case "OptionsMenu":
+            case "optionsMenu":
+                System.out.println("Options");
                 break;
 
         }

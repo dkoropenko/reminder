@@ -32,8 +32,6 @@ public class MainWindowListener implements ActionListener{
     String taskTitle, taskBody;
 
     public MainWindowListener(JList masterList, DefaultTableModel tableModel, JTable taskTable){
-        addTaskGUI = new AddTaskGUI(this);
-        updateTaskGUI = new UpdateTaskGUI(this);
         this.masterList = masterList;
         this.tableModel = tableModel;
         this.taskTable = taskTable;
@@ -78,12 +76,9 @@ public class MainWindowListener implements ActionListener{
             if (name == JOptionPane.OK_OPTION){
                 database = DataBaseClass.getInstance();
                 database.connect();
-<<<<<<< HEAD
+
                 database.deleteFromMaster((String)masterList.getSelectedValue(), database.currentUser);
                 database.clearTask(database.currentUser, (String)masterList.getSelectedValue());
-=======
-                database.delete("Master", (String) masterList.getSelectedValue());
->>>>>>> 79d10337a3fa20ee52f4d4c2ec37ac9d773b4fad
 
                 if(selectedMasterElement != 0)
                     selectedMasterElement--;
@@ -138,14 +133,13 @@ public class MainWindowListener implements ActionListener{
                 database = DataBaseClass.getInstance();
                 database.connect();
 
-<<<<<<< HEAD
-                ArrayList<String> checkName = database.getFromTasks("title", database.currentUser, selectedMaster);
+                ArrayList<String> checkName = database.getFromTasks("title", database.currentUser, selectedMaster,null);
 
                 if (!checkName.contains(taskTitle)){
                     //Дата создания задания
                     createTime = System.currentTimeMillis()/1000;
 
-                    database.add("Tasks", taskTitle, taskBody, createTime,0,0,0, database.currentUser, selectedMaster);
+                    database.add("Tasks", taskTitle, taskBody, createTime,0,0,Constants.TASK_CREATE, database.currentUser, selectedMaster);
                     selectedTaskRow = database.getSize("Tasks", database.currentUser, (String)masterList.getSelectedValue())-1;
 
                     addTaskGUI.clearData();
@@ -153,14 +147,6 @@ public class MainWindowListener implements ActionListener{
                     JOptionPane.showMessageDialog(null,"Данное задача уже присутствует в списке.\n" +
                             "Измените тему и повторите заново", "Неудачно", 0, Constants.FAIL);
                 }
-=======
-                //Дата создания задания
-                createTime = System.currentTimeMillis()/1000;
-
-                database.add("Tasks", taskTitle, taskBody, createTime,0,0,0, database.currentUser, selectedMaster);
-                selectedTaskRow = database.getSize("Tasks")-1;
->>>>>>> 79d10337a3fa20ee52f4d4c2ec37ac9d773b4fad
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }finally {
@@ -174,7 +160,6 @@ public class MainWindowListener implements ActionListener{
             }
         }
         refreshElements();
-<<<<<<< HEAD
     }
     private void deleteTaskDataFromDB(){
         String title = String.valueOf(tableModel.getValueAt(selectedTaskRow,1));
@@ -205,40 +190,118 @@ public class MainWindowListener implements ActionListener{
         refreshElements();
     }
     private void changeTaskDataToDB(){
-        String title = updateTaskGUI.getTitle();
+        String newTitle = updateTaskGUI.getTitle();
         String oldTitle = (String)tableModel.getValueAt(taskTable.getSelectedRow(),1);
-        String body = updateTaskGUI.getBody();
+        String newBody = updateTaskGUI.getBody();
         String selectedMaster = (String)masterList.getSelectedValue();
 
-        if (!title.equals("")){
-            //Сделать 2 ветвления для орагнизации изменения
-            //титла и боди.
+        if (!newTitle.equals("")){
+            try{
+                database = DataBaseClass.getInstance();
+                database.connect();
 
-            //И закоментируй наконец свою работу. Задудешь же
-            // что делал...
+                database.change("Tasks", newTitle, newBody, System.currentTimeMillis()/1000, 0, Constants.TASK_MOD, selectedMaster, oldTitle, database.currentUser);
+
+            }catch (SQLException e){
+                e.printStackTrace();
+            }finally {
+                try {
+                    if (!database.databaseIsClosed())
+                        database.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+        refreshElements();
+    }
+    private void pauseTask(){
+        String status = (String)tableModel.getValueAt(selectedTaskRow,2);
+        String title = (String)tableModel.getValueAt(taskTable.getSelectedRow(),1);
 
-        System.out.println("new Title: "+ title);
-        System.out.println("new Body: "+ body);
+        if (Constants.TASK_STATUS[Constants.TASK_CREATE].equals(status) ||
+                Constants.TASK_STATUS[Constants.TASK_MOD].equals(status) ||
+                Constants.TASK_STATUS[Constants.TASK_START].equals(status)){
 
-        System.out.println("old Title: "+ oldTitle);
-        System.out.println("Selection master: "+ selectedMaster);
+            try {
+                database = DataBaseClass.getInstance();
+                database.connect();
 
-//
-//        try {
-//            database = DataBaseClass.getInstance();
-//            database.connect();
-//
-//            String oldTitle = database.getFromTasks()
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+                String body = database.getFromTasks("body", database.currentUser, (String)masterList.getSelectedValue(), title).get(0);
 
-=======
->>>>>>> 79d10337a3fa20ee52f4d4c2ec37ac9d773b4fad
+                database.change("Tasks", title, body, System.currentTimeMillis()/1000, 0, Constants.TASK_PAUSE, (String)masterList.getSelectedValue(), title, database.currentUser);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally {
+                try {
+                    if (!database.databaseIsClosed())
+                        database.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        refreshElements();
+    }
+    private void startTask(){
+        String status = (String)tableModel.getValueAt(selectedTaskRow,2);
+        String title = (String)tableModel.getValueAt(taskTable.getSelectedRow(),1);
+
+        if (Constants.TASK_STATUS[Constants.TASK_CREATE].equals(status) ||
+                Constants.TASK_STATUS[Constants.TASK_MOD].equals(status) ||
+                Constants.TASK_STATUS[Constants.TASK_PAUSE].equals(status)){
+
+            try {
+                database = DataBaseClass.getInstance();
+                database.connect();
+
+                String body = database.getFromTasks("body", database.currentUser, (String)masterList.getSelectedValue(), title).get(0);
+
+                database.change("Tasks", title, body, System.currentTimeMillis()/1000, 0, Constants.TASK_START, (String)masterList.getSelectedValue(), title, database.currentUser);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally {
+                try {
+                    if (!database.databaseIsClosed())
+                        database.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        refreshElements();
+    }
+    private void completeTask(){
+        String status = (String)tableModel.getValueAt(selectedTaskRow,2);
+        String title = (String)tableModel.getValueAt(taskTable.getSelectedRow(),1);
+
+        if (Constants.TASK_STATUS[Constants.TASK_CREATE].equals(status) ||
+                Constants.TASK_STATUS[Constants.TASK_MOD].equals(status) ||
+                Constants.TASK_STATUS[Constants.TASK_PAUSE].equals(status) ||
+                Constants.TASK_STATUS[Constants.TASK_START].equals(status)){
+
+            try {
+                database = DataBaseClass.getInstance();
+                database.connect();
+
+                String body = database.getFromTasks("body", database.currentUser, (String)masterList.getSelectedValue(), title).get(0);
+
+                database.change("Tasks", title, body, 0, System.currentTimeMillis()/1000, Constants.TASK_FINISH, (String)masterList.getSelectedValue(), title, database.currentUser);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally {
+                try {
+                    if (!database.databaseIsClosed())
+                        database.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        refreshElements();
     }
 
-    private void refreshElements(){
+    protected void refreshElements(){
         try {
             database = DataBaseClass.getInstance();
             database.connect();
@@ -247,8 +310,8 @@ public class MainWindowListener implements ActionListener{
             masterList.setListData(masterElements.toArray());
             masterList.setSelectedIndex(selectedMasterElement);
 
-            ArrayList<String> title = database.getFromTasks("title", database.currentUser, (String)masterList.getSelectedValue());
-            ArrayList<String> status = database.getFromTasks("status", database.currentUser, (String)masterList.getSelectedValue());
+            ArrayList<String> title = database.getFromTasks("title", database.currentUser, (String)masterList.getSelectedValue(), null);
+            ArrayList<String> status = database.getFromTasks("status", database.currentUser, (String)masterList.getSelectedValue(), null);
 
             Object[][] rowData = new Object[title.size()][];
 
@@ -257,11 +320,7 @@ public class MainWindowListener implements ActionListener{
 
                 rowLine[0] = i+1;
                 rowLine[1] = title.get(i);
-<<<<<<< HEAD
                 rowLine[2] = Constants.TASK_STATUS[Integer.parseInt(status.get(i))];
-=======
-                rowLine[2] = status.get(i);
->>>>>>> 79d10337a3fa20ee52f4d4c2ec37ac9d773b4fad
 
                 rowData[i] = rowLine;
             }
@@ -270,17 +329,10 @@ public class MainWindowListener implements ActionListener{
             //Заролняем таблицу
             tableModel.setDataVector(rowData,head);
 
-<<<<<<< HEAD
+
             //Выделяем cтрочку в таблице
             if (tableModel.getRowCount() > 0)
                 taskTable.setRowSelectionInterval(0,selectedTaskRow);
-=======
-            //Выделяем первую строчку в таблице
-            if (tableModel.getRowCount() > 0){
-                System.out.println("Больше 0");
-                taskTable.setRowSelectionInterval(0,selectedTaskRow);
-            }
->>>>>>> 79d10337a3fa20ee52f4d4c2ec37ac9d773b4fad
 
             //А так же размеры столбцов
             taskTable.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
@@ -300,6 +352,10 @@ public class MainWindowListener implements ActionListener{
                 e.printStackTrace();
             }
         }
+    }
+    protected void setSelectedElements(int selectedMaster, int selectedTask){
+        this.selectedMasterElement = selectedMaster;
+        this.selectedTaskRow = selectedTask;
     }
 
     @Override
@@ -324,24 +380,40 @@ public class MainWindowListener implements ActionListener{
                     changeMasterDataToDB();
                 break;
             case "TaskAdd":
-                addTaskGUI.setVisible(true);
+                if (masterList.getSelectedIndex() != -1){
+                    addTaskGUI = new AddTaskGUI(this);
+                    addTaskGUI.setVisible(true);
+                }
                 break;
             case "newTask":
                 addTaskGUI.setVisible(false);
                 addTasksDataToDB();
                 break;
             case "TaskDel":
-                deleteTaskDataFromDB();
+                if (taskTable.getSelectedRow() != -1)
+                    deleteTaskDataFromDB();
                 break;
             case "TaskOptions":
-                updateTaskGUI.setVisible(true);
+                if (taskTable.getSelectedRow() != -1){
+                    updateTaskGUI = new UpdateTaskGUI(this, (String)masterList.getSelectedValue(), (String)tableModel.getValueAt(taskTable.getSelectedRow(),1));
+                    updateTaskGUI.setVisible(true);
+                }
                 break;
             case "updateTask":
                 updateTaskGUI.setVisible(false);
                 changeTaskDataToDB();
                 break;
+            case "TaskPause":
+                if (taskTable.getSelectedRow() != -1)
+                    pauseTask();
+                break;
+            case "TaskStart":
+                if (taskTable.getSelectedRow() != -1)
+                    startTask();
+                break;
             case "TaskComplete":
-                System.out.println("TaskComplete");
+                if (taskTable.getSelectedRow() != -1)
+                    completeTask();
                 break;
         }
 

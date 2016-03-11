@@ -14,10 +14,11 @@ public interface Constants {
     String TASK =          "Задание";
     String STATUS =        "Статус";
     int TASK_CREATE =       0;
-    int TASK_START =        1;
-    int TASK_PAUSE =        2;
-    int TASK_FINISH =       3;
-    String[] TASK_STATUS = {"Создано", "В работе", "Пауза", "Закончено"};
+    int TASK_MOD =          1;
+    int TASK_START =        2;
+    int TASK_PAUSE =        3;
+    int TASK_FINISH =       4;
+    String[] TASK_STATUS = {"Создано", "Изменен", "В работе", "Пауза", "Закончено"};
 
     //Данные для создания БД.
     String[] LETTERS = {"/", "\\", ":", "*", "?", "\"", "<", ">", "|"};
@@ -36,6 +37,12 @@ public interface Constants {
     ImageIcon PAUSE = new ImageIcon("resource/images/pause.png");
     ImageIcon COMPLETE = new ImageIcon("resource/images/complete.png");
     ImageIcon FAIL = new ImageIcon("resource/images/fail.png");
-
+    ImageIcon NEW = new ImageIcon("resource/images/new.png");
+    ImageIcon OPEN = new ImageIcon("resource/images/open.png");
+    ImageIcon SAVE = new ImageIcon("resource/images/save.png");
+    ImageIcon CLOSE = new ImageIcon("resource/images/close.png");
+    ImageIcon EXIT = new ImageIcon("resource/images/exit.png");
+    ImageIcon USERS = new ImageIcon("resource/images/users.png");
+    ImageIcon PREFERENCE = new ImageIcon("resource/images/options.png");
 
 }

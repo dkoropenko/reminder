@@ -96,11 +96,15 @@ public class DataBaseClass {
         prepareQuery.append("INSERT INTO "+ tableName);
 
         switch (tableName){
+            case "Users":
+                prepareQuery.append(" (name, passwd) ");
+                break;
             case "Master":
                 prepareQuery.append(" (name, count, author) ");
                 break;
             case "Tasks":
                 prepareQuery.append(" (title, body, createTime, modifyTime, finishTime, status, author, master) ");
+                break;
         }
         prepareQuery.append("VALUES (");
 
@@ -167,6 +171,23 @@ public class DataBaseClass {
      * Метод изменяет состояние строки в таблице.
      * @param tableName - имя таблицы
      * @param parametres - новые параметры
+     *<br>Для таблицы <b>Users:</b>
+     *<br><b>paramentres[0]</b> - имя пользователя.
+     *<br><b>paramentres[1]</b> - Условие поиска по id.
+     *<br>
+     *<br>Для таблицы <b>Masters:</b>
+     *<br><b>paramentres[0]</b> - Элемент, который необходимо заменить (name).
+     *<br><b>paramentres[1]</b> - Условие поиска по полю name.
+     *<br>
+     *<br>Для таблицы <b>Tasks:</b>
+     *<br><b>paramentres[0]</b> - Title для замены.
+     *<br><b>paramentres[1]</b> - Body для замены.
+     *<br><b>paramentres[2]</b> - ModifyTime для замены.
+     *<br><b>paramentres[3]</b> - finishTime для замены.
+     *<br><b>paramentres[4]</b> - status для замены.
+     *<br><b>paramentres[5]</b> - master для поиска.
+     *<br><b>paramentres[6]</b> - title для поиска.
+     *<br><b>paramentres[7]</b> - author для поиска.
      * @throws SQLException
      */
     public void change (String tableName, Object ... parametres) throws SQLException{
@@ -186,8 +207,14 @@ public class DataBaseClass {
                 break;
             case "Tasks":
                 prepareQuery.append(tableName +" SET ");
-                prepareQuery.append("master = \""+ parametres[0] +"\"");
-                prepareQuery.append(" where master = \""+ parametres[1] + "\";");
+                prepareQuery.append("title = \""+ parametres[0] +"\", ");
+                prepareQuery.append("body = \""+ parametres[1] +"\", ");
+                prepareQuery.append("modifyTime = \""+ parametres[2] +"\", ");
+                prepareQuery.append("finishTime = \""+ parametres[3] +"\", ");
+                prepareQuery.append("status = \""+ parametres[4] +"\" ");
+                prepareQuery.append(" where master = \""+ parametres[5] + "\"");
+                prepareQuery.append(" AND title = \""+ parametres[6] + "\" ");
+                prepareQuery.append(" AND author = \""+ parametres[7] + "\";");
                 break;
 
         }
@@ -203,7 +230,7 @@ public class DataBaseClass {
      * @return - ArrayList<String> Все значения столбца в таблице.
      * @throws SQLException
      */
-    private ArrayList<String> getFromTable(String tbName, String rowName, String author, String masterSelected) throws SQLException {
+    private ArrayList<String> getFromTable(String tbName, String rowName, String author, String masterSelected, String title) throws SQLException {
         ArrayList<String> result = new ArrayList<>();
 
         StringBuilder prepareQuery = new StringBuilder();
@@ -214,6 +241,8 @@ public class DataBaseClass {
             prepareQuery.append("WHERE author=\""+ author +"\"");
         if (masterSelected != null)
             prepareQuery.append(" AND master =\""+ masterSelected +"\"");
+        if (title != null)
+            prepareQuery.append(" AND title =\""+ title +"\"");
 
         prepareQuery.append(";");
 
@@ -227,13 +256,13 @@ public class DataBaseClass {
     }
 
     public ArrayList<String> getFromUsers (String rowName) throws SQLException {
-        return this.getFromTable("Users", rowName, null, null);
+        return this.getFromTable("Users", rowName, null, null, null);
     }
     public ArrayList<String> getFromMaster (String rowName, String author) throws SQLException {
-        return this.getFromTable("Master", rowName, author, null);
+        return this.getFromTable("Master", rowName, author, null, null);
     }
-    public ArrayList<String> getFromTasks (String rowName, String author, String masterSelect) throws SQLException {
-        return this.getFromTable("Tasks", rowName, author, masterSelect);
+    public ArrayList<String> getFromTasks (String rowName, String author, String masterSelect, String title) throws SQLException {
+        return this.getFromTable("Tasks", rowName, author, masterSelect, title);
     }
 
     /**
