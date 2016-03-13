@@ -3,6 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/alfa_jar</output-path>
     <root id="archive" name="alfa.jar">
       <element id="module-output" name="alfa" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/sqlite.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

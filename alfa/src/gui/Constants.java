@@ -21,7 +21,6 @@ public interface Constants {
     String[] TASK_STATUS = {"Создано", "Изменен", "В работе", "Пауза", "Закончено"};
 
     //Данные для создания БД.
-    String[] LETTERS = {"/", "\\", ":", "*", "?", "\"", "<", ">", "|"};
     String DRIVER = "org.sqlite.JDBC";
     String URL = "jdbc:sqlite:Task.db";
     String DEFAULT_USER = "User";
@@ -29,20 +28,20 @@ public interface Constants {
 
     //Переменные UI
     String APPNAME = "Reminder 0.9";
-    ImageIcon ICON = new ImageIcon("resource/images/icon.png");
-    ImageIcon ADD = new ImageIcon("resource/images/add.png");
-    ImageIcon DEL = new ImageIcon("resource/images/del.png");
-    ImageIcon OPTIONS = new ImageIcon("resource/images/mod.png");
-    ImageIcon START = new ImageIcon("resource/images/start.png");
-    ImageIcon PAUSE = new ImageIcon("resource/images/pause.png");
-    ImageIcon COMPLETE = new ImageIcon("resource/images/complete.png");
-    ImageIcon FAIL = new ImageIcon("resource/images/fail.png");
-    ImageIcon NEW = new ImageIcon("resource/images/new.png");
-    ImageIcon OPEN = new ImageIcon("resource/images/open.png");
-    ImageIcon SAVE = new ImageIcon("resource/images/save.png");
-    ImageIcon CLOSE = new ImageIcon("resource/images/close.png");
-    ImageIcon EXIT = new ImageIcon("resource/images/exit.png");
-    ImageIcon USERS = new ImageIcon("resource/images/users.png");
-    ImageIcon PREFERENCE = new ImageIcon("resource/images/options.png");
+    ImageIcon ICON = new ImageIcon("images/icon.png");
+    ImageIcon ADD = new ImageIcon("images/add.png");
+    ImageIcon DEL = new ImageIcon("images/del.png");
+    ImageIcon OPTIONS = new ImageIcon("images/mod.png");
+    ImageIcon START = new ImageIcon("images/start.png");
+    ImageIcon PAUSE = new ImageIcon("images/pause.png");
+    ImageIcon COMPLETE = new ImageIcon("images/complete.png");
+    ImageIcon FAIL = new ImageIcon("images/fail.png");
+    ImageIcon NEW = new ImageIcon("images/new.png");
+    ImageIcon OPEN = new ImageIcon("images/open.png");
+    ImageIcon SAVE = new ImageIcon("images/save.png");
+    ImageIcon CLOSE = new ImageIcon("images/close.png");
+    ImageIcon EXIT = new ImageIcon("images/exit.png");
+    ImageIcon USERS = new ImageIcon("images/users.png");
+    ImageIcon PREFERENCE = new ImageIcon("images/options.png");
 
 }
