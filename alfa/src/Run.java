@@ -27,10 +27,12 @@ public class Run {
             //пользователь и является ли он единственным.
             if (database.getSize("Users",null,null) == 1 && database.getFromUsers("name").get(0).equals(Constants.DEFAULT_USER)){
                 database.currentUser = Constants.DEFAULT_USER;
+                database.currentDB = Constants.DEFAULT_DB;
 
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.setVisible(true);
             } else{
+                database.currentDB = Constants.DEFAULT_DB;
                 LogInWindow startWindow = new LogInWindow();
                 startWindow.setVisible(true);
             }

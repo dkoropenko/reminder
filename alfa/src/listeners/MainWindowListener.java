@@ -23,6 +23,8 @@ public class MainWindowListener implements ActionListener{
     private DefaultTableModel tableModel;
     private JTable taskTable;
 
+    private JLabel user;
+
     private int selectedMasterElement;
     private int selectedTaskRow;
 
@@ -31,10 +33,11 @@ public class MainWindowListener implements ActionListener{
 
     String taskTitle, taskBody;
 
-    public MainWindowListener(JList masterList, DefaultTableModel tableModel, JTable taskTable){
+    public MainWindowListener(JList masterList, DefaultTableModel tableModel, JTable taskTable, JLabel user){
         this.masterList = masterList;
         this.tableModel = tableModel;
         this.taskTable = taskTable;
+        this.user = user;
     }
 
     private void addMasterDataToDB(){
@@ -303,6 +306,9 @@ public class MainWindowListener implements ActionListener{
 
     protected void refreshElements(){
         try {
+
+            user.setText("Пользователь: "+ database.currentUser);
+
             database = DataBaseClass.getInstance();
             database.connect();
 

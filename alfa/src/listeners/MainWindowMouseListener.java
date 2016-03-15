@@ -16,8 +16,8 @@ public class MainWindowMouseListener extends MainWindowListener implements Mouse
     private DefaultTableModel tableModel;
     private JTable taskTable;
 
-    public MainWindowMouseListener(JList masterList, DefaultTableModel tableModel, JTable taskTable) {
-        super(masterList, tableModel, taskTable);
+    public MainWindowMouseListener(JList masterList, DefaultTableModel tableModel, JTable taskTable, JLabel user) {
+        super(masterList, tableModel, taskTable, user);
         this.masterList = masterList;
         this.tableModel = tableModel;
         this.taskTable = taskTable;

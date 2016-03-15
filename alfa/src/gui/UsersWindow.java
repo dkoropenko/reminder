@@ -63,6 +63,7 @@ public class UsersWindow extends JFrame{
             }
             listOfUsers = new JList<>();
             listOfUsers.setListData(users);
+            listOfUsers.setSelectedIndex(0);
 
         } catch (SQLException e) {
             e.printStackTrace();

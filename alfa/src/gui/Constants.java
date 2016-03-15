@@ -23,6 +23,7 @@ public interface Constants {
     //Данные для создания БД.
     String DRIVER = "org.sqlite.JDBC";
     String URL = "jdbc:sqlite:Task.db";
+    String DEFAULT_DB = "Task.db";
     String DEFAULT_USER = "User";
     String DEFAULT_PASSWORD = "";
 

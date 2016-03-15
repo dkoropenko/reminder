@@ -8,9 +8,11 @@ import listeners.MainWindowMouseListener;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * Created by Koropenkods on 04.02.16.
@@ -25,7 +27,8 @@ public class MainWindow extends JFrame {
      *Панели для левого окна вывода данных.
      */
     private JPanel btnMasterPanel,
-                    mainMasterPanel;
+                    mainMasterPanel,
+                    infoPanel;
     /**
      *Панель для главного окна вывода данных.
      */
@@ -36,7 +39,7 @@ public class MainWindow extends JFrame {
      */
     private JMenuBar mainMenu;
     private JMenu fileMenu, prefMenu, helpMenu;
-    private JMenuItem newDBMenu, openDBMenu, closeDBMenu, exitMenu;
+    private JMenuItem newDBMenu, openDBMenu, saveDBMenu, exitMenu;
     private JMenuItem usersMenu, optionsMenu;
 
     private MainWindowListener btnListener;
@@ -50,6 +53,9 @@ public class MainWindow extends JFrame {
     //Кнопки для управлением состоянием задач
     private JButton btnTaskPause, btnTaskStart, btnTaskComplete;
 
+    //Определение активного пользователя
+    private JLabel user, dbFile;
+
     //Переменные управления списком элементов в левом меню
     private JList masterList;
 
@@ -62,7 +68,7 @@ public class MainWindow extends JFrame {
     DataBaseClass database = null;
 
     public MainWindow(){
-        setTitle(Constants.APPNAME + " User: " + database.currentUser);
+        setTitle(Constants.APPNAME);
         setSize(700, 450);
         setResizable(true);
         setLocationRelativeTo(null);
@@ -73,6 +79,7 @@ public class MainWindow extends JFrame {
         initMenu();
         initData();
         initBtn();
+        initInfoContainer();
         initListeners();
         initPanels();
     }
@@ -93,9 +100,9 @@ public class MainWindow extends JFrame {
         openDBMenu.setName("openDBMenu");
         openDBMenu.setIcon(Constants.OPEN);
 
-        closeDBMenu = new JMenuItem("Закрыть БД");
-        closeDBMenu.setName("closeDBMenu");
-        closeDBMenu.setIcon(Constants.CLOSE);
+        saveDBMenu = new JMenuItem("Резервная копия БД");
+        saveDBMenu.setName("reservDBMenu");
+        saveDBMenu.setIcon(Constants.SAVE);
 
         exitMenu = new JMenuItem("Выход");
         exitMenu.setName("exit");
@@ -109,14 +116,18 @@ public class MainWindow extends JFrame {
         optionsMenu.setName("optionsMenu");
         optionsMenu.setIcon(Constants.PREFERENCE);
 
+        //Пока не реализован функционал. Будет доделан чуть позже.
+        optionsMenu.setEnabled(false);
+        //********************************************************
+
         fileMenu.add(newDBMenu);
-        fileMenu.add(openDBMenu);
-        fileMenu.add(closeDBMenu);
+        //fileMenu.add(openDBMenu);
+        fileMenu.add(saveDBMenu);
         fileMenu.addSeparator();
         fileMenu.add(exitMenu);
 
         prefMenu.add(usersMenu);
-        prefMenu.add(optionsMenu);
+       // prefMenu.add(optionsMenu);
 
         mainMenu.add(fileMenu);
         mainMenu.add(prefMenu);
@@ -145,10 +156,6 @@ public class MainWindow extends JFrame {
                 e.printStackTrace();
             }
         }
-
-
-
-
         //********КОНЕЦ ЛЕВОЕ МЕНЮ******************
 
         //******** ОСНОВНОЕ МЕНЮ******************
@@ -156,9 +163,18 @@ public class MainWindow extends JFrame {
         tableModel = new DefaultTableModel();
 
         //Создаем таблицу и добавляем ей модель. Оборачиваем все в скроллпаин.
-        mainData = new JTable();
-        mainData.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+        class MyTableModel extends DefaultTableModel{
+            @Override
+            public boolean isCellEditable(int row, int col) {
+                return false;
+            }
+        }
+
+        MyTableModel tm = new MyTableModel();
+
+        mainData = new JTable(tm);
+        mainData.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         //Устаналиваем размеры прокручиваемой области
         mainData.setPreferredScrollableViewportSize(new Dimension(250, 100));
@@ -184,7 +200,6 @@ public class MainWindow extends JFrame {
         mainData.getColumnModel().getColumn(2).setMaxWidth(70);
         //********КОНЕЦ ПРАВОЕ МЕНЮ******************
     }
-
     private void initTableContents(){
         try {
             database = DataBaseClass.getInstance();
@@ -208,6 +223,19 @@ public class MainWindow extends JFrame {
          catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    private void initInfoContainer(){
+        Dimension prefSize = new Dimension(170,25);
+
+        user = new JLabel();
+        user.setBorder(BorderFactory.createLoweredBevelBorder());
+        user.setPreferredSize(prefSize);
+        user.setText(" Пользователь: "+ DataBaseClass.currentUser);
+
+        dbFile = new JLabel();
+        dbFile.setBorder(BorderFactory.createLoweredBevelBorder());
+        dbFile.setPreferredSize(prefSize);
+        dbFile.setText(" БД: "+ DataBaseClass.currentDB);
     }
 
     private void initBtn(){
@@ -256,21 +284,20 @@ public class MainWindow extends JFrame {
         btnTaskPause.setToolTipText("Приостановить");
         btnTaskPause.setName("TaskPause");
     }
-
     private void initListeners(){
 
-        menuListener = new MainMenuListener();
+        menuListener = new MainMenuListener(masterList, tableModel, mainData, user);
         newDBMenu.addActionListener(menuListener);
         openDBMenu.addActionListener(menuListener);
-        closeDBMenu.addActionListener(menuListener);
+        saveDBMenu.addActionListener(menuListener);
         exitMenu.addActionListener(menuListener);
         usersMenu.addActionListener(menuListener);
         optionsMenu.addActionListener(menuListener);
 
-        mouseListener = new MainWindowMouseListener(masterList, tableModel, mainData);
+        mouseListener = new MainWindowMouseListener(masterList, tableModel, mainData, user);
         masterList.addMouseListener(mouseListener);
 
-        btnListener = new MainWindowListener(masterList, tableModel, mainData);
+        btnListener = new MainWindowListener(masterList, tableModel, mainData, user);
 
         btnMasterAdd.addActionListener(btnListener);
         btnMasterDelete.addActionListener(btnListener);
@@ -286,7 +313,7 @@ public class MainWindow extends JFrame {
 
     private void initPanels(){
         //*****Создаем слои*****//
-        BorderLayout mainLayout = new BorderLayout(5,5);
+        BorderLayout mainLayout = new BorderLayout(2,2);
         BorderLayout leftMainLayout = new BorderLayout(5,5);
         BorderLayout dataMainLayout = new BorderLayout(5,5);
 
@@ -304,6 +331,8 @@ public class MainWindow extends JFrame {
         //Общая левая панель.
         mainMasterPanel = new JPanel(leftMainLayout);
         mainMasterPanel.setBorder(new EtchedBorder());
+        //Панель вывода информации
+        infoPanel = new JPanel(btnLayout);
 
         //Центральная панель для кнопок.
         btnTaskPanel = new JPanel(btnLayout);
@@ -331,9 +360,13 @@ public class MainWindow extends JFrame {
         mainTaskPanel.add(btnTaskPanel, BorderLayout.NORTH);
         mainTaskPanel.add(jscrlp, BorderLayout.CENTER);
 
+        infoPanel.add(user);
+        infoPanel.add(dbFile);
+
         //Заполняем главную панель данными
         mainPanel.add(mainMasterPanel, BorderLayout.WEST);
         mainPanel.add(mainTaskPanel, BorderLayout.CENTER);
+        mainPanel.add(infoPanel, BorderLayout.SOUTH);
         //*************************//
 
         //Заполняем Frame

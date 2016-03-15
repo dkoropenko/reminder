@@ -21,12 +21,13 @@ public class UserListener implements ActionListener {
 
     JTextField login;
     JPasswordField passwd;
+    int selectedUser;
 
     public UserListener(JList listOfUsers){
         this.listOfUsers = listOfUsers;
     }
 
-    private int createDialog(String[] options){
+    private int createDialog(String[] options, String title){
         login = new JTextField(10);
         login.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(), "Пользователь"));
 
@@ -39,14 +40,13 @@ public class UserListener implements ActionListener {
         createUserPanel.add(passwd);
 
         int status = 1;
-        return JOptionPane.showOptionDialog(null,createUserPanel,"Создать", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,Constants.ADD,options,status);
+        return JOptionPane.showOptionDialog(null,createUserPanel,title, JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,Constants.ADD,options,status);
     }
 
     private void addUser(){
         try {
             String[] options = {"Создать", "Отмена"};
-            int status = 1;
-            status = createDialog(options);
+            int status = createDialog(options, "Создать");
 
             if (status == 0 && !login.getText().equals("")){
                 database = DataBaseClass.getInstance();
@@ -56,6 +56,7 @@ public class UserListener implements ActionListener {
 
                 if (!checkedNameList.contains(login.getText())){
                     database.add("Users", login.getText(), String.copyValueOf(passwd.getPassword()));
+                    selectedUser = database.getSize("Users", null,null)-1;
                     refreshUsers();
                 }
                 else
@@ -73,20 +74,56 @@ public class UserListener implements ActionListener {
         }
     }
     private void deleteUser(){
-        int selectedUser = listOfUsers.getSelectedIndex();
         try {
             database = DataBaseClass.getInstance();
             database.connect();
 
-            if (selectedUser != -1){
-                database.deleteFromUsers((String)listOfUsers.getSelectedValue());
+            if (!database.currentUser.equals((String)listOfUsers.getSelectedValue())){
+                database.clearDBFromUser((String)listOfUsers.getSelectedValue());
+                if (selectedUser != 0)
+                    selectedUser--;
                 refreshUsers();
             }
+            else
+                JOptionPane.showMessageDialog(null,"Извините, но вы вошли под этим пользователем. \n" +
+                    "Перезайдите под другим и попробуйте снова", "Ошибка удаления", JOptionPane.ERROR_MESSAGE, Constants.FAIL);
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
             try {
                 if (!database.databaseIsClosed())
+                    database.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void changeUser(){
+        try {
+            String[] options = {"Изменить", "Отмена"};
+           // login.setText((String)listOfUsers.getSelectedValue());
+            int status = createDialog(options, "Изменить");
+
+            if (status == 0 && !login.getText().equals("")){
+                database = DataBaseClass.getInstance();
+                database.connect();
+
+                ArrayList<String> checkedNameList = database.getFromUsers("name");
+
+                if (!checkedNameList.equals(login.getText()) && !checkedNameList.contains(login.getText())){
+                    database.changeUserInformation(login.getText(),(String)listOfUsers.getSelectedValue(),String.copyValueOf(passwd.getPassword()));
+                    database.changeUserInDB(login.getText(), (String)listOfUsers.getSelectedValue());
+                    database.currentUser = login.getText();
+                    refreshUsers();
+                }
+                else
+                    JOptionPane.showMessageDialog(null,"Данное имя уже присутствует в списке.", "Неудачно", 0, Constants.FAIL);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (database != null & !database.databaseIsClosed())
                     database.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -107,6 +144,7 @@ public class UserListener implements ActionListener {
                 users[i] = userName.get(i);
             }
             listOfUsers.setListData(users);
+            listOfUsers.setSelectedIndex(selectedUser);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,16 +162,18 @@ public class UserListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         JButton button = (JButton)e.getSource();
+        selectedUser = listOfUsers.getSelectedIndex();
 
         switch(button.getName()){
             case "addUser":
                 addUser();
                 break;
             case "deleteUser":
-                deleteUser();
+                if (listOfUsers.getMaxSelectionIndex() > 0)
+                    deleteUser();
                 break;
             case "changeUser":
-                System.out.println("chUser");
+                changeUser();
                 break;
 
         }

@@ -2,6 +2,7 @@ package db_logic;
 
 import gui.Constants;
 
+import java.io.File;
 import java.sql.*;
 import java.util.*;
 
@@ -18,6 +19,8 @@ public class DataBaseClass {
     private Statement statement = null;
 
     public static String currentUser;
+    public static String currentDB;
+    private String currentDBURL = Constants.URL;
 
     /**Приватный конструктор.
      * Инициализирует драйвер для работы с DB.
@@ -46,8 +49,17 @@ public class DataBaseClass {
             e.printStackTrace();
         }
     }
+    public void setDBURL(String url){
+        System.out.println("URL: "+ url);
+        currentDBURL = url;
+    }
     public void connect() throws SQLException{
-        connection = DriverManager.getConnection(Constants.URL);
+        int lastSlash = currentDBURL.lastIndexOf(File.pathSeparator);
+        if (lastSlash != -1)
+            currentDB = currentDBURL.substring(lastSlash+1, currentDBURL.length());
+        else
+            currentDB = currentDBURL.substring(12, currentDBURL.length());
+        connection = DriverManager.getConnection(currentDBURL);
         statement = connection.createStatement();
     }
     private void createTables() throws SQLException {
@@ -146,15 +158,13 @@ public class DataBaseClass {
         statement.execute(buildQuery.toString());
     }
 
-    public void deleteFromUsers(String rowName) throws SQLException {
-        delete("Users", "name", rowName, null, null);
-    }
     public void deleteFromMaster(String rowName, String author) throws SQLException {
         delete("Master", "name", rowName, author, null);
     }
     public void deleteFromTasks(String rowName, String author, String master) throws SQLException {
         delete("Tasks", "title", rowName, author, master);
     }
+
     public void clearTask(String author, String master) throws SQLException {
         StringBuilder buildQuery = new StringBuilder();
 
@@ -166,6 +176,17 @@ public class DataBaseClass {
 
         statement.execute(buildQuery.toString());
     }
+    public void clearDBFromUser(String user) throws SQLException {
+        statement.execute("DELETE FROM Users where name =\""+ user +"\";");
+        statement.execute("DELETE FROM Master where author =\""+ user +"\";");
+        statement.execute("DELETE FROM Tasks where author =\""+ user +"\";");
+    }
+    public void dropTables() throws SQLException {
+        statement.execute("DROP TABLE Users;");
+        statement.execute("DROP TABLE Master;");
+        statement.execute("DROP TABLE Tasks;");
+        createTables();
+    }
 
     /**
      * Метод изменяет состояние строки в таблице.
@@ -174,6 +195,7 @@ public class DataBaseClass {
      *<br>Для таблицы <b>Users:</b>
      *<br><b>paramentres[0]</b> - имя пользователя.
      *<br><b>paramentres[1]</b> - Условие поиска по id.
+     *<br><b>paramentres[1]</b> - Условие поиска по name.
      *<br>
      *<br>Для таблицы <b>Masters:</b>
      *<br><b>paramentres[0]</b> - Элемент, который необходимо заменить (name).
@@ -198,7 +220,10 @@ public class DataBaseClass {
             case "Users":
                 prepareQuery.append(tableName +" SET ");
                 prepareQuery.append("name = \""+ parametres[0] +"\"");
-                prepareQuery.append(" where id = "+ parametres[1] + ";");
+                if (parametres[1] instanceof Integer)
+                    prepareQuery.append(" where id = "+ parametres[1] + ";");
+                else
+                    prepareQuery.append(" where name = \""+ parametres[1] + "\";");
                 break;
             case "Master":
                 prepareQuery.append(tableName +" SET ");
@@ -216,10 +241,16 @@ public class DataBaseClass {
                 prepareQuery.append(" AND title = \""+ parametres[6] + "\" ");
                 prepareQuery.append(" AND author = \""+ parametres[7] + "\";");
                 break;
-
         }
 
         statement.execute(prepareQuery.toString());
+    }
+    public void changeUserInDB(String newUser, String oldUser) throws SQLException {
+        statement.execute("UPDATE Master SET author = \""+ newUser + "\" WHERE author =\""+ oldUser +"\";");
+        statement.execute("UPDATE Tasks SET author = \""+ newUser + "\" WHERE author =\""+ oldUser +"\";");
+    }
+    public void changeUserInformation(String newUser, String oldUser, String passwd) throws SQLException {
+        statement.execute("UPDATE Users SET name = \""+ newUser + "\", passwd = \""+ passwd +"\" WHERE name =\""+ oldUser +"\";");
     }
 
     /**
