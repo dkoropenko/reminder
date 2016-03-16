@@ -23,8 +23,7 @@ public class Run {
             database.connect();
 
             //database.getFromUsers("name").get(0).equals(Constants.DEFAULT_USER)
-            // выясняем есть ли в бд стандартный
-            //пользователь и является ли он единственным.
+            // выясняем есть ли в бд стандартный пользователь и является ли он единственным.
             if (database.getSize("Users",null,null) == 1 && database.getFromUsers("name").get(0).equals(Constants.DEFAULT_USER)){
                 database.currentUser = Constants.DEFAULT_USER;
                 database.currentDB = Constants.DEFAULT_DB;

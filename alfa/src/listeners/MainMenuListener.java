@@ -32,98 +32,61 @@ public class MainMenuListener extends MainWindowListener implements ActionListen
     }
 
     private void newDB(){
-        Calendar date = Calendar.getInstance();
-        date.setTimeInMillis(System.currentTimeMillis());
-        String resultDate = date.get(Calendar.DAY_OF_MONTH)+"."+ date.get(Calendar.MONTH)+1 +"."+ date.get(Calendar.YEAR);
+        String message = "Вы уверены? \n При создании новой БД. Используемая будет сохранена в \n" +
+                "папке Backups в папке с программой.";
+        int choose = JOptionPane.showConfirmDialog(null,message,"Новая БД", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, Constants.COMPLETE);
 
-        File databaseFile = new File("Task.db");
-        File BackupDatabaseFile = new File("Backup/Backup-"+ resultDate +".db");
+        if (choose == JOptionPane.OK_OPTION){
+            Calendar date = Calendar.getInstance();
+            date.setTimeInMillis(System.currentTimeMillis());
+            String resultDate = date.get(Calendar.DAY_OF_MONTH)+"."+ date.get(Calendar.MONTH)+1 +"."+ date.get(Calendar.YEAR);
 
-        InputStream inStream = null;
-        OutputStream outStream = null;
+            File databaseFile = new File("Task.db");
+            File BackupDatabaseFile = new File("Backup/Backup-"+ resultDate +".db");
 
-        try{
-            inStream = new FileInputStream(databaseFile);
-            outStream = new FileOutputStream(BackupDatabaseFile);
-            byte[] buffer = new byte[1024];
-            int length;
+            InputStream inStream = null;
+            OutputStream outStream = null;
 
-            while((length = inStream.read(buffer)) > 0){
-                outStream.write(buffer, 0, length);
-            }
-
-            database = DataBaseClass.getInstance();
-            database.connect();
-            database.dropTables();
-            database.currentUser = Constants.DEFAULT_USER;
-            refreshElements();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
             try{
-                inStream.close();
-                outStream.close();
+                inStream = new FileInputStream(databaseFile);
+                outStream = new FileOutputStream(BackupDatabaseFile);
+                byte[] buffer = new byte[1024];
+                int length;
 
-                try {
-                    if (!database.databaseIsClosed())
-                        database.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                while((length = inStream.read(buffer)) > 0){
+                    outStream.write(buffer, 0, length);
                 }
+
+                database = DataBaseClass.getInstance();
+                database.connect();
+                database.dropTables();
+                database.currentUser = Constants.DEFAULT_USER;
+                refreshElements();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-        }
-    }
-    private void openDB(){
-        openDBFile = new JFileChooser();
-        openDBFile.setAcceptAllFileFilterUsed(false);
-        openDBFile.setMultiSelectionEnabled(false);
-        openDBFile.setFileFilter(new FileFilter() {
-            @Override
-            public boolean accept(File f) {
-                if (f.getName().indexOf("db") != -1 || f.isDirectory())
-                    return true;
-                return false;
-            }
-
-            @Override
-            public String getDescription() {
-                return "Файл базы данных";
-            }
-        });
-
-        openDBFile.showDialog(null, "Открыть базу данных");
-
-        File newDatabase = openDBFile.getSelectedFile();
-
-        try {
-            String pathToDBcan = newDatabase.getCanonicalPath();
-
-            database = DataBaseClass.getInstance();
-            database.setDBURL("jdbc:sqlite:"+ pathToDBcan);
-            database.currentUser = Constants.DEFAULT_USER;
-
-            refreshElements();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                if (!database.databaseIsClosed())
-                    database.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+            } finally {
+                try{
+                    inStream.close();
+                    outStream.close();
+
+                    try {
+                        if (!database.databaseIsClosed())
+                            database.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
-    private void reservDB(){
+    private void backupDB(){
         Calendar date = Calendar.getInstance();
         date.setTimeInMillis(System.currentTimeMillis());
         String resultDate = date.get(Calendar.DAY_OF_MONTH)+"."+ date.get(Calendar.MONTH)+1 +"."+ date.get(Calendar.YEAR);
@@ -161,6 +124,16 @@ public class MainMenuListener extends MainWindowListener implements ActionListen
             }
         }
     }
+    private void helpMenu(){
+        String message = "Reminder 1.0 \n" +
+                "Программа написана Коропенко Дмитрием. \n" +
+                "\nРаспространяется свободно." +
+                "\nЕсли есть вопросы или предложения" +
+                "\nпо улучшению программы, то адреса для связи:\n" +
+                "\n e-mail:         nikotin13@mail.ru"+
+                "\n skype:          nikotin_dm";
+        JOptionPane.showMessageDialog(null,message,"Помощь", JOptionPane.INFORMATION_MESSAGE, Constants.COMPLETE);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -170,11 +143,8 @@ public class MainMenuListener extends MainWindowListener implements ActionListen
             case "newDBMenu":
                 newDB();
                 break;
-            case "openDBMenu":
-                openDB();
-                break;
-            case "reservDBMenu":
-                reservDB();
+            case "backupDBMenu":
+                backupDB();
                 break;
             case "exit":
                 System.exit(0);
@@ -183,10 +153,9 @@ public class MainMenuListener extends MainWindowListener implements ActionListen
                 usersWindow = new UsersWindow();
                 usersWindow.setVisible(true);
                 break;
-            case "optionsMenu":
-                System.out.println("Options");
+            case "helpMenu":
+                helpMenu();
                 break;
-
         }
     }
 }

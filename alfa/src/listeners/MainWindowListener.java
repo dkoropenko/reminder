@@ -1,9 +1,8 @@
 package listeners;
 
 import db_logic.DataBaseClass;
-import gui.AddTaskGUI;
 import gui.Constants;
-import gui.UpdateTaskGUI;
+import gui.TaskGUI;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -28,9 +27,7 @@ public class MainWindowListener implements ActionListener{
     private int selectedMasterElement;
     private int selectedTaskRow;
 
-    AddTaskGUI addTaskGUI;
-    UpdateTaskGUI updateTaskGUI;
-
+    TaskGUI addTaskGUI, updateTaskGUI;
     String taskTitle, taskBody;
 
     public MainWindowListener(JList masterList, DefaultTableModel tableModel, JTable taskTable, JLabel user){
@@ -387,7 +384,7 @@ public class MainWindowListener implements ActionListener{
                 break;
             case "TaskAdd":
                 if (masterList.getSelectedIndex() != -1){
-                    addTaskGUI = new AddTaskGUI(this);
+                    addTaskGUI = new TaskGUI(this, null, null, "Создать");
                     addTaskGUI.setVisible(true);
                 }
                 break;
@@ -401,7 +398,7 @@ public class MainWindowListener implements ActionListener{
                 break;
             case "TaskOptions":
                 if (taskTable.getSelectedRow() != -1){
-                    updateTaskGUI = new UpdateTaskGUI(this, (String)masterList.getSelectedValue(), (String)tableModel.getValueAt(taskTable.getSelectedRow(),1));
+                    updateTaskGUI = new TaskGUI(this, (String)masterList.getSelectedValue(), (String)tableModel.getValueAt(taskTable.getSelectedRow(),1), "Изменить");
                     updateTaskGUI.setVisible(true);
                 }
                 break;

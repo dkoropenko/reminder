@@ -2,22 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d0b375f-94b7-4b79-a498-2b960c3ce793" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/gui/TaskGUI.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/close.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/open.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/images/options.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/gui/AddTaskGUI.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/gui/AddUserWindow.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/gui/MainDBTableRender.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/gui/UpdateTaskGUI.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Task.db" afterPath="$PROJECT_DIR$/Task.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/Thumbs.db" afterPath="$PROJECT_DIR$/images/Thumbs.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/save.png" afterPath="$PROJECT_DIR$/images/save.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/alfa_jar/alfa.jar" afterPath="$PROJECT_DIR$/out/artifacts/alfa_jar/alfa.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Run.java" afterPath="$PROJECT_DIR$/src/Run.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/db_logic/DataBaseClass.java" afterPath="$PROJECT_DIR$/src/db_logic/DataBaseClass.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/Constants.java" afterPath="$PROJECT_DIR$/src/gui/Constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/LogInWindow.java" afterPath="$PROJECT_DIR$/src/gui/LogInWindow.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/MainWindow.java" afterPath="$PROJECT_DIR$/src/gui/MainWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/UsersWindow.java" afterPath="$PROJECT_DIR$/src/gui/UsersWindow.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/listeners/MainMenuListener.java" afterPath="$PROJECT_DIR$/src/listeners/MainMenuListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/listeners/MainWindowListener.java" afterPath="$PROJECT_DIR$/src/listeners/MainWindowListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/listeners/MainWindowMouseListener.java" afterPath="$PROJECT_DIR$/src/listeners/MainWindowMouseListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/listeners/UserListener.java" afterPath="$PROJECT_DIR$/src/listeners/UserListener.java" />
     </list>
     <ignored path="alfa.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,11 +43,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Run.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Run.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Run.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.4558059">
+              <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -53,16 +57,14 @@
         <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="129" column="9" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
+              <caret line="363" column="53" selection-start-line="363" selection-start-column="53" selection-end-line="363" selection-end-column="53" />
               <folding>
-                <element signature="method#MainWindow#0;class#MainWindow#0" expanded="false" />
-                <element signature="method#initData#0;class#MainWindow#0" expanded="false" />
-                <element signature="e#5174#5175#0" expanded="true" />
-                <element signature="e#5218#5219#0" expanded="true" />
-                <element signature="method#initTableContents#0;class#MainWindow#0" expanded="false" />
+                <element signature="method#initMenu#0;class#MainWindow#0" expanded="false" />
                 <element signature="method#initInfoContainer#0;class#MainWindow#0" expanded="false" />
                 <element signature="method#initBtn#0;class#MainWindow#0" expanded="false" />
                 <element signature="method#initListeners#0;class#MainWindow#0" expanded="false" />
+                <element signature="method#initPanels#0;class#MainWindow#0" expanded="false" />
+                <element signature="e#12522#12523#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,15 +74,11 @@
         <entry file="file://$PROJECT_DIR$/src/listeners/MainMenuListener.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="82" column="25" selection-start-line="82" selection-start-column="25" selection-end-line="82" selection-end-column="25" />
+              <caret line="131" column="65" selection-start-line="131" selection-start-column="65" selection-end-line="131" selection-end-column="65" />
               <folding>
                 <element signature="method#MainMenuListener#0;class#MainMenuListener#0" expanded="false" />
                 <element signature="method#newDB#0;class#MainMenuListener#0" expanded="false" />
-                <element signature="method#openDB#0;class#MainMenuListener#0" expanded="false" />
-                <element signature="class#2750:3114" expanded="false" />
-                <element signature="e#3046#3047#0" expanded="true" />
-                <element signature="e#3103#3104#0" expanded="true" />
-                <element signature="method#reservDB#0;class#MainMenuListener#0" expanded="false" />
+                <element signature="method#backupDB#0;class#MainMenuListener#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -90,48 +88,48 @@
         <entry file="file://$PROJECT_DIR$/src/listeners/MainWindowListener.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="309" column="43" selection-start-line="309" selection-start-column="43" selection-end-line="309" selection-end-column="43" />
+              <caret line="402" column="17" selection-start-line="399" selection-start-column="16" selection-end-line="402" selection-end-column="17" />
               <folding>
                 <element signature="method#MainWindowListener#0;class#MainWindowListener#0" expanded="false" />
                 <element signature="method#addMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
                 <element signature="method#delMasterDataFromTable#0;class#MainWindowListener#0" expanded="false" />
                 <element signature="method#changeMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
-                <element signature="method#addTasksDataToDB#0;class#MainWindowListener#0" expanded="false" />
                 <element signature="method#deleteTaskDataFromDB#0;class#MainWindowListener#0" expanded="false" />
                 <element signature="method#changeTaskDataToDB#0;class#MainWindowListener#0" expanded="false" />
                 <element signature="method#pauseTask#0;class#MainWindowListener#0" expanded="false" />
                 <element signature="method#startTask#0;class#MainWindowListener#0" expanded="false" />
                 <element signature="method#completeTask#0;class#MainWindowListener#0" expanded="false" />
+                <element signature="method#refreshElements#0;class#MainWindowListener#0" expanded="false" />
+                <element signature="method#setSelectedElements#0;class#MainWindowListener#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataBaseClass.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/db_logic/DataBaseClass.java">
+      <file leaf-file-name="MainWindowMouseListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/listeners/MainWindowMouseListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.8578856">
-              <caret line="56" column="69" selection-start-line="56" selection-start-column="69" selection-end-line="56" selection-end-column="69" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="48" column="17" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TaskGUI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/TaskGUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="95" column="45" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
               <folding>
-                <element signature="method#getInstance#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#initDriver#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#createTables#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#close#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#databaseIsClosed#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#add#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#delete#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#deleteFromMaster#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#deleteFromTasks#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#clearTask#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#clearDBFromUser#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#change#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#changeUserInDB#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#changeUserInformation#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#getFromTable#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#getFromUsers#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#getFromMaster#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#getFromTasks#0;class#DataBaseClass#0" expanded="false" />
-                <element signature="method#getSize#0;class#DataBaseClass#0" expanded="false" />
+                <element signature="imports" expanded="true" />
+                <element signature="method#TaskGUI#0;class#TaskGUI#0" expanded="false" />
+                <element signature="method#initTexts#0;class#TaskGUI#0" expanded="false" />
+                <element signature="method#getBodyTask#0;class#TaskGUI#0" expanded="false" />
+                <element signature="method#initPanels#0;class#TaskGUI#0" expanded="false" />
+                <element signature="method#getTitle#0;class#TaskGUI#0" expanded="false" />
+                <element signature="method#getBody#0;class#TaskGUI#0" expanded="false" />
+                <element signature="method#clearData#0;class#TaskGUI#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -141,13 +139,20 @@
         <entry file="file://$PROJECT_DIR$/src/gui/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+              <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -162,13 +167,18 @@
       <list>
         <option value="$PROJECT_DIR$/src/gui/UsersWindow.java" />
         <option value="$PROJECT_DIR$/src/listeners/UserListener.java" />
-        <option value="$PROJECT_DIR$/src/listeners/MainWindowMouseListener.java" />
+        <option value="$PROJECT_DIR$/src/db_logic/DataBaseClass.java" />
+        <option value="$PROJECT_DIR$/src/gui/AddTaskGUI.java" />
+        <option value="$PROJECT_DIR$/src/gui/AddUserWindow.java" />
+        <option value="$PROJECT_DIR$/src/Run.java" />
+        <option value="$PROJECT_DIR$/src/gui/LogInWindow.java" />
+        <option value="$PROJECT_DIR$/src/gui/showTaskGUI.java" />
         <option value="$PROJECT_DIR$/src/listeners/MainWindowListener.java" />
+        <option value="$PROJECT_DIR$/src/gui/MainWindow.java" />
+        <option value="$PROJECT_DIR$/src/listeners/MainWindowMouseListener.java" />
+        <option value="$PROJECT_DIR$/src/gui/TaskGUI.java" />
         <option value="$PROJECT_DIR$/src/gui/Constants.java" />
         <option value="$PROJECT_DIR$/src/listeners/MainMenuListener.java" />
-        <option value="$PROJECT_DIR$/src/Run.java" />
-        <option value="$PROJECT_DIR$/src/gui/MainWindow.java" />
-        <option value="$PROJECT_DIR$/src/db_logic/DataBaseClass.java" />
       </list>
     </option>
   </component>
@@ -203,7 +213,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -272,10 +282,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alfa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alfa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MainWindow.java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -578,7 +610,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1288" height="1002" extended-state="7" />
+    <frame x="-4" y="-4" width="1288" height="1002" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -592,6 +624,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925472" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -602,7 +635,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -650,7 +682,7 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="3" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -659,6 +691,97 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Run.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="129" column="9" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
+          <folding>
+            <element signature="method#initMenu#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initInfoContainer#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initBtn#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initListeners#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initPanels#0;class#MainWindow#0" expanded="false" />
+            <element signature="e#12522#12523#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/listeners/MainMenuListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="82" column="25" selection-start-line="82" selection-start-column="25" selection-end-line="82" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="method#MainMenuListener#0;class#MainMenuListener#0" expanded="false" />
+            <element signature="method#newDB#0;class#MainMenuListener#0" expanded="false" />
+            <element signature="method#backupDB#0;class#MainMenuListener#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/listeners/MainWindowListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="309" column="43" selection-start-line="309" selection-start-column="43" selection-end-line="309" selection-end-column="43" />
+          <folding>
+            <element signature="method#MainWindowListener#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#addMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#delMasterDataFromTable#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#changeMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#addTasksDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#deleteTaskDataFromDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#changeTaskDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#pauseTask#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#startTask#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#completeTask#0;class#MainWindowListener#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db_logic/DataBaseClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="method#getInstance#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#initDriver#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#createTables#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#close#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#databaseIsClosed#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#add#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#delete#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#deleteFromTasks#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#clearTask#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#clearDBFromUser#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#change#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#changeUserInDB#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#changeUserInformation#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromTable#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromUsers#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromMaster#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getFromTasks#0;class#DataBaseClass#0" expanded="false" />
+            <element signature="method#getSize#0;class#DataBaseClass#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Run.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -671,9 +794,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -682,14 +803,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="145" column="43" selection-start-line="145" selection-start-column="43" selection-end-line="145" selection-end-column="43" />
           <folding>
-            <element signature="method#MainWindow#0;class#MainWindow#0" expanded="false" />
-            <element signature="method#initData#0;class#MainWindow#0" expanded="false" />
-            <element signature="e#5174#5175#0" expanded="true" />
-            <element signature="e#5218#5219#0" expanded="true" />
-            <element signature="method#initTableContents#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initMenu#0;class#MainWindow#0" expanded="false" />
             <element signature="method#initInfoContainer#0;class#MainWindow#0" expanded="false" />
             <element signature="method#initBtn#0;class#MainWindow#0" expanded="false" />
             <element signature="method#initListeners#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initPanels#0;class#MainWindow#0" expanded="false" />
+            <element signature="e#12522#12523#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -699,13 +818,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="31" column="51" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#MainMenuListener#0;class#MainMenuListener#0" expanded="false" />
             <element signature="method#newDB#0;class#MainMenuListener#0" expanded="false" />
-            <element signature="method#openDB#0;class#MainMenuListener#0" expanded="false" />
-            <element signature="class#2750:3114" expanded="false" />
-            <element signature="e#3046#3047#0" expanded="true" />
-            <element signature="e#3103#3104#0" expanded="true" />
-            <element signature="method#reservDB#0;class#MainMenuListener#0" expanded="false" />
+            <element signature="method#backupDB#0;class#MainMenuListener#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -772,124 +888,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/UsersWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.677643">
-          <caret line="65" column="42" selection-start-line="65" selection-start-column="42" selection-end-line="65" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/listeners/UserListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57019067">
-          <caret line="104" column="56" selection-start-line="104" selection-start-column="56" selection-end-line="104" selection-end-column="56" />
-          <folding>
-            <element signature="method#addUser#0;class#UserListener#0" expanded="false" />
-            <element signature="method#deleteUser#0;class#UserListener#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/AddUserWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.4731369">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/listeners/MainWindowMouseListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_71/src.zip!/javax/swing/table/DefaultTableModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33272728">
-          <caret line="634" column="5" selection-start-line="632" selection-start-column="4" selection-end-line="634" selection-end-column="5" />
-          <folding>
-            <element signature="e#2103#2104#0" expanded="false" />
-            <element signature="e#2129#2130#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/listeners/MainWindowListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="309" column="43" selection-start-line="309" selection-start-column="43" selection-end-line="309" selection-end-column="43" />
-          <folding>
-            <element signature="method#MainWindowListener#0;class#MainWindowListener#0" expanded="false" />
-            <element signature="method#addMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
-            <element signature="method#delMasterDataFromTable#0;class#MainWindowListener#0" expanded="false" />
-            <element signature="method#changeMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
-            <element signature="method#addTasksDataToDB#0;class#MainWindowListener#0" expanded="false" />
-            <element signature="method#deleteTaskDataFromDB#0;class#MainWindowListener#0" expanded="false" />
-            <element signature="method#changeTaskDataToDB#0;class#MainWindowListener#0" expanded="false" />
-            <element signature="method#pauseTask#0;class#MainWindowListener#0" expanded="false" />
-            <element signature="method#startTask#0;class#MainWindowListener#0" expanded="false" />
-            <element signature="method#completeTask#0;class#MainWindowListener#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/listeners/MainMenuListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="82" column="25" selection-start-line="82" selection-start-column="25" selection-end-line="82" selection-end-column="25" />
-          <folding>
-            <element signature="method#MainMenuListener#0;class#MainMenuListener#0" expanded="false" />
-            <element signature="method#newDB#0;class#MainMenuListener#0" expanded="false" />
-            <element signature="method#openDB#0;class#MainMenuListener#0" expanded="false" />
-            <element signature="class#2750:3114" expanded="false" />
-            <element signature="e#3046#3047#0" expanded="true" />
-            <element signature="e#3103#3104#0" expanded="true" />
-            <element signature="method#reservDB#0;class#MainMenuListener#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="129" column="9" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
-          <folding>
-            <element signature="method#MainWindow#0;class#MainWindow#0" expanded="false" />
-            <element signature="method#initData#0;class#MainWindow#0" expanded="false" />
-            <element signature="e#5174#5175#0" expanded="true" />
-            <element signature="e#5218#5219#0" expanded="true" />
-            <element signature="method#initTableContents#0;class#MainWindow#0" expanded="false" />
-            <element signature="method#initInfoContainer#0;class#MainWindow#0" expanded="false" />
-            <element signature="method#initBtn#0;class#MainWindow#0" expanded="false" />
-            <element signature="method#initListeners#0;class#MainWindow#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Run.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/db_logic/DataBaseClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8578856">
+        <state vertical-scroll-proportion="0.3115693">
           <caret line="56" column="69" selection-start-line="56" selection-start-column="69" selection-end-line="56" selection-end-column="69" />
           <folding>
             <element signature="method#getInstance#0;class#DataBaseClass#0" expanded="false" />
@@ -912,6 +913,141 @@
             <element signature="method#getFromTasks#0;class#DataBaseClass#0" expanded="false" />
             <element signature="method#getSize#0;class#DataBaseClass#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/LogInWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="27" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
+          <folding>
+            <element signature="method#LogInWindow#0;class#LogInWindow#0" expanded="false" />
+            <element signature="method#initTexts#0;class#LogInWindow#0" expanded="false" />
+            <element signature="method#initBtn#0;class#LogInWindow#0" expanded="false" />
+            <element signature="method#initPanels#0;class#LogInWindow#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/UsersWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26689774">
+          <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
+          <folding>
+            <element signature="method#initData#0;class#UsersWindow#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/listeners/UserListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.58925474">
+          <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+          <folding>
+            <element signature="method#addUser#0;class#UserListener#0" expanded="false" />
+            <element signature="method#deleteUser#0;class#UserListener#0" expanded="false" />
+            <element signature="method#changeUser#0;class#UserListener#0" expanded="false" />
+            <element signature="method#refreshUsers#0;class#UserListener#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_71/src.zip!/javax/swing/table/DefaultTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3321617">
+          <caret line="632" column="19" selection-start-line="632" selection-start-column="19" selection-end-line="632" selection-end-column="19" />
+          <folding>
+            <element signature="e#22324#22325#0" expanded="false" />
+            <element signature="e#22351#22352#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/listeners/MainWindowListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="402" column="17" selection-start-line="399" selection-start-column="16" selection-end-line="402" selection-end-column="17" />
+          <folding>
+            <element signature="method#MainWindowListener#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#addMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#delMasterDataFromTable#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#changeMasterDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#deleteTaskDataFromDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#changeTaskDataToDB#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#pauseTask#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#startTask#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#completeTask#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#refreshElements#0;class#MainWindowListener#0" expanded="false" />
+            <element signature="method#setSelectedElements#0;class#MainWindowListener#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/TaskGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="95" column="45" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#TaskGUI#0;class#TaskGUI#0" expanded="false" />
+            <element signature="method#initTexts#0;class#TaskGUI#0" expanded="false" />
+            <element signature="method#getBodyTask#0;class#TaskGUI#0" expanded="false" />
+            <element signature="method#initPanels#0;class#TaskGUI#0" expanded="false" />
+            <element signature="method#getTitle#0;class#TaskGUI#0" expanded="false" />
+            <element signature="method#getBody#0;class#TaskGUI#0" expanded="false" />
+            <element signature="method#clearData#0;class#TaskGUI#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="363" column="53" selection-start-line="363" selection-start-column="53" selection-end-line="363" selection-end-column="53" />
+          <folding>
+            <element signature="method#initMenu#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initInfoContainer#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initBtn#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initListeners#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initPanels#0;class#MainWindow#0" expanded="false" />
+            <element signature="e#12522#12523#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/listeners/MainWindowMouseListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="17" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/listeners/MainMenuListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="131" column="65" selection-start-line="131" selection-start-column="65" selection-end-line="131" selection-end-column="65" />
+          <folding>
+            <element signature="method#MainMenuListener#0;class#MainMenuListener#0" expanded="false" />
+            <element signature="method#newDB#0;class#MainMenuListener#0" expanded="false" />
+            <element signature="method#backupDB#0;class#MainMenuListener#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Run.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4558059">
+          <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>

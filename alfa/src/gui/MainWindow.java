@@ -16,31 +16,31 @@ import java.util.Vector;
 
 /**
  * Created by Koropenkods on 04.02.16.
- * Главный класс для построения графического интерфейса.
- * Здесь же идет первоначальное заполнение данными таблиц в программе.
+ * Класс для построения графического интерфейса.
+ * Является главным окном программы.
  */
 public class MainWindow extends JFrame {
 
     private JPanel mainPanel;
 
-    /**
+    /*
      *Панели для левого окна вывода данных.
      */
     private JPanel btnMasterPanel,
                     mainMasterPanel,
                     infoPanel;
-    /**
+    /*
      *Панель для главного окна вывода данных.
      */
     private JPanel btnTaskPanel,
                     mainTaskPanel;
-    /**
+    /*
      * Переменная для главного меню
      */
     private JMenuBar mainMenu;
-    private JMenu fileMenu, prefMenu, helpMenu;
-    private JMenuItem newDBMenu, openDBMenu, saveDBMenu, exitMenu;
-    private JMenuItem usersMenu, optionsMenu;
+    private JMenu fileMenu, prefMenu;
+    private JMenuItem newDBMenu, backupDBMenu, exitMenu;
+    private JMenuItem usersMenu, helpMenu;
 
     private MainWindowListener btnListener;
     private MainWindowMouseListener mouseListener;
@@ -60,8 +60,8 @@ public class MainWindow extends JFrame {
     private JList masterList;
 
     //Переменные для управления списком элементов в основном меню
-    private DefaultTableModel tableModel;
-    private JTable mainData;
+    private MyTableModel tableModel;
+    private JTable taskTable;
     JScrollPane jscrlp;
 
     //База данных
@@ -96,13 +96,9 @@ public class MainWindow extends JFrame {
         newDBMenu.setName("newDBMenu");
         newDBMenu.setIcon(Constants.NEW);
 
-        openDBMenu = new JMenuItem("Открыть БД");
-        openDBMenu.setName("openDBMenu");
-        openDBMenu.setIcon(Constants.OPEN);
-
-        saveDBMenu = new JMenuItem("Резервная копия БД");
-        saveDBMenu.setName("reservDBMenu");
-        saveDBMenu.setIcon(Constants.SAVE);
+        backupDBMenu = new JMenuItem("Резервная копия БД");
+        backupDBMenu.setName("backupDBMenu");
+        backupDBMenu.setIcon(Constants.SAVE);
 
         exitMenu = new JMenuItem("Выход");
         exitMenu.setName("exit");
@@ -112,22 +108,17 @@ public class MainWindow extends JFrame {
         usersMenu.setName("usersMenu");
         usersMenu.setIcon(Constants.USERS);
 
-        optionsMenu = new JMenuItem("Опции");
-        optionsMenu.setName("optionsMenu");
-        optionsMenu.setIcon(Constants.PREFERENCE);
-
-        //Пока не реализован функционал. Будет доделан чуть позже.
-        optionsMenu.setEnabled(false);
-        //********************************************************
+        helpMenu = new JMenuItem("Помощь");
+        helpMenu.setName("helpMenu");
+        helpMenu.setIcon(Constants.HELP);
 
         fileMenu.add(newDBMenu);
-        //fileMenu.add(openDBMenu);
-        fileMenu.add(saveDBMenu);
+        fileMenu.add(backupDBMenu);
         fileMenu.addSeparator();
         fileMenu.add(exitMenu);
 
         prefMenu.add(usersMenu);
-       // prefMenu.add(optionsMenu);
+        prefMenu.add(helpMenu);
 
         mainMenu.add(fileMenu);
         mainMenu.add(prefMenu);
@@ -160,44 +151,31 @@ public class MainWindow extends JFrame {
 
         //******** ОСНОВНОЕ МЕНЮ******************
         //Создаем модель для работы с таблицей.
-        tableModel = new DefaultTableModel();
 
         //Создаем таблицу и добавляем ей модель. Оборачиваем все в скроллпаин.
+        tableModel = new MyTableModel();
 
-        class MyTableModel extends DefaultTableModel{
-            @Override
-            public boolean isCellEditable(int row, int col) {
-                return false;
-            }
-        }
-
-        MyTableModel tm = new MyTableModel();
-
-        mainData = new JTable(tm);
-        mainData.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        taskTable = new JTable();
+        taskTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         //Устаналиваем размеры прокручиваемой области
-        mainData.setPreferredScrollableViewportSize(new Dimension(250, 100));
+        taskTable.setPreferredScrollableViewportSize(new Dimension(250, 100));
 
         //Заполняем таблицу данными.
         initTableContents();
 
-        //Создаем пользовательский рендер для таблицы.
-        //MainDBTableRender render = new MainDBTableRender();
-        //mainData.setDefaultRenderer(Object.class,render);
-
         //Задаем модель для таблицы.
-        mainData.setModel(tableModel);
-        jscrlp = new JScrollPane(mainData);
+        taskTable.setModel(tableModel);
+        jscrlp = new JScrollPane(taskTable);
         //Выделяем первую строчку в таблице
         if (tableModel.getRowCount() > 0)
-           mainData.setRowSelectionInterval(0,0);
+           taskTable.setRowSelectionInterval(0,0);
 
         //А так же размеры столбцов
-        mainData.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
-        mainData.getColumnModel().getColumn(0).setMaxWidth(30);
-        mainData.getColumnModel().getColumn(1).setMaxWidth(10000);
-        mainData.getColumnModel().getColumn(2).setMaxWidth(70);
+        taskTable.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+        taskTable.getColumnModel().getColumn(0).setMaxWidth(30);
+        taskTable.getColumnModel().getColumn(1).setMaxWidth(10000);
+        taskTable.getColumnModel().getColumn(2).setMaxWidth(70);
         //********КОНЕЦ ПРАВОЕ МЕНЮ******************
     }
     private void initTableContents(){
@@ -286,18 +264,18 @@ public class MainWindow extends JFrame {
     }
     private void initListeners(){
 
-        menuListener = new MainMenuListener(masterList, tableModel, mainData, user);
+        menuListener = new MainMenuListener(masterList, tableModel, taskTable, user);
         newDBMenu.addActionListener(menuListener);
-        openDBMenu.addActionListener(menuListener);
-        saveDBMenu.addActionListener(menuListener);
+        backupDBMenu.addActionListener(menuListener);
         exitMenu.addActionListener(menuListener);
         usersMenu.addActionListener(menuListener);
-        optionsMenu.addActionListener(menuListener);
+        helpMenu.addActionListener(menuListener);
 
-        mouseListener = new MainWindowMouseListener(masterList, tableModel, mainData, user);
+        mouseListener = new MainWindowMouseListener(masterList, tableModel, taskTable, user);
         masterList.addMouseListener(mouseListener);
+        taskTable.addMouseListener(mouseListener);
 
-        btnListener = new MainWindowListener(masterList, tableModel, mainData, user);
+        btnListener = new MainWindowListener(masterList, tableModel, taskTable, user);
 
         btnMasterAdd.addActionListener(btnListener);
         btnMasterDelete.addActionListener(btnListener);
@@ -372,5 +350,18 @@ public class MainWindow extends JFrame {
         //Заполняем Frame
         setJMenuBar(mainMenu);
         getContentPane().add(mainPanel);
+    }
+}
+
+
+/**
+ * Класс для модели, запрещающей
+ * изменение строк в таблице, что бы можно было
+ * их проспатривать.
+ */
+class MyTableModel extends DefaultTableModel{
+    @Override
+    public boolean isCellEditable(int row, int col) {
+        return false;
     }
 }

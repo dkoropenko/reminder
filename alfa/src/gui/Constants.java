@@ -4,6 +4,8 @@ import javax.swing.*;
 
 /**
  * Created by Koropenkods on 29.02.16.
+ * Интерфейс, который я использую исключительно как
+ * контейнер с константами.
  */
 public interface Constants {
     //Данные для заполнения таблицы
@@ -28,7 +30,7 @@ public interface Constants {
     String DEFAULT_PASSWORD = "";
 
     //Переменные UI
-    String APPNAME = "Reminder 0.9";
+    String APPNAME = "Reminder";
     ImageIcon ICON = new ImageIcon("images/icon.png");
     ImageIcon ADD = new ImageIcon("images/add.png");
     ImageIcon DEL = new ImageIcon("images/del.png");
@@ -38,11 +40,9 @@ public interface Constants {
     ImageIcon COMPLETE = new ImageIcon("images/complete.png");
     ImageIcon FAIL = new ImageIcon("images/fail.png");
     ImageIcon NEW = new ImageIcon("images/new.png");
-    ImageIcon OPEN = new ImageIcon("images/open.png");
     ImageIcon SAVE = new ImageIcon("images/save.png");
-    ImageIcon CLOSE = new ImageIcon("images/close.png");
     ImageIcon EXIT = new ImageIcon("images/exit.png");
     ImageIcon USERS = new ImageIcon("images/users.png");
-    ImageIcon PREFERENCE = new ImageIcon("images/options.png");
+    ImageIcon HELP = new ImageIcon("images/help.png");
 
 }

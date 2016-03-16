@@ -13,6 +13,8 @@ import java.sql.SQLException;
 /**
  * Created by Koropenkods on 03.03.16.
  * <p>GUI для аутентификации пользователя в программе</p>
+ * <p>Показывается при наличие нестандартного пользователя<br>
+ *     в БД. Требует ввести логин и пароль.</p>
  */
 public class LogInWindow extends JFrame {
 
